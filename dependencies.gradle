@@ -34,5 +34,19 @@
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-    //runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.7.69-GTNH:dev")
+    devOnlyNonPublishable(rfg.deobf("curse.maven:zombie-awareness-237754:2285743"))
+    devOnlyNonPublishable(rfg.deobf("curse.maven:coroutil-237749:2388794"))
+    devOnlyNonPublishable(rfg.deobf(project.files("libs/particleman.jar")))
+    devOnlyNonPublishable(rfg.deobf(project.files("libs/hostileworlds.jar")))
+    devOnlyNonPublishable(project.files("libs/HardcoreEnderExpansion-1.12.25-GTNH-dev.jar"))
+    //   devOnlyNonPublishable(rfg.deobf(project.files("libs/infernalMobs.jar")))
+    devOnlyNonPublishable(rfg.deobf(project.files("libs/DI.jar")))
+        devOnlyNonPublishable(rfg.deobf(project.files("libs/specm.jar")))
+    devOnlyNonPublishable(rfg.deobf(project.files("libs/tbc.jar")))
+    devOnlyNonPublishable(rfg.deobf(project.files("libs/infernos.jar")))
+    //InfernalMobs-1.10.8-GTNH.jar
+    devOnlyNonPublishable(rfg.deobf(project.files("libs/InfernalMobs-1.10.8-GTNH.jar")))
+    devOnlyNonPublishable(project.files("libs/fakeores1.5.jar"));
+    //transformedModCompileOnly(rfg.deobf("curse.maven:zombie-awareness-237754:2285743"))
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.7.69-GTNH:dev")
 }

@@ -1,4 +1,4 @@
-  "required": true,
+{"required": true,
   "minVersion": "0.8.5-GTNH",
   "package": "com.jerios.evilMinecraftFixes.mixins.late",
   "refmap": "mixins.evilMinecraftFixes.refmap.json",
