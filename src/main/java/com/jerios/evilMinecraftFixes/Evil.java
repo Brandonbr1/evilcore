@@ -6,12 +6,14 @@ import com.jerios.evilMinecraftFixes.athena.WitherProps;
 import com.jerios.evilMinecraftFixes.evilOres.OreBossTickEvent;
 import com.jerios.evilMinecraftFixes.evilOres.OresAttackEvent;
 import com.jerios.evilMinecraftFixes.evilOres.OresInteg;
+import com.jerios.evilMinecraftFixes.evilOres.world.EvilGenFakeOres;
 import com.jerios.evilMinecraftFixes.hee.EntityCrystalBomb;
 import com.jerios.evilMinecraftFixes.infernalMobs.InfernalMobsMakeNeturalMobsAgressiveEvent;
 import com.jerios.evilMinecraftFixes.mixins.early.IEntityPigmenAccessor;
 import com.jerios.evilMinecraftFixes.zombieAwareness.WorldRefEvent;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import hostileworlds.entity.monster.ZombieClimber;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityPigZombie;
@@ -69,6 +71,7 @@ public class Evil {
         WitherProps.register();
         EntityRegistry.registerModEntity(EntityWitherDeathManager.class, "death", 54, INSTANCE, 256, 1, true);
         EntityRegistry.registerModEntity(EntityCrystalBomb.class, "bomb", 808, INSTANCE, 256, 1, true);
+        GameRegistry.registerWorldGenerator(new EvilGenFakeOres(), 1);
     }
 
 

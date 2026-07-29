@@ -74,6 +74,10 @@ public enum Mixins implements IMixins {
         .addRequiredMod(TargetMods.ORE)
         .addCommonMixins("fakeOres.MixinOreBoss")),
 
+    FIX_ORE_GEN(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.ORE)
+        .addCommonMixins("fakeOres.MixinWorldGen")),
+
     SPM_CREEPER(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.SPM)
         .addCommonMixins("specialMobs.MixinEntity_SpecialCreeper")),

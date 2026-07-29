@@ -74,7 +74,6 @@ public class MixinOreBoss extends EntityMob {
 
             if (oresBoss.getHealth() <= 100 ) {
 
-
                 if (globalPlayer != null) {
                     globalPlayer.motionY += 0.7D;
                     globalPlayer.isAirBorne = true;
@@ -94,7 +93,6 @@ public class MixinOreBoss extends EntityMob {
     public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2) {
     }
 
-    // Netherire Ore add
     /**
      * @author Jerios
      * @reason Make Anti ores blade useful and needed
