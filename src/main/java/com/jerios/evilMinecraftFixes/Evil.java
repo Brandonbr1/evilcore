@@ -55,6 +55,7 @@ import java.io.File;
 @Mod(modid = Evil.MODID, version = "1.0", name = "evilMinecraftFixes", acceptedMinecraftVersions = "[1.7.10]")
 public class Evil {
 
+    public static final String PREFIX2 = "evilmc:";
     public static final String MODID = "evilMinecraftFixes";
     public static final String PREFIX = "evilMinecraftFixes:";
     public static final Logger LOG = LogManager.getLogger(MODID);

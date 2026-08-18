@@ -7,7 +7,7 @@ public class ItemNetherStarFragment extends Item {
 
     public ItemNetherStarFragment() {
         this.setUnlocalizedName("netherstar_fragment");
-        setTextureName(Evil.PREFIX + "netherFragment");
+        setTextureName(Evil.PREFIX2 + "netherFragment");
     }
 
 

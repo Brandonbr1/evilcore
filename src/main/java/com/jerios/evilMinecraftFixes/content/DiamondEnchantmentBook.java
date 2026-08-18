@@ -23,7 +23,7 @@ public class DiamondEnchantmentBook extends Item {
         this.enchantmentID = id;
         this.level = lvl;
         this.setUnlocalizedName("diamond_enchantmentBook" + bType + lvl);
-        setTextureName(Evil.PREFIX + "diamond_book");
+        setTextureName(Evil.PREFIX2 + "diamond_book");
         setCreativeTab(CreativeTabs.tabCombat);
 
     }

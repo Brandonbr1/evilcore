@@ -255,6 +255,11 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> ConfigASM.increasedSpawning)
         .addCommonMixins("mutantCreatures.MixinMutantCreatures")),
 
+    ENCHANCED_ISLAND_DECORATOR(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.HEE)
+        .setApplyIf(() -> ConfigASM.decoratorEnchancedIsland)
+        .addCommonMixins("hee.MixinBiomeDecoratorEnchantedIsland")),
+
     CREEPER_MUTANT_HIGHERCHANCE_CHARGED(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.MUTANT)
         .setApplyIf(() -> ConfigASM.buffMutants)

@@ -9,7 +9,7 @@ public class BaseDiamondBook extends Item {
     public BaseDiamondBook() {
 
         this.setUnlocalizedName("diamond_basebook");
-        setTextureName(Evil.PREFIX + "diamond_book_base");
+        setTextureName(Evil.PREFIX2 + "diamond_book_base");
         setCreativeTab(CreativeTabs.tabCombat);
 
     }

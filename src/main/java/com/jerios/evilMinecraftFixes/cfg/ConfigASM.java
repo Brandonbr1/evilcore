@@ -115,6 +115,10 @@ public class ConfigASM {
     @Config.DefaultBoolean(true)
     public static boolean increasedSpawning ;
 
+    @Config.Comment("{test} make ender deamon structure thing try and spawn")
+    @Config.DefaultBoolean(true)
+    public static boolean decoratorEnchancedIsland ;
+
     @Config.Comment("Bomby Fixes")
     @Config.DefaultBoolean(true)
     public static boolean bomby ;

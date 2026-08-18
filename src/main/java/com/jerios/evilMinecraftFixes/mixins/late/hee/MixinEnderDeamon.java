@@ -22,7 +22,9 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EntityBossEnderDemon.class)
 public class MixinEnderDeamon extends EntityFlying {
@@ -37,14 +39,45 @@ public class MixinEnderDeamon extends EntityFlying {
         super(p_i1587_1_);
     }
 
+
+    @Inject(method = "onDeathUpdate", at=@At("HEAD"))
+    private void evil$forceSetNightAgain(CallbackInfo ci) {
+        if (!this.worldObj.isRemote) {
+            this.worldObj.getWorldInfo().setWorldTime(13333L);
+        }
+    }
+
     @Redirect(method = "onSpawnWithEgg", at= @At(value = "INVOKE", target = "Lchylex/hee/entity/boss/EntityBossEnderDemon;setDead()V"))
     private void redirectNull(EntityBossEnderDemon instance){
        if (!instance.worldObj.isRemote) {
+           this.worldObj.getWorldInfo().setWorldTime(13333L);
 
            for (int i = 0; i < 15; i++) {
                SpawnEntry spawnEntry = spawnList.getRandomItem(instance.worldObj.rand);
                EntityLiving entity = spawnEntry.createMob(instance.worldObj);
-               entity.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 600, 2, false));
+               entity.addPotionEffect(new PotionEffect(Potion.resistance.id, 60, 1, false));
+               entity.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 600, 1, false));
+               entity.setLocationAndAngles(instance.posX,instance.posY,instance.posZ,instance.worldObj.rand.nextFloat()*360F,0F);
+               entity.func_110163_bv();
+               entity.hurtResistantTime = 120;
+               instance.worldObj.spawnEntityInWorld(entity);
+           }
+
+           // hardcoded spawns
+           for (int i = 0; i < 5; i++) {
+               EntityLiving entity = new EntityMobAngryEnderman(instance.worldObj);
+               entity.addPotionEffect(new PotionEffect(Potion.resistance.id, 60, 1, false));
+               entity.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 600, 1, false));
+               entity.setLocationAndAngles(instance.posX,instance.posY,instance.posZ,instance.worldObj.rand.nextFloat()*360F,0F);
+               entity.func_110163_bv();
+               entity.hurtResistantTime = 120;
+               instance.worldObj.spawnEntityInWorld(entity);
+           }
+
+           for (int i = 0; i < 2; i++) {
+               EntityLiving entity = new EntityMobEnderGuardian(instance.worldObj);
+               entity.addPotionEffect(new PotionEffect(Potion.resistance.id, 60, 1, false));
+               entity.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 600, 1, false));
                entity.setLocationAndAngles(instance.posX,instance.posY,instance.posZ,instance.worldObj.rand.nextFloat()*360F,0F);
                entity.func_110163_bv();
                entity.hurtResistantTime = 120;
@@ -58,30 +91,5 @@ public class MixinEnderDeamon extends EntityFlying {
         ));
 
     }
-
-    @Unique
-    private void spawnEndermen(EntityLiving skeleton, World world, int x, int y, int z) {
-        skeleton.setLocationAndAngles(x, y, z, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F), 0.0F);
-        skeleton.rotationYawHead = skeleton.rotationYaw;
-        skeleton.renderYawOffset = skeleton.rotationYaw;
-        skeleton.onSpawnWithEgg(null);
-        world.spawnEntityInWorld(skeleton);
-    }
-
-    @Unique
-    private void doRandomLightning(World world, int chanceRange, int chance){
-        if (world.rand.nextInt(chanceRange) >= chance || world.playerEntities.size() == 0)return;
-
-        EntityPlayer randPlayer = (EntityPlayer)world.playerEntities.get(world.rand.nextInt(world.playerEntities.size()));
-        double x = randPlayer.posX+world.rand.nextGaussian()*70D,
-            z = randPlayer.posZ+world.rand.nextGaussian()*70D,
-            y = world.getPrecipitationHeight((int)Math.floor(x),(int)Math.floor(z));
-
-        if (world.rand.nextInt(5) != 0 && MathUtil.distance(x-randPlayer.posX,z-randPlayer.posZ) < 40D)return;
-
-        if (world.rand.nextInt(8) == 0)world.addWeatherEffect(new EntityLightningBolt(world,x,y,z));
-        else world.addWeatherEffect(new EntityWeatherLightningBoltSafe(world,x,y,z));
-    }
-
 
 }

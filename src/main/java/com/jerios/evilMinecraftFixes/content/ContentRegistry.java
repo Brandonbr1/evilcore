@@ -1,6 +1,7 @@
 package com.jerios.evilMinecraftFixes.content;
 
 import com.jerios.evilMinecraftFixes.content.tile.BlockUnlockerAnvil;
+import com.jerios.evilMinecraftFixes.hee.ItemEndermenRelicJerios;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -30,6 +31,8 @@ public class ContentRegistry {
     public static Block unlocker;
 
     public static Item baseBook;
+
+    public static Item endermenRelicSpawner;
 
     public static void register() {
         starFragment = new ItemNetherStarFragment().setCreativeTab(CreativeTabs.tabRedstone);
@@ -90,6 +93,9 @@ public class ContentRegistry {
         registerItm(prot10, "Prot 10");
         reci(prot9, prot10);
 
+
+        endermenRelicSpawner = new ItemEndermenRelicJerios();
+        registerItm(endermenRelicSpawner, "Endemen Deamon Relic Spawner");
 
 
 
