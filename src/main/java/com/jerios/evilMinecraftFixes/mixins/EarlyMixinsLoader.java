@@ -39,6 +39,7 @@ public class EarlyMixinsLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     @Override
     public String getMixinConfig() {
+        ConfigASM.init();
         return "mixins.evilMinecraftFixes.early.json";
     }
 
