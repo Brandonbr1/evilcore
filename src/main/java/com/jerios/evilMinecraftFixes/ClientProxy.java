@@ -20,11 +20,12 @@ public class ClientProxy extends CommonProxy {
     public void init(FMLInitializationEvent event) {
         super.init(event);
 
-        if (Loader.isModLoaded("dextersnether")) {
+        if (Loader.isModLoaded("fakeores")) {
             RenderingRegistry.registerEntityRenderingHandler(EntityNetheriteOre.class, new RenderEvilOres(new ModelOre()));
             RenderingRegistry.registerEntityRenderingHandler(EntityGoldNugget.class, new RenderEvilOres(new ModelOre()));
+            RenderingRegistry.registerEntityRenderingHandler(EntityGlowstone.class, new RenderEvilOres(new ModelOre()));
         }
-        RenderingRegistry.registerEntityRenderingHandler(EntityGlowstone.class, new RenderEvilOres(new ModelOre()));
+
     }
 
 
