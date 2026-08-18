@@ -148,6 +148,10 @@ public class ConfigASM {
     public static boolean nerfCQArmor;
 
 
+    public static void init() {
+
+    }
+
 
 
  static {

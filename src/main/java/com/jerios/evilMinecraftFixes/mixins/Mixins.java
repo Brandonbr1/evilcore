@@ -16,13 +16,15 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> ConfigASM.harderEndermen)
         .addCommonMixins("hard.MixinHarderEndermen")),
 
-    HARDER_SPAWNERS(new MixinBuilder().setPhase(Phase.EARLY)
+    /**  HARDER_SPAWNERS(new MixinBuilder().setPhase(Phase.EARLY)
         .setApplyIf(() -> ConfigASM.rareSpawners)
         .addCommonMixins("hard.MixinEvilMobSpawnerBaseLogic")),
+     **/
 
-    RARE_SPAWNERS(new MixinBuilder().setPhase(Phase.EARLY)
+  /**  RARE_SPAWNERS(new MixinBuilder().setPhase(Phase.EARLY)
         .setApplyIf(() -> ConfigASM.rareSpawners)
         .addCommonMixins("hard.MixinTileEntityMobSpawner")),
+   **/
 
 
        MOVEHELPER(new MixinBuilder().setPhase(Phase.EARLY)
@@ -31,7 +33,7 @@ public enum Mixins implements IMixins {
 
        LIVINGBASE(new MixinBuilder().setPhase(Phase.EARLY)
            .setApplyIf(() -> ConfigASM.math)
-           .addServerMixins("math.MixinEntityLivingBase")),
+           .addCommonMixins("math.MixinEntityLivingBase")),
 
       LIVING(new MixinBuilder().setPhase(Phase.EARLY)
           .setApplyIf(() -> ConfigASM.math)

@@ -15,6 +15,7 @@ public class EarlyMixinsLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     @Override
     public String[] getASMTransformerClass() {
+        ConfigASM.init();
         return null;
     }
 
