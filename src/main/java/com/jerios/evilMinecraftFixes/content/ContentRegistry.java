@@ -32,7 +32,7 @@ public class ContentRegistry {
 
     public static Item baseBook;
 
-    public static Item endermenRelicSpawner;
+
 
     public static void register() {
         starFragment = new ItemNetherStarFragment().setCreativeTab(CreativeTabs.tabRedstone);
@@ -92,10 +92,6 @@ public class ContentRegistry {
         prot10 = new DiamondEnchantmentBook("Protection",Enchantment.protection.effectId, 10);
         registerItm(prot10, "Prot 10");
         reci(prot9, prot10);
-
-
-        endermenRelicSpawner = new ItemEndermenRelicJerios();
-        registerItm(endermenRelicSpawner, "Endemen Deamon Relic Spawner");
 
 
 

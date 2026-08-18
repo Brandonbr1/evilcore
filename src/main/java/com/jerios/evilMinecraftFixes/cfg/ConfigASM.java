@@ -152,6 +152,9 @@ public class ConfigASM {
     @Config.DefaultBoolean(true)
     public static boolean nerfCQArmor;
 
+    @Config.Comment("ORE TEST")
+    @Config.DefaultBoolean(true)
+    public static boolean ORE;
 
     public static void init() {
 

@@ -4,6 +4,7 @@ import chylex.hee.init.BlockList;
 import chylex.hee.init.ItemList;
 import chylex.hee.world.structure.island.biome.feature.AbstractIslandStructure;
 import chylex.hee.world.structure.util.pregen.LargeStructureWorld;
+import com.jerios.evilMinecraftFixes.EnderDeamonIsolator;
 import com.jerios.evilMinecraftFixes.content.ContentRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
@@ -107,7 +108,7 @@ public class DecoratorEndDeamon extends AbstractIslandStructure {
 
         //TODO, IS THIS NEEDED world is remote check needed?
         if (!world.getWorldObj().isRemote) {
-            EntityItem item = new EntityItem(world.getWorldObj(), x + 0.5D, (y + 1), z + 0.5D, new ItemStack(ContentRegistry.endermenRelicSpawner));
+            EntityItem item = new EntityItem(world.getWorldObj(), x + 0.5D, (y + 1), z + 0.5D, new ItemStack(EnderDeamonIsolator.endermenRelicSpawner));
             world.getWorldObj().spawnEntityInWorld(item);
         }
 
