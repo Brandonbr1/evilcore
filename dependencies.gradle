@@ -36,17 +36,38 @@
 dependencies {
     devOnlyNonPublishable(rfg.deobf("curse.maven:zombie-awareness-237754:2285743"))
     devOnlyNonPublishable(rfg.deobf("curse.maven:coroutil-237749:2388794"))
+    devOnlyNonPublishable(rfg.deobf("curse.maven:hardcore-wither-237407:2282681"))
+    devOnlyNonPublishable(rfg.deobf("curse.maven:iron-backpacks-227049:2339301"))
+    devOnlyNonPublishable(rfg.deobf("curse.maven:mutant-creatures-mod-59203:2250071"))
+    devOnlyNonPublishable(rfg.deobf("curse.maven:animationapi-77191:2221721"))
+    devOnlyNonPublishable(rfg.deobf("curse.maven:move-plus-237758:2265751"))
+    devOnlyNonPublishable(rfg.deobf("curse.maven:atomicstrykers-infernal-mobs-227875:2227584"))
     devOnlyNonPublishable(rfg.deobf(project.files("libs/particleman.jar")))
     devOnlyNonPublishable(rfg.deobf(project.files("libs/hostileworlds.jar")))
+    devOnlyNonPublishable(rfg.deobf(project.files("libs/chocolateQuest-1.7.10-1.1d.jar")))
     devOnlyNonPublishable(project.files("libs/HardcoreEnderExpansion-1.12.25-GTNH-dev.jar"))
     //   devOnlyNonPublishable(rfg.deobf(project.files("libs/infernalMobs.jar")))
     devOnlyNonPublishable(rfg.deobf(project.files("libs/DI.jar")))
         devOnlyNonPublishable(rfg.deobf(project.files("libs/specm.jar")))
     devOnlyNonPublishable(rfg.deobf(project.files("libs/tbc.jar")))
+    devOnlyNonPublishable(rfg.deobf(project.files("libs/thirstmod-1.8.14.jar")))
     devOnlyNonPublishable(rfg.deobf(project.files("libs/infernos.jar")))
     //InfernalMobs-1.10.8-GTNH.jar
-    devOnlyNonPublishable(rfg.deobf(project.files("libs/InfernalMobs-1.10.8-GTNH.jar")))
+  //  devOnlyNonPublishable(rfg.deobf(project.files("libs/InfernalMobs-1.10.8-GTNH.jar")))
     devOnlyNonPublishable(project.files("libs/fakeores1.5.jar"));
     //transformedModCompileOnly(rfg.deobf("curse.maven:zombie-awareness-237754:2285743"))
-    runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.7.69-GTNH:dev")
+   // runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.7.69-GTNH:dev")
+
+
+   api("com.github.GTNewHorizons:GTNHLib:0.11.37:dev")
+
+   // api("com.falsepattern:falsepatternlib-mc1.7.10:1.12.2")
+
+
+
+
+
+
+
+
 }

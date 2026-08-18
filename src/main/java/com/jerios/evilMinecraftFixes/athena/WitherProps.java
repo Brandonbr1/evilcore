@@ -76,8 +76,6 @@ public class WitherProps implements IExtendedEntityProperties {
                 }
 
             }
-
-
             if (e.entity instanceof EntitySkeleton) {
                 if (e.entity.getExtendedProperties(PROP_NAME) == null) {
                     e.entity.registerExtendedProperties(PROP_NAME, new WitherProps());

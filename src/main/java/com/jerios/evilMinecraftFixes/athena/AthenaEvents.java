@@ -1,7 +1,7 @@
 package com.jerios.evilMinecraftFixes.athena;
 
 import com.jerios.evilMinecraftFixes.Evil;
-import com.jerios.evilMinecraftFixes.mixins.Config;
+import com.jerios.evilMinecraftFixes.cfg.Config;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -118,8 +118,6 @@ public class AthenaEvents {
                                 if (props.ticks % 170 == 0) {
                                     while (timer2 > 0) {
                                         timer2--;
-
-                                        System.out.println(timer2);
 
                                         int YP = MathHelper.floor_double(wither.posY);
                                         int i1 = MathHelper.floor_double(wither.posX);

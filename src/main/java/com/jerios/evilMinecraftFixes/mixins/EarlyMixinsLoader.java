@@ -7,6 +7,7 @@ import java.util.Set;
 import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
 import com.gtnewhorizon.gtnhmixins.builders.IMixins;
 
+import com.jerios.evilMinecraftFixes.cfg.ConfigASM;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 
 @IFMLLoadingPlugin.MCVersion("1.7.10")
@@ -37,7 +38,6 @@ public class EarlyMixinsLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     @Override
     public String getMixinConfig() {
-
         return "mixins.evilMinecraftFixes.early.json";
     }
 

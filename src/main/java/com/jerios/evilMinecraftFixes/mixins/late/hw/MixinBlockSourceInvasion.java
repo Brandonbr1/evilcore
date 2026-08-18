@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.jerios.evilMinecraftFixes.mixins.Config;
+import com.jerios.evilMinecraftFixes.cfg.Config;
 
 import hostileworlds.block.BlockSourceInvasion;
 

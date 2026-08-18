@@ -2,4 +2,10 @@
 
 repositories {
 
+   /** maven {
+        name = "mavenpatternReleases"
+        url = uri("https://mvn.falsepattern.com/releases")
+    }
+    **/
+
 }

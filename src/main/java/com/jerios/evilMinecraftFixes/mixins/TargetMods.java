@@ -8,9 +8,18 @@ import com.gtnewhorizon.gtnhmixins.builders.TargetModBuilder;
 public enum TargetMods implements ITargetMod {
 
     HWINVASION("hostileworlds.HostileWorlds", true),
-    SPM("toast.specialMobs._SpecialMobs", true),
+    SPM("SpecialMobs"),
+    AD_INF("dextersnether"),
     ORE("fr.elias.fakeores.common.EntityCoalOre", true),
-    HEE("HardcoreEnderExpansion");
+    MP("moveplus.forge.ClientTicker", true),
+    MUTANT("thehippomaster.MutantCreatures.MutantCreatures", true),
+    HARDCORE_WITHER("thor12022.hardcorewither.HardcoreWither", true),
+    HEE("HardcoreEnderExpansion"),
+    INFERNAL_MOBS("atomicstryker.infernalmobs.common.InfernalMobsCore", true),
+    DI("DamageIndicatorsMod.client.DIClientProxy", true),
+    CQ("com.chocolate.chocolateQuest.ChocolateQuest", true),
+    THIRST("com.thetorine.thirstmod.core.main.ThirstMod", true),
+    PM("particleman.forge.ParticleMan", true);
 
     private final TargetModBuilder builder;
 

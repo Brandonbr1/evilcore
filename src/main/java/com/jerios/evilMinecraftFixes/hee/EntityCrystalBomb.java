@@ -2,6 +2,7 @@ package com.jerios.evilMinecraftFixes.hee;
 
 import chylex.hee.entity.boss.EntityBossDragon;
 import chylex.hee.proxy.ModCommonProxy;
+import com.jerios.evilMinecraftFixes.cfg.Config;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.MovingObjectPosition;
@@ -45,12 +46,17 @@ public class EntityCrystalBomb extends EntityThrowable {
             for (int i = 0; i < list.size(); i++) {
                 EntityBossDragon dragon = list.get(i);
 
-                if (dragon.isAngry()) {
-                    explosionSize += 1.2f;
+                if (dragon != null) {
+                    if (dragon.isAngry()) {
+                        explosionSize += 1.2f;
+                    }
+
                 }
+
+
             }
 
-            this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, explosionSize, false, false);
+            this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, explosionSize, Config.dangerousBombs, Config.dangerousBombs);
 
             setDead();
 

@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -85,12 +86,7 @@ public class MixinEntity_SpecialCreeper extends EntityCreeper {
     private Explosion evil$redirectCharged(World instance, Entity p_72876_1_, double p_72876_2_, double p_72876_4_, double p_72876_6_, float p_72876_8_, boolean p_72876_9_) {
         boolean flag = this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
 
-
-        if (!(((Entity_SpecialCreeper) (Object) this) instanceof EntityEnderCreeper)) {
-
-            timeSinceIgnited = -20;
-        }
-
+        timeSinceIgnited = -20;
         return this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ,(float)this.explosionRadius * 2, flag, flag);
     }
 
@@ -107,9 +103,5 @@ public class MixinEntity_SpecialCreeper extends EntityCreeper {
         tag.getBoolean("rareCreeperEvil");
         tag.getBoolean("rareAlreadyLowHp");
     }
-
-
-
-
 
 }

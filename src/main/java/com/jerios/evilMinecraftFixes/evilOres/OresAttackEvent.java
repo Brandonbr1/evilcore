@@ -67,7 +67,7 @@ public class OresAttackEvent {
                 }
 
                 if (ore instanceof EntityGoldOre) {
-                    ore.addPotionEffect(new PotionEffect(Potion.regeneration.id, 600, 3));
+                    ore.addPotionEffect(new PotionEffect(Potion.regeneration.id, 600, 1));
                     ore.addPotionEffect(new PotionEffect(Potion.resistance.id, 6000, 0));
                     ore.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 6000, 0));
                 }

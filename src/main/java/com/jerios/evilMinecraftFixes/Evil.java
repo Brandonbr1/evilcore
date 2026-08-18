@@ -1,20 +1,27 @@
 package com.jerios.evilMinecraftFixes;
 
+import com.jerios.evilMinecraftFixes.CQAdditions.CQInteg;
 import com.jerios.evilMinecraftFixes.athena.AthenaEvents;
 import com.jerios.evilMinecraftFixes.athena.EntityWitherDeathManager;
 import com.jerios.evilMinecraftFixes.athena.WitherProps;
+import com.jerios.evilMinecraftFixes.content.ContentRegistry;
 import com.jerios.evilMinecraftFixes.evilOres.OreBossTickEvent;
 import com.jerios.evilMinecraftFixes.evilOres.OresAttackEvent;
 import com.jerios.evilMinecraftFixes.evilOres.OresInteg;
 import com.jerios.evilMinecraftFixes.evilOres.world.EvilGenFakeOres;
 import com.jerios.evilMinecraftFixes.hee.EntityCrystalBomb;
+import com.jerios.evilMinecraftFixes.hostileWorlds.HWSpawns;
 import com.jerios.evilMinecraftFixes.infernalMobs.InfernalMobsMakeNeturalMobsAgressiveEvent;
+import com.jerios.evilMinecraftFixes.infernalMobs.InfernalMobsSaveHandler;
+import com.jerios.evilMinecraftFixes.ironBackPacks.IronBackPacksLimitAmmountEvent;
 import com.jerios.evilMinecraftFixes.mixins.early.IEntityPigmenAccessor;
+import com.jerios.evilMinecraftFixes.packet.NetworkHandler;
+import com.jerios.evilMinecraftFixes.pg.PGI;
 import com.jerios.evilMinecraftFixes.zombieAwareness.WorldRefEvent;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import hostileworlds.entity.monster.ZombieClimber;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -26,14 +33,13 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.jerios.evilMinecraftFixes.mixins.Config;
+import com.jerios.evilMinecraftFixes.cfg.Config;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -43,11 +49,14 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
+import java.io.File;
+
 
 @Mod(modid = Evil.MODID, version = "1.0", name = "evilMinecraftFixes", acceptedMinecraftVersions = "[1.7.10]")
 public class Evil {
 
     public static final String MODID = "evilMinecraftFixes";
+    public static final String PREFIX = "evilMinecraftFixes:";
     public static final Logger LOG = LogManager.getLogger(MODID);
 
     @SidedProxy(
@@ -60,18 +69,63 @@ public class Evil {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+       // ReplaceMobFilter.replaceMobFilterWithInstanceThatDoesNotAttackBomby();
+
         Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
         proxy.preInit(event);
+        ContentRegistry.register();
+        NetworkHandler.init();
+
+
+        if (Config.bufffNetherMobs) {
+            MinecraftForge.EVENT_BUS.register(new BuffMobs());
+        }
+
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new OreBossTickEvent());
-        MinecraftForge.EVENT_BUS.register(new WorldRefEvent());
-        MinecraftForge.EVENT_BUS.register(new OresAttackEvent());
-        MinecraftForge.EVENT_BUS.register(new AthenaEvents());
-        MinecraftForge.EVENT_BUS.register(new InfernalMobsMakeNeturalMobsAgressiveEvent());
+
+        if (Loader.isModLoaded("ZAMod")) {
+            MinecraftForge.EVENT_BUS.register(new WorldRefEvent());
+        }
+
+        if (Loader.isModLoaded("fakeores")) {
+            MinecraftForge.EVENT_BUS.register(new OreBossTickEvent());
+            MinecraftForge.EVENT_BUS.register(new OresAttackEvent());
+        }
+
+        if (Config.athena) {
+            MinecraftForge.EVENT_BUS.register(new AthenaEvents());
+        }
+
+        if (Loader.isModLoaded("InfernalMobs")) {
+            FMLCommonHandler.instance().bus().register(new InfernalMobsSaveHandler());
+            MinecraftForge.EVENT_BUS.register(new InfernalMobsSaveHandler());
+            MinecraftForge.EVENT_BUS.register(new InfernalMobsMakeNeturalMobsAgressiveEvent());
+
+        }
+
+
+
+        if (Loader.isModLoaded("thirstmod")) {
+            MinecraftForge.EVENT_BUS.register(new ThirstEvents());
+            MinecraftForge.EVENT_BUS.register(new ThirstSatuartionEvent());
+        }
+
+        if (Loader.isModLoaded("ironbackpacks")) {
+            FMLCommonHandler.instance().bus().register(new IronBackPacksLimitAmmountEvent());
+
+            MinecraftForge.EVENT_BUS.register(new IronBackPacksLimitAmmountEvent());
+        }
+
+
         WitherProps.register();
+
         EntityRegistry.registerModEntity(EntityWitherDeathManager.class, "death", 54, INSTANCE, 256, 1, true);
+
         EntityRegistry.registerModEntity(EntityCrystalBomb.class, "bomb", 808, INSTANCE, 256, 1, true);
-        GameRegistry.registerWorldGenerator(new EvilGenFakeOres(), 1);
+
+        if (Loader.isModLoaded("fakeores")) {
+            GameRegistry.registerWorldGenerator(new EvilGenFakeOres(), 1);
+        }
     }
 
 
@@ -80,14 +134,25 @@ public class Evil {
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
-        if (Config.spawnLadderZombie) {
-            BiomeGenBase[] biomes = {BiomeGenBase.desert, BiomeGenBase.taiga, BiomeGenBase.forest, BiomeGenBase.jungle, BiomeGenBase.plains, BiomeGenBase.swampland, BiomeGenBase.mesa, BiomeGenBase.roofedForest};
-            EntityRegistry.addSpawn(ZombieClimber.class, 1, 1, 2, EnumCreatureType.monster, biomes);
-        }
 
-        if (Loader.isModLoaded("dextersnether")) {
+        HWSpawns.spawnHook();
+
+
+        if (Loader.isModLoaded("fakeores")) {
             OresInteg.init(event);
         }
+
+
+        if (Loader.isModLoaded("chocolateQuest")) {
+            CQInteg.register();
+        }
+
+        if (Loader.isModLoaded("ParticleMan")) {
+            PGI.re();
+        }
+
+
+
     }
 
     @SubscribeEvent

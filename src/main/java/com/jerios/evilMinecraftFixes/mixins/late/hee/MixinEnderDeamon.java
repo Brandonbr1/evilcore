@@ -28,8 +28,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class MixinEnderDeamon extends EntityFlying {
 
     private static final WeightedList<SpawnEntry> spawnList = new WeightedList<>(
-        new SpawnEntry(EntityEnderman.class,13,23),
-        new SpawnEntry(EntityMobAngryEnderman.class,32,100),
+        new SpawnEntry(EntityEnderman.class,32,100),
+        new SpawnEntry(EntityMobAngryEnderman.class,13,23),
         new SpawnEntry(EntityMobEnderGuardian.class,6,5)
     );
 
@@ -41,7 +41,7 @@ public class MixinEnderDeamon extends EntityFlying {
     private void redirectNull(EntityBossEnderDemon instance){
        if (!instance.worldObj.isRemote) {
 
-           for (int i = 0; i < 90; i++) {
+           for (int i = 0; i < 15; i++) {
                SpawnEntry spawnEntry = spawnList.getRandomItem(instance.worldObj.rand);
                EntityLiving entity = spawnEntry.createMob(instance.worldObj);
                entity.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 600, 2, false));
@@ -49,22 +49,6 @@ public class MixinEnderDeamon extends EntityFlying {
                entity.func_110163_bv();
                entity.hurtResistantTime = 120;
                instance.worldObj.spawnEntityInWorld(entity);
-           }
-
-           for (int i = 0; i < 25; i++) {
-               EntityMobAngryEnderman enderman = new EntityMobAngryEnderman(instance.worldObj);
-               enderman.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 600, 2, false));
-               enderman.hurtResistantTime = 120;
-               enderman.func_110163_bv();
-               spawnEndermen(enderman, instance.worldObj, (int) instance.posX, (int) instance.posY, (int) instance.posZ);
-           }
-
-           for (int i = 0; i < 5; i++) {
-               EntityMobEnderGuardian enderman = new EntityMobEnderGuardian(instance.worldObj);
-               enderman.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 600, 2, false));
-               enderman.hurtResistantTime = 120;
-               enderman.func_110163_bv();
-               spawnEndermen(enderman, instance.worldObj, (int) instance.posX, (int) instance.posY, (int) instance.posZ);
            }
 
        }

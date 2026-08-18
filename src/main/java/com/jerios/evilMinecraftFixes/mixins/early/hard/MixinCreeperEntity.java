@@ -1,5 +1,6 @@
 package com.jerios.evilMinecraftFixes.mixins.early.hard;
 
+import fr.elias.fakeores.common.EntityOresBoss;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -18,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import thehippomaster.MutantCreatures.CreeperMinion;
 
 @Mixin(EntityCreeper.class)
 public class MixinCreeperEntity extends EntityMob {
@@ -39,15 +41,21 @@ public class MixinCreeperEntity extends EntityMob {
     @Inject(method = "onUpdate", at = @At("HEAD"))
     private void evil$injectOnUpdate(CallbackInfo ci) {
         if (this.getHealth() <= 12) {
-            if (!hasAlreadyActivatedLowHP) {
-                this.fuseTime = this.fuseTime - 5;
+            EntityCreeper creeper = ((EntityCreeper)(Object)this);
+            if (!(creeper instanceof CreeperMinion)) {
 
-                hasAlreadyActivatedLowHP = true;
-                double currentSpeed = this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue();
-                double newSpeed = currentSpeed + 0.05D;
-                this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(newSpeed);
+                if (!hasAlreadyActivatedLowHP) {
+                    this.fuseTime = this.fuseTime - 5;
+
+                    hasAlreadyActivatedLowHP = true;
+                    double currentSpeed = this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue();
+                    double newSpeed = currentSpeed + 0.05D;
+                    this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(newSpeed);
+
+                }
 
             }
+
         }
 
         if (isRareCreeper) {
@@ -118,6 +126,8 @@ public class MixinCreeperEntity extends EntityMob {
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60D);
     }
 
+
+
     @Redirect(method = "func_146077_cc", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/monster/EntityCreeper;setDead()V"))
     private void evil$dontDie(EntityCreeper instance) {
 
@@ -136,7 +146,7 @@ public class MixinCreeperEntity extends EntityMob {
     private Explosion evil$redirectNonCharged(World instance, Entity p_72876_1_, double p_72876_2_, double p_72876_4_, double p_72876_6_, float p_72876_8_, boolean p_72876_9_) {
         boolean flag = this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
 
-        timeSinceIgnited = 0;
+        timeSinceIgnited = -20;
 
         return this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ,(float)this.explosionRadius, flag, flag);
     }
@@ -150,5 +160,6 @@ public class MixinCreeperEntity extends EntityMob {
     protected Item getDropItem() {
         return Items.gold_ingot;
     }
+
 
 }
