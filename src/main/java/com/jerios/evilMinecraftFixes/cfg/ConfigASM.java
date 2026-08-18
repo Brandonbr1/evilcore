@@ -119,6 +119,7 @@ public class ConfigASM {
     @Config.DefaultBoolean(true)
     public static boolean bomby ;
 
+
     @Config.Comment("Harder Endermen")
     @Config.DefaultBoolean(true)
     public static boolean harderEndermen ;
