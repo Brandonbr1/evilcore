@@ -72,7 +72,6 @@ public class ContainerRepairUnlocker extends Container {
         this.addSlotToContainer(new Slot(this.inputSlots, 1, 76, 47));
         this.addSlotToContainer(new Slot(this.outputSlot, 2, 134, 47)
         {
-            private static final String __OBFID = "CL_00001734";
             /**
              * Check if the stack is a valid item for this slot. Always true beside for the armor slots.
              */
