@@ -242,6 +242,7 @@ public enum Mixins implements IMixins {
 
     CHEM_X_SPECIAL_MOBS_WORKS(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.MUTANT)
+        .addRequiredMod(TargetMods.SPM)
         .setApplyIf(() -> ConfigASM.chemXSpecialMobsWorks)
         .addCommonMixins("mutantCreatures.MixinChemicalX")),
 
