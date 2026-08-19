@@ -48,7 +48,7 @@ public class Config {
             .getFloat("Heal AMM", "Wither", 4f, 0f, 1000f, "");
 
 
-        naturalRegeneration = configuration.getBoolean("Natural regeneration", "Player", false, "Should natural Regeneration be forcefully turned off?");
+        naturalRegeneration = configuration.getBoolean("Natural regeneration", "Player", true, "Should natural Regeneration be forcefully turned off?");
 
         healTimer = configuration
             .getInt("Heal Timer", "Wither", 120, 0, 100000, "");
