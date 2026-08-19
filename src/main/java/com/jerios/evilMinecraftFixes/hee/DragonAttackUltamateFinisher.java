@@ -22,7 +22,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 
-// every single attack except divebomb!
+// every single attack except divebomb and punch!
 public class DragonAttackUltamateFinisher extends DragonSpecialAttackBase {
     private Entity target;
     private byte shootTimer;
