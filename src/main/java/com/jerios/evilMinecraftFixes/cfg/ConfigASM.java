@@ -95,6 +95,10 @@ public class ConfigASM {
     @Config.DefaultBoolean(true)
     public static boolean hEEMusicFix ;
 
+    @Config.Comment("Dragon Always gives effects on bite attack?")
+    @Config.DefaultBoolean(true)
+    public static boolean alwaysEffects ;
+
     @Config.Comment("Increase Block Wielder HP")
     @Config.DefaultBoolean(true)
     public static boolean blockWilderBuff ;
@@ -136,9 +140,13 @@ public class ConfigASM {
     @Config.DefaultBoolean(true)
     public static boolean HeeTweaks ;
 
-    @Config.Comment("Nerf the hungey mobs")
+    @Config.Comment("Hard Dragon")
     @Config.DefaultBoolean(true)
-    public static boolean hungeyMobsNerf ;
+    public static boolean hardDragom ;
+
+   // @Config.Comment("Nerf the hungey mobs")
+   // @Config.DefaultBoolean(true)
+   // public static boolean hungeyMobsNerf ;
 
     @Config.Comment("Particle Glove consumes Thirst")
     @Config.DefaultBoolean(true)

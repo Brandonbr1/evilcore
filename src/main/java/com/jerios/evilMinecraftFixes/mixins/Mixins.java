@@ -182,7 +182,7 @@ public enum Mixins implements IMixins {
 
     ENDER_DRAGON_NO_KNOCKBACK(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.HEE)
-        .setApplyIf(() -> ConfigASM.HeeTweaks)
+        .setApplyIf(() -> ConfigASM.hardDragom)
         .addCommonMixins("hee.MixinEnderDragon")),
 
     DISABLE_UPDATE_CHECKER_2(new MixinBuilder().setPhase(Phase.LATE)
@@ -271,10 +271,10 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> ConfigASM.HeeTweaks)
         .addCommonMixins("hee.MixinDragonAttackBloodlust")),
 
-    MOBS_NO_INSTA_EAT(new MixinBuilder().setPhase(Phase.LATE)
+   /** MOBS_NO_INSTA_EAT(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.SPM)
         .setApplyIf(() -> ConfigASM.hungeyMobsNerf)
-        .addCommonMixins("specialMobs.MixinMobHelper")),
+        .addCommonMixins("specialMobs.MixinMobHelper")), **/
 
     CREEPER_MUTANT_HIGHERCHANCE_CHARGED(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.MUTANT)
@@ -321,6 +321,11 @@ public enum Mixins implements IMixins {
         .addRequiredMod(TargetMods.HEE)
         .setApplyIf(() -> ConfigASM.hEEMusicFix)
         .addClientMixins("hee.MixinCustomMusicTicker")),
+
+    ENDER_DRAGON_ALWAYS_EFFECTS(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.HEE)
+        .setApplyIf(() -> ConfigASM.alwaysEffects)
+        .addClientMixins("hee.MixinDragonAttackManager")),
 
     INFERNAL_MOBS(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.INFERNAL_MOBS)

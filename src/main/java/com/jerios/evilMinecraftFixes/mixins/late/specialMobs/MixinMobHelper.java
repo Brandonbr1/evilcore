@@ -15,7 +15,74 @@ public class MixinMobHelper {
     /**
      * @author
      * @reason
+
+    @Overwrite(remap = false)
+    public static ItemStack removeHeldItem(EntityPlayer player) {
+        ItemStack heldItem = player.inventory.getCurrentItem();
+        int index = player.inventory.currentItem;
+        if (heldItem != null) {
+            if (heldItem.stackSize >= 1) {
+                player.clearItemInUse();
+                heldItem.stackSize--;
+            }
+            if (heldItem.stackSize <= 0) {
+                player.clearItemInUse();
+                player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+            }
+          //  player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+        }
+
+        return heldItem;
+    }
      */
+
+    /**
+     * @author
+     * @reason
+
+    @Overwrite(remap = false)
+    public static ItemStack removeRandomItem(EntityPlayer player) {
+        int count = 0;
+
+        for(int i = 0; i < player.inventory.getSizeInventory(); ++i) {
+            if (player.inventory.getStackInSlot(i) != null) {
+                ++count;
+            }
+        }
+
+        if (count > 0) {
+            count = _SpecialMobs.random.nextInt(count);
+
+            for(int i = 0; i < player.inventory.getSizeInventory(); ++i) {
+                ItemStack item = player.inventory.getStackInSlot(i);
+                if (item != null) {
+                    --count;
+                    if (count < 0) {
+
+                        if (item.stackSize >= 1) {
+                            player.clearItemInUse();
+                            item.stackSize--;
+                        }
+                        if (item.stackSize <= 0) {
+                            player.clearItemInUse();
+                            player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+                        }
+                       // player.inventory.setInventorySlotContents(i, (ItemStack)null);
+                        return item;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+     */
+
+    /**
+     * @author
+     * @reason
+
     @Overwrite(remap = false)
     public static ItemStack removeHeldItem(EntityPlayer player) {
         int index = player.inventory.currentItem;
@@ -43,10 +110,7 @@ public class MixinMobHelper {
         return heldItem;
     }
 
-    /**
-     * @author
-     * @reason
-     */
+
     @Overwrite(remap = false)
     public static ItemStack removeRandomItem(EntityPlayer player) {
         int count = 0;
@@ -88,6 +152,7 @@ public class MixinMobHelper {
 
         return null;
     }
+    */
 
 
 

@@ -4,8 +4,6 @@ import chylex.hee.entity.boss.EntityBossDragon;
 import chylex.hee.entity.boss.dragon.managers.DragonAttackManager;
 import com.jerios.evilMinecraftFixes.cfg.Config;
 import com.jerios.evilMinecraftFixes.hee.DragonAttackUltamateFinisher;
-import com.jerios.evilMinecraftFixes.hee.DragonByteMadness;
-import com.jerios.evilMinecraftFixes.hee.SuperLightingAttack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
@@ -28,11 +26,8 @@ public class MixinEnderDragon extends EntityLiving {
     @Inject(method = "<init>", at=@At("TAIL"))
     private void evil$in(World world, CallbackInfo ci) {
         EntityBossDragon dragon = ((EntityBossDragon)(Object)this);
-        this.attacks.registerSpecial((new DragonByteMadness(dragon, 6, 7)).setDisabledPassiveAttacks(new byte[]{0, 1}));
-        this.attacks.registerSpecial((new DragonAttackUltamateFinisher(dragon, 7, 5)).setDisabledPassiveAttacks(new byte[]{0, 1}));
-        this.attacks.registerSpecial((new SuperLightingAttack(dragon, 8, 7)).setDisabledPassiveAttacks(new byte[]{0, 1}));
+        this.attacks.registerSpecial((new DragonAttackUltamateFinisher(dragon, 6, 8)).setDisabledPassiveAttacks(new byte[]{0, 1}));
     }
-
 
     public void knockBack(Entity p_70653_1_, float p_70653_2_, double p_70653_3_, double p_70653_5_) {
         if (this.getHealth() >= Config.enderDragonNoKnockbackHp) {
