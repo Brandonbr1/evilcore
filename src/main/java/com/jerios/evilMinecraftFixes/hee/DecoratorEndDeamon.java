@@ -136,7 +136,7 @@ public class DecoratorEndDeamon extends WorldGenerator {
             }
         }
         placeBlock(world, BlockList.obsidian_special_glow, 1, x, y, z);
-        EntityItem item = new EntityItem(world, x, y + 0.5D, z, new ItemStack(EnderDeamonIsolator.endermenRelicSpawner));
+        EntityItem item = new EntityItem(world, x, y + 2, z, new ItemStack(EnderDeamonIsolator.endermenRelicSpawner));
         item.lifespan = Integer.MAX_VALUE;
         world.spawnEntityInWorld(item);
        // getWorld().spawnEntityInWorld((Entity)new EntityItemEndermanRelic(getWorld(), x + 0.5D, (y + 1), z + 0.5D, 0));
