@@ -38,7 +38,7 @@ public class MixinEntityProjectileDragonFireball extends EntityFireball {
 
                 if (e instanceof EntityPlayer) {
                     EntityPlayer living = (EntityPlayer) e;
-                    living.addPotionEffect(new PotionEffect(Potion.hunger.id, 200, 3));
+              //      living.addPotionEffect(new PotionEffect(Potion.hunger.id, 200, 3));
                //     living.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 200, 2));
                     living.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 200, 2));
                 }
@@ -113,8 +113,8 @@ public class MixinEntityProjectileDragonFireball extends EntityFireball {
 
                 if (e instanceof EntityPlayer) {
                     EntityPlayer living = (EntityPlayer) e;
-                    living.addPotionEffect(new PotionEffect(Potion.hunger.id, 200, 9));
-                    living.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 200, 2));
+              //      living.addPotionEffect(new PotionEffect(Potion.hunger.id, 200, 9));
+                //    living.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 200, 2));
                     living.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 200, 2));
                 }
 

@@ -3,6 +3,7 @@ package com.jerios.evilMinecraftFixes.hee;
 import chylex.hee.init.BlockList;
 import chylex.hee.system.util.BlockPosM;
 import com.jerios.evilMinecraftFixes.EnderDeamonIsolator;
+import com.jerios.evilMinecraftFixes.cfg.Config;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
@@ -18,16 +19,33 @@ public class DecoratorEndDeamon extends WorldGenerator {
             world.setBlock(x, y, z, (block == null) ? Blocks.air : block, metadata, 3);
     }
 
+    public static final byte metaEnchanted = 2;
+
     public boolean generate(World world, Random rand, int x, int y, int z) {
-        int sz = (int)Math.floor(48.0D), halfsz = sz >> 1;
-        x = x + rand.nextInt(sz) - halfsz;
-        z = z + rand.nextInt(sz) - halfsz;
+      //  int sz = (int)Math.floor(48.0D), halfsz = sz >> 1;
+       // x = x + rand.nextInt(sz) - halfsz;
+      //  z = z + rand.nextInt(sz) - halfsz;
         BlockPosM tmpPos = BlockPosM.tmp();
-        if (tmpPos.set(x - 7, y, z).getBlock(world) != Blocks.air && tmpPos.set(x + 7, y, z).getBlock(world) != Blocks.air && tmpPos.set(x, y, z - 7).getBlock(world) != Blocks.air && tmpPos.set(x, y, z + 7).getBlock(world) != Blocks.air && tmpPos.set(x, y - 7, z).getBlock(world) != Blocks.air && tmpPos.set(x, y + 7, z).getBlock(world) != Blocks.air && tmpPos.set(x, y - 15, z).getBlock(world) != Blocks.air && tmpPos.set(x, y + 15, z).getBlock(world) != Blocks.air) {
-            return false;
-        }
-        if (world.getBlock(x, y, z) != Blocks.air && world.getBlock(x, y - 1, z) != Blocks.air && world.getBlock(x, y + 1, z) != Blocks.air) {
-           return false;
+
+        // if we are not set to spawn on enriched island, use algorithm that spawns own islands
+        if (!Config.trySpawnOnEnrichedIslandOnly) {
+            if (tmpPos.set(x - 7, y, z).getBlock(world) != Blocks.air && tmpPos.set(x + 7, y, z).getBlock(world) != Blocks.air && tmpPos.set(x, y, z - 7).getBlock(world) != Blocks.air && tmpPos.set(x, y, z + 7).getBlock(world) != Blocks.air && tmpPos.set(x, y - 7, z).getBlock(world) != Blocks.air && tmpPos.set(x, y + 7, z).getBlock(world) != Blocks.air && tmpPos.set(x, y - 15, z).getBlock(world) != Blocks.air && tmpPos.set(x, y + 15, z).getBlock(world) != Blocks.air) {
+                return false;
+            }
+            if (world.getBlock(x, y, z) != Blocks.air && world.getBlock(x, y - 1, z) != Blocks.air && world.getBlock(x, y + 1, z) != Blocks.air) {
+                return false;
+            }
+        } else {
+            // enriched island algorithm
+            if (world.getBlock(x,y,z) != BlockList.end_terrain
+                || world.getBlock(x,y - 1, z) != BlockList.end_terrain
+                || world.getBlock(x,y + 1, z) != BlockList.end_terrain
+                && world.getBlockMetadata(x,y,z) != metaEnchanted
+                || world.getBlockMetadata(x,y - 1, z) != metaEnchanted
+                || world.getBlockMetadata(x,y + 1, z) != metaEnchanted
+            ) {
+                return false;
+            }
         }
 
        // if (world.getBlock(x, y, z) != BlockList.end_terrain || world.getBlock(x, y, z) != Blocks.end_stone) {
@@ -118,7 +136,7 @@ public class DecoratorEndDeamon extends WorldGenerator {
             }
         }
         placeBlock(world, BlockList.obsidian_special_glow, 1, x, y, z);
-        EntityItem item = new EntityItem(world, x + 0.5D, (y + 1), z + 0.5D, new ItemStack(EnderDeamonIsolator.endermenRelicSpawner));
+        EntityItem item = new EntityItem(world, x, y + 0.5D, z, new ItemStack(EnderDeamonIsolator.endermenRelicSpawner));
         item.lifespan = Integer.MAX_VALUE;
         world.spawnEntityInWorld(item);
        // getWorld().spawnEntityInWorld((Entity)new EntityItemEndermanRelic(getWorld(), x + 0.5D, (y + 1), z + 0.5D, 0));

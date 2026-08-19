@@ -49,13 +49,17 @@ public class MixinBiomeDecoratorHardcoreEnd extends BiomeEndDecorator {
     }
 
     // This causes lots of decoration errors, sorry!!!
-    @Inject(method = "genDecorations", at= @At(value = "INVOKE", target = "Lchylex/hee/world/biome/BiomeDecoratorHardcoreEnd;generateOres()V"))
+    @Inject(method = "genDecorations", at= @At(value = "INVOKE", target = "Lchylex/hee/system/logging/Stopwatch;finish(Ljava/lang/String;)V", ordinal = 5))
     private void evil$in(BiomeGenBase biome, CallbackInfo ci) {
 
         double distFromCenter2 = MathUtil.distance((this.chunk_X >> 4), (double)(this.chunk_Z >> 4)) * (double)16.0F;
         if (distFromCenter2 > (double) Config.distanceToSpawn && this.randomGenerator.nextInt(Config.chanceToSpawnIsland) == 0 && Math.abs(this.randomGenerator.nextGaussian()) < 0.285) {
           //  Stopwatch.timeAverage("EnderDeamonStructure", 64);
-            this.tryGenerateSlient(this.deamonStructure, this.chunk_X + 16, 32 + this.randomGenerator.nextInt(40), this.chunk_Z + 16);
+            int xx = randX();
+            int zz= randZ();
+            // if enriched enabled, get possible block as x and z, else random height
+            int height = Config.trySpawnOnEnrichedIslandOnly ? this.currentWorld.getTopSolidOrLiquidBlock(xx, zz) : 32 + this.randomGenerator.nextInt(40);
+            this.tryGenerate(this.deamonStructure, xx, height, zz);
           //  Stopwatch.finish("EnderDeamonStructure");
         }
     }

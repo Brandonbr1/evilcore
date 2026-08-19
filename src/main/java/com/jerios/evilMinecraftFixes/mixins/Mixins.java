@@ -185,6 +185,26 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> ConfigASM.hardDragom)
         .addCommonMixins("hee.MixinEnderDragon")),
 
+    BLOOD_LUST(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.HEE)
+        .setApplyIf(() -> ConfigASM.hardDragom)
+        .addCommonMixins("hee.DragonAttackBloodlustMixin")),
+
+    DEFAULT_SPECIAL_ATTACK(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.HEE)
+        .setApplyIf(() -> ConfigASM.hardDragom)
+        .addCommonMixins("hee.DragonAttackDefaultMixin")),
+
+    SUMMON_ATTACK(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.HEE)
+        .setApplyIf(() -> ConfigASM.hardDragom)
+        .addCommonMixins("hee.DragonAttackSummoningMixin")),
+
+    BASE_SPECIAL_ATTACK(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.HEE)
+        .setApplyIf(() -> ConfigASM.hardDragom)
+        .addCommonMixins("hee.DragonSpecialAttackBaseMixin")),
+
     DISABLE_UPDATE_CHECKER_2(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.DI)
         .setApplyIf(() -> ConfigASM.DIUpCheck)

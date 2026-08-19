@@ -27,6 +27,8 @@ public class Config {
 
     public static float enderDragonNoKnockbackHp = 80;
 
+    public static boolean trySpawnOnEnrichedIslandOnly;
+
     public static int maxBP;
     public static boolean dangerousBombs;
 
@@ -80,6 +82,9 @@ public class Config {
         dangerousBombs = configuration.getBoolean("Dangerous Bombs", "HEE", false, "Make the bombs destroy blocks");
 
         bufffNetherMobs = configuration.getBoolean("Buff Nether Mobs", "Nether", true, "Give Nether Mobs an increased HP");
+
+        trySpawnOnEnrichedIslandOnly = configuration.getBoolean("Spawn Ender Deamon Structure only on Enriched Island", "HEE", false, "SHould the  Ender Deamon Structure spawn only on Enrinched Island(test)");
+
 
         athena = configuration.getBoolean("Athena", "Wither", true, "Enable Athena?");
 

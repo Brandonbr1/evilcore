@@ -153,7 +153,7 @@ public class DragonAttackUltamateFinisher extends DragonSpecialAttackBase {
 
     @Override
     public int getNextAttackTimer() {
-        return 5;
+        return 50;
     }
 
     @Override
