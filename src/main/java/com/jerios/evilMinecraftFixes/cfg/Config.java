@@ -34,6 +34,10 @@ public class Config {
 
     public static boolean bufffNetherMobs;
 
+    public static float distanceToSpawn;
+
+    public static int chanceToSpawnIsland;
+
     public static void synchronizeConfiguration(File configFile) {
         Configuration configuration = new Configuration(configFile);
         hardness = configuration.getFloat("hardness", "HW", 50f, 0f, 1000f, "HW source invasion hardness(break)");
@@ -79,6 +83,9 @@ public class Config {
 
         athena = configuration.getBoolean("Athena", "Wither", true, "Enable Athena?");
 
+        distanceToSpawn = configuration.getFloat("Max spawn distance for endermen relic structure", "HEE", 1300.0F, 0, Float.MAX_VALUE, "Distance to try and spawn ender deamon structure");
+
+        chanceToSpawnIsland = configuration.getInt("Spawn Chance of Relic Island", "HEE", 16, 0, Integer.MAX_VALUE, "Spawn chance after required distance");
         if (configuration.hasChanged()) {
             configuration.save();
         }

@@ -120,6 +120,10 @@ public class Evil {
 
         WitherProps.register();
 
+        if (Loader.isModLoaded("HardcoreEnderExpansion")) {
+            EnderDeamonIsolator.init();
+        }
+
         EntityRegistry.registerModEntity(EntityWitherDeathManager.class, "death", 54, INSTANCE, 256, 1, true);
 
         EntityRegistry.registerModEntity(EntityCrystalBomb.class, "bomb", 808, INSTANCE, 256, 1, true);

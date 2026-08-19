@@ -40,10 +40,12 @@ public class MixinRenderBossDradon extends RenderLiving {
     public void renderDragon(EntityBossDragon dragon, double x, double y, double z, float yaw, float partialTickTime) {
         BossStatus.setBossStatus(dragon, false);
 
-       if (dragon.isAngry()) {
-            BossStatus.bossName = EnumChatFormatting.LIGHT_PURPLE + "YOUR DOOM";
+        if (dragon.attacks.getHealthPercentage() < 40) {
+            BossStatus.bossName = EnumChatFormatting.LIGHT_PURPLE + "YOUR DOOM!";
+        }else if (dragon.isAngry()) {
+            BossStatus.bossName = EnumChatFormatting.LIGHT_PURPLE + "Your Doom";
         } else if (dragon.worldObj.difficultySetting.getDifficultyId() < 2) {
-            BossStatus.bossName = "BIG FLYING FLOPPY DERPY LIZARD";
+            BossStatus.bossName = "FLYING DERPY LIZARD";
         } else {
             BossStatus.bossName = I18n.format(dragon.getCommandSenderName());
         }

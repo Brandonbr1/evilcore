@@ -136,6 +136,10 @@ public class ConfigASM {
     @Config.DefaultBoolean(true)
     public static boolean HeeTweaks ;
 
+    @Config.Comment("Nerf the hungey mobs")
+    @Config.DefaultBoolean(true)
+    public static boolean hungeyMobsNerf ;
+
     @Config.Comment("Particle Glove consumes Thirst")
     @Config.DefaultBoolean(true)
     public static boolean PGGloveThirst ;

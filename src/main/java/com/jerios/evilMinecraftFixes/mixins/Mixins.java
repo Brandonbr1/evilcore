@@ -258,7 +258,22 @@ public enum Mixins implements IMixins {
     ENCHANCED_ISLAND_DECORATOR(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.HEE)
         .setApplyIf(() -> ConfigASM.decoratorEnchancedIsland)
-        .addCommonMixins("hee.MixinBiomeDecoratorEnchantedIsland")),
+        .addCommonMixins("hee.MixinBiomeDecoratorHardcoreEnd")),
+
+    SNOWBALL_FIRE(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.HEE)
+        .setApplyIf(() -> ConfigASM.HeeTweaks)
+        .addCommonMixins("hee.MixinEntityProjectileDragonFireball")),
+
+    BLOODLUST_CAP(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.HEE)
+        .setApplyIf(() -> ConfigASM.HeeTweaks)
+        .addCommonMixins("hee.MixinDragonAttackBloodlust")),
+
+    MOBS_NO_INSTA_EAT(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.SPM)
+        .setApplyIf(() -> ConfigASM.hungeyMobsNerf)
+        .addCommonMixins("specialMobs.MixinMobHelper")),
 
     CREEPER_MUTANT_HIGHERCHANCE_CHARGED(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.MUTANT)

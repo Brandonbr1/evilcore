@@ -1,7 +1,6 @@
 package com.jerios.evilMinecraftFixes.content;
 
 import com.jerios.evilMinecraftFixes.content.tile.BlockUnlockerAnvil;
-import com.jerios.evilMinecraftFixes.hee.ItemEndermenRelicJerios;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
