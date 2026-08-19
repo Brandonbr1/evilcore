@@ -26,7 +26,7 @@ public class MixinEnderDragon extends EntityLiving {
     @Inject(method = "<init>", at=@At("TAIL"))
     private void evil$in(World world, CallbackInfo ci) {
         EntityBossDragon dragon = ((EntityBossDragon)(Object)this);
-        this.attacks.registerSpecial((new DragonAttackUltamateFinisher(dragon, 6, 8)).setDisabledPassiveAttacks(new byte[]{0, 1}));
+        this.attacks.registerSpecial((new DragonAttackUltamateFinisher(dragon, 6, 6)).setDisabledPassiveAttacks(new byte[]{0, 1}));
     }
 
     public void knockBack(Entity p_70653_1_, float p_70653_2_, double p_70653_3_, double p_70653_5_) {
