@@ -58,6 +58,10 @@ public class DragonAttackUltamateFinisher extends DragonSpecialAttackBase {
                     stopShooting = true;
                 } else if (++this.shootTimer > 13 - this.getDifficulty() * 2 - (ModCommonProxy.opMobs ? 3 : 0)) {
                     this.dragon.shots.createNew(DragonShotManager.ShotType.FIREBALL).setTarget(this.target).setRandom().shoot();
+                    this.dragon.shots.createNew(DragonShotManager.ShotType.FIREBALL).setTarget(this.target).setRandom().shoot();
+                    this.dragon.shots.createNew(DragonShotManager.ShotType.FIREBALL).setTarget(this.target).setRandom().shoot();
+                    this.dragon.shots.createNew(DragonShotManager.ShotType.FIREBALL).setTarget(this.target).setRandom().shoot();
+                    this.dragon.shots.createNew(DragonShotManager.ShotType.FIREBALL).setTarget(this.target).setRandom().shoot();
                     this.shootTimer = 0;
                     if (++this.shotAmount > 7 + this.rand.nextInt(6) + this.getDifficulty()) {
                         stopShooting = true;
