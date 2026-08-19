@@ -49,7 +49,7 @@ public class MixinBiomeDecoratorHardcoreEnd extends BiomeEndDecorator {
     }
 
     // This causes lots of decoration errors, sorry!!!
-    @Inject(method = "genDecorations", at= @At(value = "INVOKE", target = "Lchylex/hee/system/logging/Stopwatch;finish(Ljava/lang/String;)V", ordinal = 5))
+    @Inject(method = "genDecorations", at= @At(value = "INVOKE", target = "Lchylex/hee/system/logging/Stopwatch;finish(Ljava/lang/String;)V", ordinal = 5), remap = false)
     private void evil$in(BiomeGenBase biome, CallbackInfo ci) {
 
         double distFromCenter2 = MathUtil.distance((this.chunk_X >> 4), (double)(this.chunk_Z >> 4)) * (double)16.0F;
