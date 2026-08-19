@@ -30,11 +30,14 @@ public class SuperLightingAttack extends DragonSpecialAttackBase {
         super.update();
 
         if (this.target == null) {
+            System.out.println("Lighting ");
             this.target = this.dragon.attacks.getRandomPlayer();
             this.dragon.target = this.target;
 
             if (target != null) {
+                System.out.println("Lightingg ");
                 for (int i = 0; i < 25 + this.rand.nextInt(12) + this.dragon.worldObj.difficultySetting.getDifficultyId(); i++) {
+                    System.out.println("Lightingg? ");
                     int x = (int) target.posX + this.rand.nextInt(16);
                     int z = (int) target.posZ + this.rand.nextInt(16);
                     int y = (int) target.posY + this.rand.nextInt(4);
@@ -52,7 +55,7 @@ public class SuperLightingAttack extends DragonSpecialAttackBase {
 
     @Override
     public float overrideMovementSpeed() {
-        return super.overrideMovementSpeed() + 0.5f;
+        return super.overrideMovementSpeed() + 0.3f;
     }
 
 

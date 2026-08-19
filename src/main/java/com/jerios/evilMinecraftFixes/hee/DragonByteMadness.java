@@ -33,6 +33,7 @@ public class DragonByteMadness extends DragonSpecialAttackBase {
         if (this.target != null) {
             if (this.dragon.target != null && this.biteCooldown == 0) {
                 this.biteCooldown = (byte)(this.dragon.attacks.biteClosePlayers() ? 6 : 3);
+                System.out.println("OM NOM NOM");
               //  if (this.dragon.target instanceof EntityPlayer) {
                     //    KnowledgeRegistrations.ENDER_DRAGON((EntityPlayer)this.dragon.target, 0.14F, new short[] { 7, 10 });
               //  }
