@@ -14,7 +14,7 @@ import thehippomaster.MutantCreatures.ai.MCAIEnderClone;
 
 @Mixin(MCAIEnderClone.class)
 public class MixinMCAIEnderClone extends EntityAIBase {
-    @Shadow private EntityLivingBase attackTarget;
+    @Shadow(remap = false) private EntityLivingBase attackTarget;
 
     @WrapOperation(method = "startExecuting", at= @At(value = "INVOKE", target = "Lthehippomaster/MutantCreatures/EndermanClone;setAttackTarget(Lnet/minecraft/entity/EntityLivingBase;)V"))
     private void evil$cloneSpawnAngryEndermen(EndermanClone instance, EntityLivingBase entityLivingBase, Operation<Void> original) {

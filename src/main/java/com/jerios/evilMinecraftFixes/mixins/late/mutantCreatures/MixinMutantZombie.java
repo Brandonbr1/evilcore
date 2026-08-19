@@ -20,7 +20,7 @@ public class MixinMutantZombie extends EntityMob {
         super(p_i1738_1_);
     }
 
-        @Shadow
+        @Shadow(remap = false)
         public int getLives() {
         return this.dataWatcher.getWatchableObjectByte(20);
     }

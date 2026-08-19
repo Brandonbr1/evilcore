@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinPlayerContainer implements IExtendedEntityProperties, IThirst {
 
 
-   @Shadow
+   @Shadow(remap = false)
    private ThirstLogic stats;
 
     @Override
@@ -88,7 +88,7 @@ public class MixinPlayerContainer implements IExtendedEntityProperties, IThirst 
     public static void addPlayer(EntityPlayer player) {
     }
 
-    @Shadow
+    @Shadow(remap = false)
     public ThirstLogic getStats() {
         return this.stats;
     }

@@ -18,9 +18,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinNetherHooks {
 
    @Mutable
-   @Shadow public static @Final WeightedRandomChestContent[] NETHERCHESTItems;
+   @Shadow(remap = false) public static @Final WeightedRandomChestContent[] NETHERCHESTItems;
    @Mutable
-   @Shadow public static @Final WeightedRandomChestContent[] PIGGYCHESTItems;
+   @Shadow(remap = false) public static @Final WeightedRandomChestContent[] PIGGYCHESTItems;
 
    @Inject(method = "Init", at=@At("HEAD"), remap = false)
     private static void eevil$a(CallbackInfo ci) {

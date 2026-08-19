@@ -21,9 +21,9 @@ import java.util.HashMap;
 @Mixin(ChemicalX.class)
 public class MixinChemicalX {
 
-    @Shadow private static HashMap<Class<? extends EntityLivingBase>, Class<? extends EntityLivingBase>> mcMap = new HashMap();
+    @Shadow(remap = false) private static HashMap<Class<? extends EntityLivingBase>, Class<? extends EntityLivingBase>> mcMap = new HashMap();
 
-    @Inject(method = "<init>",at=@At("TAIL"))
+    @Inject(method = "<init>",at=@At("TAIL")  , remap = false)
     private void evil$inject(CallbackInfo ci) {
 
         mcMap.put(Entity_SpecialZombie.class, MutantZombie.class);

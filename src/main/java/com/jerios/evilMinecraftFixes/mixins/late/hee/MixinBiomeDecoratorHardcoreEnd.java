@@ -23,7 +23,7 @@ public class MixinBiomeDecoratorHardcoreEnd extends BiomeEndDecorator {
 
     @Unique public DecoratorEndDeamon deamonStructure;
 
-    @Inject(method = "<init>", at=@At("TAIL"))
+    @Inject(method = "<init>", at=@At("TAIL"), remap = false)
     private void evil$inject(CallbackInfo ci) {
         deamonStructure = new DecoratorEndDeamon();
     }

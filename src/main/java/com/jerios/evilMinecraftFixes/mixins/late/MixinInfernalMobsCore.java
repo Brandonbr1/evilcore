@@ -21,7 +21,7 @@ import java.util.Iterator;
 @Mixin(InfernalMobsCore.class)
 public class MixinInfernalMobsCore {
 
-    @Shadow
+    @Shadow(remap = false)
     public Configuration config;
 
     // save

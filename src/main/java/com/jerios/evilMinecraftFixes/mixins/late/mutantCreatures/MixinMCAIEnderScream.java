@@ -23,8 +23,8 @@ import java.util.Random;
 @Mixin(MCAIEnderScream.class)
 public class MixinMCAIEnderScream extends EntityAIBase {
 
-    @Shadow private MutantEnderman mutantEnderman;
-    @Shadow private Random rand;
+    @Shadow(remap = false) private MutantEnderman mutantEnderman;
+    @Shadow(remap = false) private Random rand;
     @Shadow
     public boolean shouldExecute() {
         return false;

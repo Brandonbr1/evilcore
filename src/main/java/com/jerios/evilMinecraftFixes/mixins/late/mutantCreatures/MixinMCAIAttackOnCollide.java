@@ -15,7 +15,7 @@ import thehippomaster.MutantCreatures.ai.MCAIAttackOnCollide;
 @Mixin(MCAIAttackOnCollide.class)
 public class MixinMCAIAttackOnCollide extends EntityAIBase {
 
-   @Shadow EntityCreature attacker;
+   @Shadow(remap = false) EntityCreature attacker;
 
    @WrapOperation(method = "updateTask", at= @At(value = "INVOKE", target = "Lnet/minecraft/entity/EntityCreature;attackEntityAsMob(Lnet/minecraft/entity/Entity;)Z"))
    private boolean evil$explode(EntityCreature instance, Entity entity, Operation<Boolean> original) {

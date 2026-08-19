@@ -12,12 +12,12 @@ import java.util.Random;
 public class MixinDragonAttackManager {
 
 
-    @Redirect(method = "biteClosePlayers", at= @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I", ordinal = 0))
+    @Redirect(method = "biteClosePlayers", at= @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I", ordinal = 0), remap = false)
     private int evil$biteAlwaysDoesEffects(Random instance, int i) {
         return 0;
     }
 
-    @Redirect(method = "biteClosePlayers", at= @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I", ordinal = 1))
+    @Redirect(method = "biteClosePlayers", at= @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I", ordinal = 1), remap = false)
     private int evil$biteAlwaysDoesEffects2(Random instance, int i) {
         return 0;
     }

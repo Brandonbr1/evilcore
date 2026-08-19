@@ -42,7 +42,7 @@ public class MixinMutantCreeper extends EntityMob {
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(180D);
     }
 
-    @Shadow
+    @Shadow(remap = false)
     public void setCharged(boolean flag) {
         this.dataWatcher.updateObject(17, (byte)(flag ? 1 : 0));
     }

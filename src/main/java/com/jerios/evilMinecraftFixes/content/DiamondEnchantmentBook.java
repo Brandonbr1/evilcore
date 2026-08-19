@@ -34,6 +34,12 @@ public class DiamondEnchantmentBook extends Item {
         return true;
     }
 
+    @SideOnly(Side.CLIENT)
+    public boolean hasEffect(ItemStack par1ItemStack, int pass)
+    {
+        return true;
+    }
+
     /**
      * Checks isDamagable and if it cannot be stacked
      */
