@@ -7,6 +7,8 @@ import com.jerios.evilMinecraftFixes.hee.EntityCrystalBomb;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityEnderCrystal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -42,7 +44,10 @@ public class MixinEnderCrystal extends EntityEnderCrystal {
                         iter += 3;
                     }
                 }
-
+                if (!player.worldObj.isRemote) {
+                    player.addPotionEffect(new PotionEffect(Potion.wither.id, 120, 1));
+                    player.addPotionEffect(new PotionEffect(Potion.blindness.id, 160, 1));
+                }
 
                 for (int i = 0; i < iter; i++) {
                     EntityCrystalBomb bomb = new EntityCrystalBomb(this.worldObj, this.posX, this.posY + 2.2D, this.posZ, player);
