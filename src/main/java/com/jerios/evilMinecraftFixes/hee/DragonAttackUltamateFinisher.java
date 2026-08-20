@@ -68,6 +68,7 @@ public class DragonAttackUltamateFinisher extends DragonSpecialAttackBase {
                     if (++this.shotAmount > 7 + this.rand.nextInt(6) + this.getDifficulty()) {
                         stopShooting = true;
                     }
+
                 }
             }
 
