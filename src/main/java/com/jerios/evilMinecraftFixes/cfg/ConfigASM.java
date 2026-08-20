@@ -144,6 +144,14 @@ public class ConfigASM {
     @Config.DefaultBoolean(true)
     public static boolean hardDragom ;
 
+    @Config.Comment("Hard Dragon WEIGHT SUPER")
+    @Config.DefaultInt(10)
+    public static int weightSuperDragon;
+
+    @Config.Comment("Hard Dragon Max Damage For BloodLust")
+    @Config.DefaultFloat(1.0F)
+    public static float maxDragonDamage;
+
    // @Config.Comment("Nerf the hungey mobs")
    // @Config.DefaultBoolean(true)
    // public static boolean hungeyMobsNerf ;

@@ -13,6 +13,7 @@ import chylex.hee.entity.weather.EntityWeatherLightningBoltSafe;
 import chylex.hee.proxy.ModCommonProxy;
 import chylex.hee.system.util.DragonUtil;
 import chylex.hee.system.util.MathUtil;
+import com.jerios.evilMinecraftFixes.cfg.ConfigASM;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
@@ -148,12 +149,12 @@ public class DragonAttackUltamateFinisher extends DragonSpecialAttackBase {
 
     @Override
     public void onDamageTakenEvent(DamageTakenEvent event) {
-        event.damage *= 0.2F;
+        event.damage = ConfigASM.maxDragonDamage;
     }
 
     @Override
     public int getNextAttackTimer() {
-        return 50;
+        return 3;
     }
 
     @Override
