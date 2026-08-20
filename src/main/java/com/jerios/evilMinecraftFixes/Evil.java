@@ -152,9 +152,9 @@ public class Evil {
             CQInteg.register();
         }
 
-        if (Loader.isModLoaded("ParticleMan")) {
-            PGI.re();
-        }
+    //    if (Loader.isModLoaded("ParticleMan")) {
+     //       PGI.re();
+     //   }
 
 
 

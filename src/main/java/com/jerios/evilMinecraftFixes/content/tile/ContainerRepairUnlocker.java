@@ -570,6 +570,7 @@ public class ContainerRepairUnlocker extends Container {
             i == ContentRegistry.sharpness8 ||
             i == ContentRegistry.sharpness9 ||
             i == ContentRegistry.sharpness10 ||
+            i == ContentRegistry.prot5 ||
             i == ContentRegistry.prot6 ||
             i == ContentRegistry.prot7 ||
             i == ContentRegistry.prot8
@@ -578,6 +579,18 @@ public class ContainerRepairUnlocker extends Container {
             ||
             i == ContentRegistry.prot10
             || i == ContentRegistry.knockback10
+            || i == ContentRegistry.knockback9
+            || i == ContentRegistry.knockback8
+            || i == ContentRegistry.knockback7
+            || i == ContentRegistry.knockback6
+            || i == ContentRegistry.knockback5
+            || i == ContentRegistry.knockback4
+            || i == ContentRegistry.knockback3
+            || i == ContentRegistry.u6
+            || i == ContentRegistry.u7
+            || i == ContentRegistry.u8
+            || i == ContentRegistry.u9
+            || i == ContentRegistry.u10
 
 
             ;

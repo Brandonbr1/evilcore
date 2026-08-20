@@ -38,11 +38,11 @@ public class DecoratorEndDeamon extends WorldGenerator {
         } else {
             // enriched island algorithm
             if (world.getBlock(x,y,z) != BlockList.end_terrain
-                || world.getBlock(x,y - 1, z) != BlockList.end_terrain
-                || world.getBlock(x,y + 1, z) != BlockList.end_terrain
+              //  || world.getBlock(x,y - 1, z) != BlockList.end_terrain
+              //  || world.getBlock(x,y + 1, z) != BlockList.end_terrain
                 && world.getBlockMetadata(x,y,z) != metaEnchanted
-                || world.getBlockMetadata(x,y - 1, z) != metaEnchanted
-                || world.getBlockMetadata(x,y + 1, z) != metaEnchanted
+               // || world.getBlockMetadata(x,y - 1, z) != metaEnchanted
+               // || world.getBlockMetadata(x,y + 1, z) != metaEnchanted
             ) {
                 return false;
             }
