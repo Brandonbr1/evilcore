@@ -7,6 +7,7 @@ import com.jerios.evilMinecraftFixes.cfg.ConfigASM;
 import com.jerios.evilMinecraftFixes.hee.DragonAttackUltamateFinisher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,6 +30,22 @@ public class MixinEnderDragon extends EntityLiving {
         EntityBossDragon dragon = ((EntityBossDragon)(Object)this);
         this.attacks.registerSpecial((new DragonAttackUltamateFinisher(dragon, 6, ConfigASM.weightSuperDragon)).setDisabledPassiveAttacks(new byte[]{0, 1}));
     }
+
+    @Inject(method = "onDeathUpdate", at= @At(value = "INVOKE", target = "Lchylex/hee/entity/boss/EntityBossDragon;setDead()V"))
+    private void evil$spawnRegularDragon(CallbackInfo ci) {
+        if (!this.worldObj.isRemote) {
+            EntityDragon normdragon = new EntityDragon(this.worldObj);
+         //   normdragon.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.8D);
+            normdragon.setLocationAndAngles((double) 0.0F, (double) 128.0F, (double) 0.0F, this.rand.nextFloat() * 360.0F, 0.0F);
+            this.worldObj.spawnEntityInWorld(normdragon);
+        }
+    }
+
+   /** @Redirect(method = "onDeathUpdate", at= @At(value = "INVOKE", target = "Lchylex/hee/entity/boss/EntityBossDragon;createEnderPortal(II)V"))
+    private void evil$doNotSpawn(EntityBossDragon instance, int zz, int xx) {
+
+    }
+   **/
 
     public void knockBack(Entity p_70653_1_, float p_70653_2_, double p_70653_3_, double p_70653_5_) {
         if (this.getHealth() >= Config.enderDragonNoKnockbackHp) {

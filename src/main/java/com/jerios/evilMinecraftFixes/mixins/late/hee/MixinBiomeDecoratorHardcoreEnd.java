@@ -1,16 +1,13 @@
 package com.jerios.evilMinecraftFixes.mixins.late.hee;
 
 import chylex.hee.system.logging.Log;
-import chylex.hee.system.logging.Stopwatch;
 import chylex.hee.system.util.MathUtil;
 import chylex.hee.world.biome.BiomeDecoratorHardcoreEnd;
-import chylex.hee.world.feature.WorldGenEndiumOre;
 import com.jerios.evilMinecraftFixes.cfg.Config;
 import com.jerios.evilMinecraftFixes.hee.DecoratorEndDeamon;
 import net.minecraft.world.biome.BiomeEndDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;

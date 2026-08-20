@@ -17,6 +17,7 @@ import java.util.List;
 @Mixin(EntityBlockEnderCrystal.class)
 public class MixinEnderCrystal extends EntityEnderCrystal {
 
+
     private byte attackTimer = (byte) (ModCommonProxy.opMobs ? 60 : 110);
 
     public void onUpdate() {
