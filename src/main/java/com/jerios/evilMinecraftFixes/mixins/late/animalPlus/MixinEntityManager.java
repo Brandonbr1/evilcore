@@ -33,7 +33,7 @@ public class MixinEntityManager {
      * @author Jerios
      * @reason use Mod Registry
      */
-    @Overwrite
+    @Overwrite(remap = false)
     public static void registerEntities() {
         evil$registerMod(EntityCentipede.class, "Centipede",  15708256, 5848090);
         evil$registerMod(EntityCricket.class, "Cricket",  8343842, 2100236);

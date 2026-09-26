@@ -80,6 +80,10 @@ public class ConfigASM {
     @Config.DefaultBoolean(true)
     public static boolean aPlusGlobalRegDisable ;
 
+    @Config.Comment("Extra Utilities Ring needs RF")
+    @Config.DefaultBoolean(true)
+    public static boolean exuRing ;
+
 
     @Config.Comment("Make cloud boots as good as iron")
     @Config.DefaultBoolean(true)

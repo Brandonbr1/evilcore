@@ -11,8 +11,8 @@ import java.util.Random;
 @Mixin(GenNetherDungeon.class)
 public class MixinGenNetherDungeon {
 
-    @Redirect(method = "pickMobSpawner", at= @At(value = "INVOKE", target = "Lcom/superdextor/dextersnether/worldgen/NetherDungeonHooks;getRandomDungeonMob(Ljava/util/Random;)Ljava/lang/String;"))
-    public String f(Random rand) {
+    @Redirect(method = "pickMobSpawner", at= @At(value = "INVOKE", target = "Lcom/superdextor/dextersnether/worldgen/NetherDungeonHooks;getRandomDungeonMob(Ljava/util/Random;)Ljava/lang/String;"), remap = false)
+    public String evil$returnNewName(Random rand) {
         return "dextersnether." + NetherDungeonHooks.getRandomDungeonMob(rand);
     }
 }

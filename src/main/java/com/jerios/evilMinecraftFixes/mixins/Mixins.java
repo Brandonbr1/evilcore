@@ -425,7 +425,7 @@ public enum Mixins implements IMixins {
     AD_INF_GID(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.AD_INF)
         .setApplyIf(() -> ConfigASM.removeGlobalIDAdInfernos)
-        .addCommonMixins("adInfernos.removeGlobalIDAdInfernos")),
+        .addCommonMixins("adInfernos.MixinEntityCreator")),
 
 
     AD_INF_GID_RESULT1(new MixinBuilder().setPhase(Phase.LATE)
@@ -457,7 +457,13 @@ public enum Mixins implements IMixins {
     APLUS_ENTITY(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.APLUS)
         .setApplyIf(() -> ConfigASM.aPlusGlobalRegDisable)
-        .addCommonMixins("animalPlus.MixinEntityManager"))
+        .addCommonMixins("animalPlus.MixinEntityManager")),
+
+
+    RING_RF(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.EXU)
+        .setApplyIf(() -> ConfigASM.exuRing)
+        .addCommonMixins("extraUtils.MixinAngelRing"))
 
 
     ;

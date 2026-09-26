@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(AnimalsPlus.class)
+@Mixin(value = AnimalsPlus.class, remap = false)
 public class MixinAnimalsPlus {
 
     @Redirect(method = "load", at= @At(value = "INVOKE", target = "Lcpw/mods/fml/common/eventhandler/EventBus;register(Ljava/lang/Object;)V"))

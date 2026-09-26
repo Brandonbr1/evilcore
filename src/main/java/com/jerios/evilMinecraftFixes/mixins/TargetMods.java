@@ -20,6 +20,7 @@ public enum TargetMods implements ITargetMod {
     CQ("chocolateQuest"),
     THIRST("thirstmod"),
     PM("ParticleMan"),
+    EXU("ExtraUtilities"),
     APLUS("animalsPlus");
 
     private final TargetModBuilder builder;

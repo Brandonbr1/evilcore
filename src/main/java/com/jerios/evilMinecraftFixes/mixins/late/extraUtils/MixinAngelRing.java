@@ -1,14 +1,24 @@
 package com.jerios.evilMinecraftFixes.mixins.late.extraUtils;
 
 import cofh.api.energy.IEnergyContainerItem;
+import com.rwtema.extrautils.helper.XUHelper;
 import com.rwtema.extrautils.item.ItemAngelRing;
+import com.rwtema.extrautils.network.NetworkHandler;
+import com.rwtema.extrautils.network.packets.PacketAngelRingNotifier;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(ItemAngelRing.class)
-public class MixinAngelRing implements IEnergyContainerItem {
+public class MixinAngelRing extends Item implements IEnergyContainerItem {
 
 
    @Unique private int evil$MAXCAPACITY = Integer.MAX_VALUE;
@@ -82,4 +92,38 @@ public class MixinAngelRing implements IEnergyContainerItem {
     public int getMaxEnergyStored(ItemStack itemStack) {
         return evil$MAXCAPACITY;
     }
+
+
+    @Shadow(remap = false)
+    public static void addPlayer(EntityPlayer player, int i, boolean override) {
+
+    }
+
+/**
+ * @author Jerios
+ * @reason REQUIRE RF
+ */
+    @Overwrite
+    public void onUpdate(ItemStack itemstack, World world, Entity entity, int slot, boolean par5) {
+        super.onUpdate(itemstack, world, entity, slot, par5);
+        if (!world.isRemote) {
+            if (entity instanceof EntityPlayerMP) {
+                NBTTagCompound nbt = XUHelper.getPersistantNBT(entity);
+                nbt.setByte("XU|Flying", (byte)20);
+                addPlayer((EntityPlayerMP)entity, itemstack.getItemDamage(), par5);
+                if (!((EntityPlayerMP)entity).capabilities.allowFlying && getEnergy(itemstack) > 0 || !nbt.hasKey("XU|FlyingDim") || nbt.getInteger("XU|FlyingDim") != world.provider.dimensionId) {
+
+                    addPlayer((EntityPlayerMP)entity, itemstack.getItemDamage(), false);
+                    ((EntityPlayerMP)entity).capabilities.allowFlying = true;
+                    ((EntityPlayerMP)entity).sendPlayerAbilities();
+                }
+
+                nbt.setInteger("XU|FlyingDim", world.provider.dimensionId);
+            }
+        }
+    }
+
+
+
+
 }
