@@ -19,7 +19,8 @@ public enum TargetMods implements ITargetMod {
     DI("DamageIndicatorsMod"),
     CQ("chocolateQuest"),
     THIRST("thirstmod"),
-    PM("ParticleMan");
+    PM("ParticleMan"),
+    APLUS("animalsPlus");
 
     private final TargetModBuilder builder;
 

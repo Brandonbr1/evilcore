@@ -2,6 +2,7 @@ package com.jerios.evilMinecraftFixes.athena;
 
 import com.jerios.evilMinecraftFixes.Evil;
 import com.jerios.evilMinecraftFixes.cfg.Config;
+import com.jerios.evilMinecraftFixes.savedata.EvilData;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -14,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -41,6 +43,10 @@ public class AthenaEvents {
 
     @SubscribeEvent
     public void damageCap(LivingHurtEvent hurtEvent) {
+
+      Entity e=  hurtEvent.source.getEntity();
+
+
         if (hurtEvent.entity instanceof EntityWither) {
             EntityWither wither = (EntityWither) hurtEvent.entity;
 
@@ -49,6 +55,31 @@ public class AthenaEvents {
             }
 
             hurtEvent.ammount = Math.min(15, hurtEvent.ammount);
+
+
+            if (e instanceof EntityPlayer ) {
+                EntityPlayer p = (EntityPlayer) e;
+
+                World world = p.worldObj;
+                World worldWither = wither.worldObj;
+                if (!worldWither.isRemote && !world.isRemote) {
+
+                    if (wither.isArmored()) {
+
+                        if (wither.ticksExisted % 500 == 0 && EvilData.get(p.worldObj).isAgressiveStage1())
+                        {
+                            world.createExplosion(wither, p.posX, p.posY, p.posZ, 0.4f, true);
+                        }
+
+                        if ( EvilData.get(p.worldObj).isAgressiveStage2())
+                        {
+                            p.attackEntityFrom(DamageSource.causeMobDamage(wither), 2);
+                        }
+                    }
+
+                }
+
+            }
         }
 
 
@@ -108,6 +139,7 @@ public class AthenaEvents {
                         if (base instanceof EntityPlayer) {
 
                             EntityPlayer player = (EntityPlayer) base;
+
 
                             // new
                             boolean desperateWither = wither.getHealth() <= 45;

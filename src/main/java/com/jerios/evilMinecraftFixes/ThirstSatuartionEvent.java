@@ -2,6 +2,7 @@ package com.jerios.evilMinecraftFixes;
 
 import com.thetorine.thirstmod.core.client.player.ClientStats;
 import com.thetorine.thirstmod.core.main.ThirstMod;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.potion.Potion;
@@ -16,7 +17,11 @@ public class ThirstSatuartionEvent {
 
     @SubscribeEvent
     public void render(RenderGameOverlayEvent.Text event) {
-        renderThirstSat(event.resolution.getScaledWidth(), event.resolution.getScaledHeight());
+       Minecraft mc = FMLClientHandler.instance().getClient();
+        if (mc!= null && !mc.thePlayer.capabilities.isCreativeMode) {
+            renderThirstSat(event.resolution.getScaledWidth(), event.resolution.getScaledHeight());
+        }
+
     }
 
     public void renderThirstSat(int width, int height)

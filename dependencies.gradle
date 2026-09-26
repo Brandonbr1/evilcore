@@ -52,6 +52,10 @@ dependencies {
     devOnlyNonPublishable(rfg.deobf(project.files("libs/tbc.jar")))
     devOnlyNonPublishable(rfg.deobf(project.files("libs/thirstmod-1.8.14.jar")))
     devOnlyNonPublishable(rfg.deobf(project.files("libs/infernos.jar")))
+
+    devOnlyNonPublishable(rfg.deobf("curse.maven:the-animals-plus-846899:4477152"))
+
+    devOnlyNonPublishable(rfg.deobf("curse.maven:extra-utilities-225561:2264383"))
     //InfernalMobs-1.10.8-GTNH.jar
   //  devOnlyNonPublishable(rfg.deobf(project.files("libs/InfernalMobs-1.10.8-GTNH.jar")))
     devOnlyNonPublishable(project.files("libs/fakeores1.5.jar"));

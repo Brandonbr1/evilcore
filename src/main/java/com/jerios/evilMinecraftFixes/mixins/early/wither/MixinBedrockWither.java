@@ -2,6 +2,7 @@ package com.jerios.evilMinecraftFixes.mixins.early.wither;
 
 import com.jerios.evilMinecraftFixes.fasterMath.FastTrigno;
 import com.jerios.evilMinecraftFixes.athena.WitherProps;
+import com.jerios.evilMinecraftFixes.savedata.EvilData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.boss.EntityWither;
@@ -21,9 +22,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 // replaced attan2 math with FastTringo
 @Mixin(EntityWither.class)
 public class MixinBedrockWither extends EntityMob {
+    World world;
     public MixinBedrockWither(World p_i1738_1_) {
         super(p_i1738_1_);
+        this.world = p_i1738_1_;
         // func_82212_n() // whatever number it needs to be
+    }
+
+    /**
+     * @author
+     * @reason
+     */
+    @Overwrite
+    public int getTotalArmorValue()
+    {
+        if (world != null) {
+            return EvilData.get(world).isAgressiveStage3() ? 20 : 4 + EvilData.get(world).athenaDeath;
+        }
+        return 4;
+
+       // return 4;
     }
 
     @Shadow private float[] field_82220_d = new float[2];
@@ -256,7 +274,7 @@ public class MixinBedrockWither extends EntityMob {
             if (entity != null)
             {
                 // rise up, hardly in player hit range if in desperate mode
-                if (this.getHealth() <= 35 && this.posY < entity.posY + 2D || this.posY < entity.posY || !this.isArmored() && this.posY < entity.posY + 14.0D)
+                if ( /**this.getHealth() <= 35 && this.posY < entity.posY + 2D || **/this.posY < entity.posY + 1.0D || !this.isArmored() && this.posY < entity.posY + 14.0D)
                 {
                     if (this.motionY < 0.0D)
                     {

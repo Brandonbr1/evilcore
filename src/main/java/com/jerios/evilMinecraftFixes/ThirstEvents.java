@@ -7,6 +7,7 @@ import com.thetorine.thirstmod.core.player.ThirstLogic;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -27,7 +28,18 @@ public class ThirstEvents {
     @SubscribeEvent
     public void onClonePlayer(PlayerEvent.Clone e) {
         if(e.wasDeath) {
+            PlayerContainer.getPlayer(e.entityPlayer).respawnPlayer();
             PlayerContainer.getPlayer(e.original).respawnPlayer();
+        }
+
+        if (!e.wasDeath) {
+            NBTTagCompound compound = new NBTTagCompound();
+            PlayerContainer ogP = PlayerContainer.getPlayer(e.original);
+            PlayerContainer newP=PlayerContainer.getPlayer(e.entityPlayer);
+            if (ogP instanceof IThirst && newP instanceof IThirst) {
+                ((IThirst) PlayerContainer.getPlayer(e.original)).saveNBTData(compound);
+                ((IThirst) PlayerContainer.getPlayer(e.original)).loadNBTData(compound);
+            }
         }
     }
 

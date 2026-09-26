@@ -67,6 +67,20 @@ public class ConfigASM {
     @Config.DefaultBoolean(true)
     public static boolean arrowFixes ;
 
+    @Config.Comment("Remove AD Infernos Global IDS for everything except Herobrine")
+    @Config.DefaultBoolean(true)
+    public static boolean removeGlobalIDAdInfernos ;
+
+    @Config.Comment("Disable Animal Plus Update checker")
+    @Config.DefaultBoolean(true)
+    public static boolean animalPlusUP ;
+
+
+    @Config.Comment("Disable Animal Plus Global Registry")
+    @Config.DefaultBoolean(true)
+    public static boolean aPlusGlobalRegDisable ;
+
+
     @Config.Comment("Make cloud boots as good as iron")
     @Config.DefaultBoolean(true)
     public static boolean buffClouldBoots ;

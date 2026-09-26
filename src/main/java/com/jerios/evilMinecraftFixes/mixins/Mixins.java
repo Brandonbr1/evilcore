@@ -422,6 +422,22 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> ConfigASM.arrowFixes)
         .addCommonMixins("adInfernos.MixinEntityHerobrine")),
 
+    AD_INF_GID(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.AD_INF)
+        .setApplyIf(() -> ConfigASM.removeGlobalIDAdInfernos)
+        .addCommonMixins("adInfernos.removeGlobalIDAdInfernos")),
+
+
+    AD_INF_GID_RESULT1(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.AD_INF)
+        .setApplyIf(() -> ConfigASM.removeGlobalIDAdInfernos)
+        .addCommonMixins("adInfernos.MixinWorldGenObsidianPyramide")),
+
+    AD_INF_GID_RESULT2(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.AD_INF)
+        .setApplyIf(() -> ConfigASM.removeGlobalIDAdInfernos)
+        .addCommonMixins("adInfernos.MixinGenNetherDungeon")),
+
     CHEST_LOOT_NERF_IF(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.AD_INF)
         .setApplyIf(() -> ConfigASM.arrowFixes)
@@ -430,7 +446,19 @@ public enum Mixins implements IMixins {
     SPM_SKELE(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.SPM)
         .setApplyIf(() -> ConfigASM.hardSkele)
-        .addCommonMixins("specialMobs.MixinEntity_SpecialSkeleton"));
+        .addCommonMixins("specialMobs.MixinEntity_SpecialSkeleton")),
+
+
+    APLUS_MAIN(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.APLUS)
+        .setApplyIf(() -> ConfigASM.animalPlusUP)
+        .addCommonMixins("animalPlus.MixinAnimalsPlus")),
+
+    APLUS_ENTITY(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.APLUS)
+        .setApplyIf(() -> ConfigASM.aPlusGlobalRegDisable)
+        .addCommonMixins("animalPlus.MixinEntityManager"))
+
 
     ;
 

@@ -17,6 +17,7 @@ import com.jerios.evilMinecraftFixes.ironBackPacks.IronBackPacksLimitAmmountEven
 import com.jerios.evilMinecraftFixes.mixins.early.IEntityPigmenAccessor;
 import com.jerios.evilMinecraftFixes.packet.NetworkHandler;
 import com.jerios.evilMinecraftFixes.pg.PGI;
+import com.jerios.evilMinecraftFixes.savedata.EvilData;
 import com.jerios.evilMinecraftFixes.zombieAwareness.WorldRefEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
@@ -195,10 +196,13 @@ public class Evil {
         skeleton.addPotionEffect(new PotionEffect(Potion.resistance.id, Integer.MAX_VALUE , 1, false));
 
         if (skeleton instanceof EntitySkeleton) {
-            ((EntitySkeleton)skeleton).setSkeletonType(1);
+            EvilData data = EvilData.get(world);
+            EntitySkeleton skeleton2 = (EntitySkeleton) skeleton;
+            skeleton2.setSkeletonType(1);
         }
 
         if (skeleton instanceof EntityPigZombie) {
+            EvilData data = EvilData.get(world);
             EntityPigZombie pig = (EntityPigZombie) skeleton;
             ((IEntityPigmenAccessor)pig).evil$setAnger(900);
             ((IEntityPigmenAccessor)pig).evil$soundDelay(900);
@@ -206,12 +210,15 @@ public class Evil {
 
         skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.iron_sword));
 
-
         skeleton.setCurrentItemOrArmor(4, new ItemStack(Items.iron_helmet));
         skeleton.setCurrentItemOrArmor(3, new ItemStack(Items.iron_chestplate));
         skeleton.setCurrentItemOrArmor(2, new ItemStack(Items.iron_leggings));
         skeleton.setCurrentItemOrArmor(1, new ItemStack(Items.iron_boots));
-        skeleton.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D + world.difficultySetting.getDifficultyId());
+        double damageF = 0.0D;
+        if (EvilData.get(world).isAgressiveStage3()) {
+            damageF = 5.0D;
+        }
+        skeleton.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D + world.difficultySetting.getDifficultyId() +damageF);
 
         double x = 0;
         double y = 0;
