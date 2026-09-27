@@ -26,6 +26,7 @@ public class EntityFireBallJean extends Entity {
 
         if (!worldObj.isRemote) {
             timer++;
+
             for (int i = 0; i < 4; i++) {
                     for (int k = 0; k < 4; k++) {
                         worldObj.spawnParticle("witchMagic", posX + i, posY , posZ + k, 0, 0, 0);
