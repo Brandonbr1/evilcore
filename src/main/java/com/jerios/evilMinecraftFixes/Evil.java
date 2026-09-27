@@ -4,6 +4,7 @@ import com.jerios.evilMinecraftFixes.CQAdditions.CQInteg;
 import com.jerios.evilMinecraftFixes.athena.AthenaEvents;
 import com.jerios.evilMinecraftFixes.athena.EntityWitherDeathManager;
 import com.jerios.evilMinecraftFixes.athena.WitherProps;
+import com.jerios.evilMinecraftFixes.cfg.ConfigASM;
 import com.jerios.evilMinecraftFixes.content.ContentRegistry;
 import com.jerios.evilMinecraftFixes.evilOres.OreBossTickEvent;
 import com.jerios.evilMinecraftFixes.evilOres.OresAttackEvent;
@@ -14,6 +15,7 @@ import com.jerios.evilMinecraftFixes.hostileWorlds.HWSpawns;
 import com.jerios.evilMinecraftFixes.infernalMobs.InfernalMobsMakeNeturalMobsAgressiveEvent;
 import com.jerios.evilMinecraftFixes.infernalMobs.InfernalMobsSaveHandler;
 import com.jerios.evilMinecraftFixes.ironBackPacks.IronBackPacksLimitAmmountEvent;
+import com.jerios.evilMinecraftFixes.jean.JeanHarder;
 import com.jerios.evilMinecraftFixes.mixins.early.IEntityPigmenAccessor;
 import com.jerios.evilMinecraftFixes.packet.NetworkHandler;
 import com.jerios.evilMinecraftFixes.pg.PGI;
@@ -81,6 +83,10 @@ public class Evil {
 
         if (Config.bufffNetherMobs) {
             MinecraftForge.EVENT_BUS.register(new BuffMobs());
+        }
+
+        if (ConfigASM.jeanHarder) {
+            MinecraftForge.EVENT_BUS.register(new JeanHarder());
         }
 
         MinecraftForge.EVENT_BUS.register(this);

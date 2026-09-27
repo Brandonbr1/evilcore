@@ -3,6 +3,7 @@ package com.jerios.evilMinecraftFixes.mixins.late.hee;
 import chylex.hee.entity.projectile.EntityProjectileDragonFireball;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.potion.Potion;
@@ -31,23 +32,9 @@ public class MixinEntityProjectileDragonFireball extends EntityFireball {
     private void evil$e(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
 
         if (!this.worldObj.isRemote) {
-            List<EntityPlayer> list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, this.boundingBox.expand(8, 8, 8));
-
-            for (int i = 0; i < list.size(); i++) {
-                Entity e = list.get(i);
-
-                if (e instanceof EntityPlayer) {
-                    EntityPlayer living = (EntityPlayer) e;
-              //      living.addPotionEffect(new PotionEffect(Potion.hunger.id, 200, 3));
-               //     living.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 200, 2));
-                    living.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 200, 2));
-                }
-
-
-
-            }
-
-
+            EntitySilverfish silverfish = new EntitySilverfish(this.worldObj);
+            silverfish.setLocationAndAngles(posX + 1, posY + 1, posZ + 1, this.rand.nextFloat() * 360.0F, 0.0F);
+            worldObj.spawnEntityInWorld(silverfish);
         }
 
     }
@@ -57,19 +44,10 @@ public class MixinEntityProjectileDragonFireball extends EntityFireball {
     private void evil$k(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
 
         if (!this.worldObj.isRemote) {
-            List<EntityPlayer> list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, this.boundingBox.expand(8, 8, 8));
 
-            for (int i = 0; i < list.size(); i++) {
-                Entity e = list.get(i);
-
-                if (e instanceof EntityPlayer) {
-                    EntityPlayer living = (EntityPlayer) e;
-                    living.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 200, 2));
-                }
-
-
-
-            }
+            EntitySilverfish silverfish = new EntitySilverfish(this.worldObj);
+            silverfish.setLocationAndAngles(posX + 1, posY + 1, posZ + 1, this.rand.nextFloat() * 360.0F, 0.0F);
+            worldObj.spawnEntityInWorld(silverfish);
 
 
         }
@@ -82,20 +60,9 @@ public class MixinEntityProjectileDragonFireball extends EntityFireball {
    private void evil$b(MovingObjectPosition mop, CallbackInfo ci) {
 
        if (!this.worldObj.isRemote) {
-           List<EntityPlayer> list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, this.boundingBox.expand(8, 8, 8));
-
-           for (int i = 0; i < list.size(); i++) {
-               Entity e = list.get(i);
-
-               if (e instanceof EntityPlayer) {
-                   EntityPlayer living = (EntityPlayer) e;
-                   living.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 200, 2));
-               }
-
-
-
-           }
-
+           EntitySilverfish silverfish = new EntitySilverfish(this.worldObj);
+           silverfish.setLocationAndAngles(mop.blockX + 1, mop.blockY + 1, mop.blockZ + 1, this.rand.nextFloat() * 360.0F, 0.0F);
+           worldObj.spawnEntityInWorld(silverfish);
 
        }
 
@@ -106,22 +73,10 @@ public class MixinEntityProjectileDragonFireball extends EntityFireball {
     private void evil$a(MovingObjectPosition mop, CallbackInfo ci) {
 
         if (!this.worldObj.isRemote) {
-            List<EntityPlayer> list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, this.boundingBox.expand(8, 8, 8));
 
-            for (int i = 0; i < list.size(); i++) {
-                Entity e = list.get(i);
-
-                if (e instanceof EntityPlayer) {
-                    EntityPlayer living = (EntityPlayer) e;
-              //      living.addPotionEffect(new PotionEffect(Potion.hunger.id, 200, 9));
-                //    living.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 200, 2));
-                    living.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 200, 2));
-                }
-
-
-
-            }
-
+                    EntitySilverfish silverfish = new EntitySilverfish(this.worldObj);
+                    silverfish.setLocationAndAngles(mop.blockX + 1, mop.blockY + 1, mop.blockZ + 1, this.rand.nextFloat() * 360.0F, 0.0F);
+                    worldObj.spawnEntityInWorld(silverfish);
 
         }
 

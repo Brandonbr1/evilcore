@@ -21,7 +21,8 @@ public enum TargetMods implements ITargetMod {
     THIRST("thirstmod"),
     PM("ParticleMan"),
     EXU("ExtraUtilities"),
-    APLUS("animalsPlus");
+    APLUS("animalsPlus"),
+    TBC("ThinkBigCore");
 
     private final TargetModBuilder builder;
 

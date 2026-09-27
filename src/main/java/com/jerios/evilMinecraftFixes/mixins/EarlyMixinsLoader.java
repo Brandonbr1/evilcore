@@ -13,9 +13,13 @@ import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 @IFMLLoadingPlugin.MCVersion("1.7.10")
 public class EarlyMixinsLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
+    static {
+        ConfigASM.init();
+    }
+
+
     @Override
     public String[] getASMTransformerClass() {
-        ConfigASM.init();
         return null;
     }
 
@@ -39,7 +43,6 @@ public class EarlyMixinsLoader implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     @Override
     public String getMixinConfig() {
-        ConfigASM.init();
         return "mixins.evilMinecraftFixes.early.json";
     }
 

@@ -15,6 +15,10 @@ public class ConfigASM {
     @Config.DefaultBoolean(true)
     public static boolean math;
 
+    @Config.Comment("Make Jean Harder?")
+    @Config.DefaultBoolean(true)
+    public static boolean jeanHarder;
+
     @Config.Comment("Athena?")
     @Config.DefaultBoolean(true)
     public static boolean athenaWither ;

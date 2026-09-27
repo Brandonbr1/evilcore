@@ -3,8 +3,6 @@ package com.jerios.evilMinecraftFixes.mixins.late.extraUtils;
 import cofh.api.energy.IEnergyContainerItem;
 import com.rwtema.extrautils.helper.XUHelper;
 import com.rwtema.extrautils.item.ItemAngelRing;
-import com.rwtema.extrautils.network.NetworkHandler;
-import com.rwtema.extrautils.network.packets.PacketAngelRingNotifier;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -109,13 +107,26 @@ public class MixinAngelRing extends Item implements IEnergyContainerItem {
         if (!world.isRemote) {
             if (entity instanceof EntityPlayerMP) {
                 NBTTagCompound nbt = XUHelper.getPersistantNBT(entity);
-                nbt.setByte("XU|Flying", (byte)20);
-                addPlayer((EntityPlayerMP)entity, itemstack.getItemDamage(), par5);
-                if (!((EntityPlayerMP)entity).capabilities.allowFlying && getEnergy(itemstack) > 0 || !nbt.hasKey("XU|FlyingDim") || nbt.getInteger("XU|FlyingDim") != world.provider.dimensionId) {
 
-                    addPlayer((EntityPlayerMP)entity, itemstack.getItemDamage(), false);
-                    ((EntityPlayerMP)entity).capabilities.allowFlying = true;
-                    ((EntityPlayerMP)entity).sendPlayerAbilities();
+                if (getEnergy(itemstack) <= 0) {
+                    ItemAngelRing.removePlayer(((EntityPlayerMP)entity));
+                    if (!((EntityPlayerMP)entity).capabilities.isCreativeMode) {
+                        nbt.setByte("XU|Flying", (byte)1);
+                        ((EntityPlayerMP)entity).capabilities.allowFlying = false;
+                        ((EntityPlayerMP)entity).capabilities.isFlying = false;
+                        ((EntityPlayerMP)entity).sendPlayerAbilities();
+                    }
+
+                } else {
+                    nbt.setByte("XU|Flying", (byte)20);
+                    addPlayer((EntityPlayerMP)entity, itemstack.getItemDamage(), par5);
+                    if (!((EntityPlayerMP)entity).capabilities.allowFlying && getEnergy(itemstack) >= 0 || !nbt.hasKey("XU|FlyingDim") || nbt.getInteger("XU|FlyingDim") != world.provider.dimensionId) {
+                        setEn(itemstack, getEnergy(itemstack) - 1);
+                        addPlayer((EntityPlayerMP)entity, itemstack.getItemDamage(), false);
+                        ((EntityPlayerMP)entity).capabilities.allowFlying = true;
+                        ((EntityPlayerMP)entity).sendPlayerAbilities();
+
+                    }
                 }
 
                 nbt.setInteger("XU|FlyingDim", world.provider.dimensionId);

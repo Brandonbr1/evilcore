@@ -11,8 +11,8 @@ public interface IThirst {
         return (PlayerContainer) p.getExtendedProperties(PROP);
     }
 
-    public void saveNBTData(NBTTagCompound compound);
+    public void saveNBTData2(NBTTagCompound compound);
 
-    public void loadNBTData(NBTTagCompound compound);
+    public void loadNBTData2(NBTTagCompound compound);
 
 }

@@ -12,6 +12,10 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> ConfigASM.math)
         .addCommonMixins("math.MixinEntityLookHelper")),
 
+    DRAGON(new MixinBuilder().setPhase(Phase.EARLY)
+        .setApplyIf(() -> ConfigASM.jeanHarder)
+        .addCommonMixins("MixinDragon")),
+
     BEDROCK_ENDERMEN(new MixinBuilder().setPhase(Phase.EARLY)
         .setApplyIf(() -> ConfigASM.harderEndermen)
         .addCommonMixins("hard.MixinHarderEndermen")),
@@ -422,11 +426,6 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> ConfigASM.arrowFixes)
         .addCommonMixins("adInfernos.MixinEntityHerobrine")),
 
-    AD_INF_GID(new MixinBuilder().setPhase(Phase.LATE)
-        .addRequiredMod(TargetMods.AD_INF)
-        .setApplyIf(() -> ConfigASM.removeGlobalIDAdInfernos)
-        .addCommonMixins("adInfernos.MixinEntityCreator")),
-
 
     AD_INF_GID_RESULT1(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.AD_INF)
@@ -463,7 +462,13 @@ public enum Mixins implements IMixins {
     RING_RF(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.EXU)
         .setApplyIf(() -> ConfigASM.exuRing)
-        .addCommonMixins("extraUtils.MixinAngelRing"))
+        .addCommonMixins("extraUtils.MixinAngelRing")),
+
+    AD_INF_GID(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.AD_INF)
+        .addRequiredMod(TargetMods.TBC)
+        .setApplyIf(() -> ConfigASM.removeGlobalIDAdInfernos)
+        .addCommonMixins("adInfernos.MixinNetherEntitys")),
 
 
     ;

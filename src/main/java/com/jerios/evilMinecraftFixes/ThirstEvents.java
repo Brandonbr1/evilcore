@@ -27,20 +27,30 @@ public class ThirstEvents {
 
     @SubscribeEvent
     public void onClonePlayer(PlayerEvent.Clone e) {
-        if(e.wasDeath) {
-            PlayerContainer.getPlayer(e.entityPlayer).respawnPlayer();
-            PlayerContainer.getPlayer(e.original).respawnPlayer();
+
+        int a =PlayerContainer.getPlayer(e.entityPlayer).getStats().thirstLevel;
+        int b =PlayerContainer.getPlayer(e.original).getStats().thirstLevel;
+
+        if(!e.wasDeath) {
+
+            NBTTagCompound compound = new NBTTagCompound();
+            ((IThirst) PlayerContainer.getPlayer(e.original)).saveNBTData2(compound);
+            ((IThirst)PlayerContainer.getPlayer(e.entityPlayer)).loadNBTData2(compound);
+
         }
 
-        if (!e.wasDeath) {
-            NBTTagCompound compound = new NBTTagCompound();
-            PlayerContainer ogP = PlayerContainer.getPlayer(e.original);
-            PlayerContainer newP=PlayerContainer.getPlayer(e.entityPlayer);
-            if (ogP instanceof IThirst && newP instanceof IThirst) {
-                ((IThirst) PlayerContainer.getPlayer(e.original)).saveNBTData(compound);
-                ((IThirst) PlayerContainer.getPlayer(e.original)).loadNBTData(compound);
-            }
-        }
+
+    //    if(e.wasDeath) {
+       //     PlayerContainer.getPlayer(e.entityPlayer).respawnPlayer();
+       //     PlayerContainer.getPlayer(e.original).respawnPlayer();
+      //  } else {
+        //    NBTTagCompound compound = new NBTTagCompound();
+       //     PlayerContainer.getPlayer(e.entityPlayer).getStats().readData();
+        //    if (ogP instanceof IThirst && newP instanceof IThirst) {
+         //       ((IThirst) PlayerContainer.getPlayer(e.original)).saveNBTData(compound);
+         //       ((IThirst) PlayerContainer.getPlayer(e.entityPlayer)).loadNBTData(compound);
+          //  }
+     //   }
     }
 
     @SubscribeEvent

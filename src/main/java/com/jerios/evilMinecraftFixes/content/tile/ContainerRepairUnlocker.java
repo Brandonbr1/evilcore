@@ -194,13 +194,18 @@ public class ContainerRepairUnlocker extends Container {
         {
             ItemStack itemToUse = itemstack.copy();
             ItemStack itemstack2 = this.inputSlots.getStackInSlot(1);
-            Map mapCurrentEnchantmetsSlot1 = EnchantmentHelper.getEnchantments(itemToUse);
+            Map<Integer, Integer> mapCurrentEnchantmetsSlot1 = EnchantmentHelper.getEnchantments(itemToUse);
             boolean flag = false;
 
 
             if (itemstack2 != null && itemstack2.getItem() instanceof DiamondEnchantmentBook) {
                 DiamondEnchantmentBook book = (DiamondEnchantmentBook) itemstack2.getItem();
                 appended += book.level * book.level;
+                Iterator<Integer> it = mapCurrentEnchantmetsSlot1.keySet().iterator();
+                while (it.hasNext()) {
+                    System.out.println(it.next());
+
+                }
             }
             int k2 = appended + ContainerRepairUnlocker.APPENDED_HARDCODED_XP_BUFFER + b0 + itemstack.getRepairCost() + (itemstack2 == null ? 0 : itemstack2.getRepairCost());
             this.stackSizeToBeUsedInRepair = 0;
@@ -312,6 +317,10 @@ public class ContainerRepairUnlocker extends Container {
 
                         if (flag1)
                         {
+
+                            if (l1 > 10) {
+                                l1 = 10;
+                            }
                            /** if (l1 > enchantment.getMaxLevel())
                             {
                                 l1 = enchantment.getMaxLevel();
