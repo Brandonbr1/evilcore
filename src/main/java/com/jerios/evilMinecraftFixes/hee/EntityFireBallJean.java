@@ -23,20 +23,22 @@ public class EntityFireBallJean extends Entity {
     public void onUpdate() {
         super.onUpdate();
 
+        for (int i = 0; i < 4; i++) {
+            for (int k = 0; k < 4; k++) {
+                worldObj.spawnParticle("witchMagic", posX + i, posY , posZ + k, 0, 0, 0);
+                worldObj.spawnParticle("witchMagic", posX - i, posY , posZ - k, 0, 0, 0);
+
+                worldObj.spawnParticle("snowballpoof", posX + i, posY , posZ + k, 0, 0, 0);
+                worldObj.spawnParticle("snowballpoof", posX - i, posY, posZ - k, 0, 0, 0);
+            }
+
+        }
+
 
         if (!worldObj.isRemote) {
             timer++;
 
-            for (int i = 0; i < 4; i++) {
-                    for (int k = 0; k < 4; k++) {
-                        worldObj.spawnParticle("witchMagic", posX + i, posY , posZ + k, 0, 0, 0);
-                        worldObj.spawnParticle("witchMagic", posX - i, posY , posZ - k, 0, 0, 0);
 
-                        worldObj.spawnParticle("snowballpoof", posX + i, posY , posZ + k, 0, 0, 0);
-                        worldObj.spawnParticle("snowballpoof", posX - i, posY, posZ - k, 0, 0, 0);
-                    }
-
-            }
 
 
             List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(4, 2, 4));
@@ -48,6 +50,8 @@ public class EntityFireBallJean extends Entity {
                     EntityLivingBase living = (EntityLivingBase) e;
                     living.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20, 0));
 
+                    this.worldObj.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)1.2f, true, this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"));
+
                     if (timer % 20 == 0) {
                         living.attackEntityFrom(DamageSource.magic, 1);
                     }
@@ -55,7 +59,7 @@ public class EntityFireBallJean extends Entity {
                 }
 
             }
-            if (timer > 600) {
+            if (timer > 120) {
                 setDead();
             }
         }

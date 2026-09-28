@@ -25,7 +25,7 @@ public class JeanFireball extends EntityLargeFireball {
         if (!worldObj.isRemote) {
             if (p_70227_1_.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                 EntityFireBallJean fireBall = new EntityFireBallJean(worldObj);
-                fireBall.setLocationAndAngles(p_70227_1_.blockX, p_70227_1_.blockY, p_70227_1_.blockZ, 0.0F, 0.0F);
+                fireBall.setPosition(posX, posY, posZ);
                 worldObj.spawnEntityInWorld(fireBall);
             }
         }
