@@ -17,6 +17,6 @@ public class MixinItemLoader {
 
     @Redirect(method = "<init>", at= @At(value = "INVOKE", target = "Lcpw/mods/fml/common/registry/GameRegistry;addShapelessRecipe(Lnet/minecraft/item/ItemStack;[Ljava/lang/Object;)V", ordinal = 0), remap = false )
     public void evil$makeRecipeExpensive(ItemStack output, Object[] params) {
-        GameRegistry.addShapelessRecipe(new ItemStack(goldCoin, 15), new Object[]{Items.gold_ingot, Items.iron_ingot});
+        GameRegistry.addShapelessRecipe(new ItemStack(goldCoin, 6), new Object[]{Items.gold_ingot, Items.iron_ingot});
     }
 }

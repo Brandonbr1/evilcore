@@ -1,13 +1,11 @@
-package com.jerios.evilMinecraftFixes.mixins.late;
+package com.jerios.evilMinecraftFixes.mixins.late.infernalMob;
 
 import atomicstryker.infernalmobs.common.InfernalMobsCore;
 import atomicstryker.infernalmobs.common.MobModifier;
 import atomicstryker.infernalmobs.common.mods.MM_Gravity;
-import com.jerios.evilMinecraftFixes.infernalMobs.IInfernalBlacklist;
 import com.jerios.evilMinecraftFixes.infernalMobs.MM_Unyielding;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import fr.elias.fakeores.common.EntityOresBoss;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.common.config.Configuration;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,5 +1,6 @@
 package com.jerios.evilMinecraftFixes.mixins.late.adInfernos;
 
+import com.jerios.evilMinecraftFixes.content.ItemSpawnEgg;
 import com.superdextor.dextersnether.NetherConfig;
 import com.superdextor.dextersnether.entity.NetherEntitys;
 import com.superdextor.dextersnether.entity.monster.EntityCurse;
@@ -50,35 +51,42 @@ public class MixinNetherEntitys {
     @Overwrite
     public static void entitys() {
         evil$registerEntity(EntityNetherSpider.class, "dextersnether_Nether_Spider", EnumCreatureType.monster, NetherConfig.netherSpiderSpawns, 1, 3, new BiomeGenBase[]{BiomeGenBase.hell}, 4857874, 2435118, true);
-      /**  EntityCreator.createEntity(EntityFlameball.class, "dextersnether_Flameball", EnumCreatureType.ambient);
-        EntityCreator.createEntity(EntityReaper.class, "dextersnether_Reaper", EnumCreatureType.monster, NetherConfig.reaperSpawns, 0, 1, new BiomeGenBase[]{BiomeGenBase.hell}, 0, 7171413, true);
-        EntityCreator.createEntity(EntityObsidianSheepman.class, "dextersnether_Obsidian_Sheepman", EnumCreatureType.monster, NetherConfig.obsidianSheepSpawns, 10, 20, new BiomeGenBase[]{BiomeGenBase.hell}, 1903672, 16548375, true);
-        EntityCreator.createEntity(EntityObsidainSheepmanGolem.class, "dextersnether_Obsidian_Sheepman_Golem", EnumCreatureType.creature, 0, 0, 0, new BiomeGenBase[0], 1903672, 6893035, true);
-        EntityCreator.createEntity(EntityCurse.class, "dextersnether_Curse", EnumCreatureType.monster, NetherConfig.curseSpawns, 1, 3, new BiomeGenBase[]{BiomeGenBase.hell}, 12926955, 7541043, true);
-        EntityCreator.createEntity(EntityWitherSkullCustom.class, "dextersnether_Wither_Skull", EnumCreatureType.ambient);
-        EntityCreator.createEntity(EntityFlame.class, "dextersnether_Flame", EnumCreatureType.ambient);
-        EntityCreator.createEntity(EntityGlowstoneSkeleton.class, "dextersnether_Glowstone_Skeleton", EnumCreatureType.monster, NetherConfig.glowstoneSkeletonSpawns, 0, 5, new BiomeGenBase[]{BiomeGenBase.hell}, 16774236, 16107313, true);
-        EntityCreator.createEntity(EntitySkeletonHorse.class, "dextersnether_Skeleton_Horse", EnumCreatureType.monster, NetherConfig.skeletonHorseSpawns, 0, 5, new BiomeGenBase[]{BiomeGenBase.hell}, 14606046, 9868950, true);
-        EntityCreator.createEntity(EntityNetherArrow.class, "dextersnether_NetherArrow", EnumCreatureType.ambient);
-        EntityCreator.createEntity(EntitySoulTNTPrimed.class, "dextersnether_Soul_TNT", EnumCreatureType.ambient);
+        evil$registerEntity(EntityFlameball.class, "dextersnether_Flameball", EnumCreatureType.ambient);
+        evil$registerEntity(EntityReaper.class, "dextersnether_Reaper", EnumCreatureType.monster, NetherConfig.reaperSpawns, 0, 1, new BiomeGenBase[]{BiomeGenBase.hell}, 0, 7171413, true);
+        evil$registerEntity(EntityObsidianSheepman.class, "dextersnether_Obsidian_Sheepman", EnumCreatureType.monster, NetherConfig.obsidianSheepSpawns, 10, 20, new BiomeGenBase[]{BiomeGenBase.hell}, 1903672, 16548375, true);
+        evil$registerEntity(EntityObsidainSheepmanGolem.class, "dextersnether_Obsidian_Sheepman_Golem", EnumCreatureType.creature, 0, 0, 0, new BiomeGenBase[0], 1903672, 6893035, true);
+        evil$registerEntity(EntityCurse.class, "dextersnether_Curse", EnumCreatureType.monster, NetherConfig.curseSpawns, 1, 3, new BiomeGenBase[]{BiomeGenBase.hell}, 12926955, 7541043, true);
+        evil$registerEntity(EntityWitherSkullCustom.class, "dextersnether_Wither_Skull", EnumCreatureType.ambient);
+        evil$registerEntity(EntityFlame.class, "dextersnether_Flame", EnumCreatureType.ambient);
+        evil$registerEntity(EntityGlowstoneSkeleton.class, "dextersnether_Glowstone_Skeleton", EnumCreatureType.monster, NetherConfig.glowstoneSkeletonSpawns, 0, 5, new BiomeGenBase[]{BiomeGenBase.hell}, 16774236, 16107313, true);
+        evil$registerEntity(EntitySkeletonHorse.class, "dextersnether_Skeleton_Horse", EnumCreatureType.monster, NetherConfig.skeletonHorseSpawns, 0, 5, new BiomeGenBase[]{BiomeGenBase.hell}, 14606046, 9868950, true);
+        evil$registerEntity(EntityNetherArrow.class, "dextersnether_NetherArrow", EnumCreatureType.ambient);
+        evil$registerEntity(EntitySoulTNTPrimed.class, "dextersnether_Soul_TNT", EnumCreatureType.ambient);
         EntityCreator.createEntity(EntityHerobrine.class, "dextersnether_", EnumCreatureType.monster, NetherConfig.herobrineSpawns, 1, 1, new BiomeGenBase[]{BiomeGenBase.hell}, 0, 0, false);
-        EntityCreator.createEntity(EntitySummor.class, "dextersnether_Summor", EnumCreatureType.creature);
-        EntityCreator.createEntity(EntityObsidianGolem.class, "dextersnether_ObsidianGolem", EnumCreatureType.creature);
-        EntityCreator.createEntity(EntityQuartzman.class, "dextersnether_Quartzman", EnumCreatureType.creature);
-        EntityCreator.createEntity(EntityPhantom.class, "dextersnether_Phantom", EnumCreatureType.monster, 0, 0, 0, new BiomeGenBase[0], 1184274, 12850710, true);
-        EntityCreator.createEntity(EntityHerobrineClone.class, "dextersnether__", EnumCreatureType.monster, NetherConfig.herobrineSpawns + 1, 1, 1, new BiomeGenBase[]{BiomeGenBase.hell}, 0, 0, false);
-        EntityCreator.createEntity(EntityInfernumAvis.class, "dextersnether_InfernumAvis", EnumCreatureType.monster, 0, 0, 0, new BiomeGenBase[0], 9190537, 12753493, true);
-        EntityCreator.createEntity(EntityTeleport.class, "dextersnether_Teleport", EnumCreatureType.ambient);
-        EntityCreator.createEntity(EntityInfernalBlaze.class, "dextersnether_InfernalBlaze", EnumCreatureType.monster, NetherConfig.infernalBlazeSpawns, 1, 3, new BiomeGenBase[]{BiomeGenBase.hell}, 14098721, 16736095, true);
-    **/}
+        evil$registerEntity(EntitySummor.class, "dextersnether_Summor", EnumCreatureType.creature);
+        evil$registerEntity(EntityObsidianGolem.class, "dextersnether_ObsidianGolem", EnumCreatureType.creature);
+        evil$registerEntity(EntityQuartzman.class, "dextersnether_Quartzman", EnumCreatureType.creature);
+        evil$registerEntity(EntityPhantom.class, "dextersnether_Phantom", EnumCreatureType.monster, 0, 0, 0, new BiomeGenBase[0], 1184274, 12850710, true);
+        evil$registerEntity(EntityHerobrineClone.class, "dextersnether__", EnumCreatureType.monster, NetherConfig.herobrineSpawns + 1, 1, 1, new BiomeGenBase[]{BiomeGenBase.hell}, 0, 0, false);
+        evil$registerEntity(EntityInfernumAvis.class, "dextersnether_InfernumAvis", EnumCreatureType.monster, 0, 0, 0, new BiomeGenBase[0], 9190537, 12753493, true);
+        evil$registerEntity(EntityTeleport.class, "dextersnether_Teleport", EnumCreatureType.ambient);
+        evil$registerEntity(EntityInfernalBlaze.class, "dextersnether_InfernalBlaze", EnumCreatureType.monster, NetherConfig.infernalBlazeSpawns, 1, 3, new BiomeGenBase[]{BiomeGenBase.hell}, 14098721, 16736095, true);
+    }
 
    @Unique
    private static int evil$ID = 100;
 
     @Unique
+    private static final void evil$registerEntity(Class entityClass, String entityName, EnumCreatureType type) {
+        EntityRegistry.registerModEntity(entityClass, entityName, evil$ID++, ThinkBigCore.modInstance, 60, 1, true);
+     //   evil$registerEntity(entityClass, entityName, type, 0, 0, 0, new BiomeGenBase[0], 0, 0, false);
+    }
+
+    @Unique
     private static void evil$registerEntity(Class entityClass, String entityName, EnumCreatureType type, int probability, int minSpawn, int maxSpawn, BiomeGenBase[] biome, int solidColor, int spotColor, boolean hasSpawnEgg) {
         EntityRegistry.registerModEntity(entityClass, entityName, evil$ID++, ThinkBigCore.modInstance, 60, 1, true);
         EntityRegistry.addSpawn(entityClass, probability, minSpawn, maxSpawn, type, biome);
+        ItemSpawnEgg.addSpawnEgg(evil$ID, entityClass, "ThinkBigCore." + entityName, solidColor, spotColor);
     }
 
 

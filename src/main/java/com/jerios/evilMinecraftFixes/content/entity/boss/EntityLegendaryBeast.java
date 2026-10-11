@@ -1,4 +1,4 @@
-package com.jerios.evilMinecraftFixes.content.entity;
+package com.jerios.evilMinecraftFixes.content.entity.boss;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -255,7 +255,7 @@ public class EntityLegendaryBeast extends EntityMob {
         for (int i = 0; i < 16 + off; i++) {
             for (int j = 0; j < 6; j++) {
                 for (int k = 0; k < 16 + off; k++) {
-                    EntityLightningBolt lightningBolt = new EntityLightningBolt(worldObj, posX + i + rand.nextDouble(3), posY + 6, posZ + k + rand.nextDouble(3));
+                    EntityLightningBolt lightningBolt = new EntityLightningBolt(worldObj, posX + i + rand.nextDouble(), posY + 1, posZ + k + rand.nextDouble());
                     worldObj.addWeatherEffect(lightningBolt);
                 }
 
@@ -451,14 +451,14 @@ public class EntityLegendaryBeast extends EntityMob {
         for (int i = 0; i < playersIn2Chunks.size(); i++) {
             EntityPlayer player = playersIn2Chunks.get(i);
 
-            player.cameraYaw = (float) (player.cameraYaw + rand.nextGaussian() + rand.nextFloat(2.3f));
-            player.cameraPitch = (float) (player.cameraPitch + rand.nextGaussian() + rand.nextFloat(3.8f));
+            player.cameraYaw = (float) (player.cameraYaw + rand.nextGaussian() + rand.nextFloat());
+            player.cameraPitch = (float) (player.cameraPitch + rand.nextGaussian() + rand.nextFloat());
         }
     }
 
     private void executeLightingRainAttack(Entity attacker) {
         if (lightingOffCoooldown()) {
-            EntityLightningBolt lightningBolt = new EntityLightningBolt(worldObj, attacker.posX + rand.nextDouble(3), attacker.posY, attacker.posZ + rand.nextDouble(3));
+            EntityLightningBolt lightningBolt = new EntityLightningBolt(worldObj, attacker.posX + rand.nextDouble(), attacker.posY, attacker.posZ + rand.nextDouble());
             worldObj.addWeatherEffect(lightningBolt);
 
             if (lightingAbilityFinish()) {
@@ -639,9 +639,9 @@ public class EntityLegendaryBeast extends EntityMob {
 
     private void executeLightingAgentSpawn() {
 
-        double lpx = posX + rand.nextDouble(64);
-        double lpz = posZ + rand.nextDouble(64);
-        double lpy = posY + rand.nextDouble(2);
+        double lpx = posX + rand.nextInt(64);
+        double lpz = posZ + rand.nextInt(64);
+        double lpy = posY + rand.nextInt(64);
 
         LightingAgent agent = new LightingAgent(worldObj);
 
@@ -794,7 +794,7 @@ public class EntityLegendaryBeast extends EntityMob {
             List<EntityPlayer> playersIn8Chunks = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, boundingBox.expand(128,128,128));
 
             if (mobSpawnTimerOffCoolown()) {
-                spawnRandomMobFromHell(rand.nextBoolean(), posX + rand.nextDouble(8), posY, posZ + rand.nextDouble(8));
+                spawnRandomMobFromHell(rand.nextBoolean(), posX + rand.nextDouble(), posY, posZ + rand.nextDouble());
                 spawnMobsFromDimTimer = 0;
             }
 

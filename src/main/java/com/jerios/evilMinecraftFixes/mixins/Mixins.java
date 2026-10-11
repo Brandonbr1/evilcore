@@ -199,6 +199,11 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> ConfigASM.hardDragom)
         .addCommonMixins("hee.DragonAttackDefaultMixin")),
 
+    THIRST_ACCOSSOR(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.THIRST)
+        .setApplyIf(() -> ConfigASM.thirstChanges)
+        .addCommonMixins("thirst.PoisionLogicAccessor")),
+
     SUMMON_ATTACK(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.HEE)
         .setApplyIf(() -> ConfigASM.hardDragom)
@@ -243,6 +248,48 @@ public enum Mixins implements IMixins {
         .addRequiredMod(TargetMods.THIRST)
         .setApplyIf(() -> ConfigASM.thirstChanges)
         .addCommonMixins("thirst.MixinThirstMod")),
+
+
+    THIRST_PACKET3(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.THIRST)
+        .setApplyIf(() -> ConfigASM.thirstChanges)
+        .addCommonMixins("thirst.MixinPacketUpdateClient")),
+
+    THIRST_PACKET2(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.THIRST)
+        .setApplyIf(() -> ConfigASM.thirstChanges)
+        .addCommonMixins("thirst.MixinPacketMovement")),
+
+    THIRST_PACKET(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.THIRST)
+        .setApplyIf(() -> ConfigASM.thirstChanges)
+        .addCommonMixins("thirst.MixinT")),
+
+    THIRST_CLIENTSTATS_CRASHES(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.THIRST)
+        .setApplyIf(() -> ConfigASM.thirstChanges)
+        .addClientMixins("thirst.MixinClientStats")),
+
+    THIRST_PACKET_CLIENT(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.THIRST)
+        .setApplyIf(() -> ConfigASM.thirstChanges)
+        .addCommonMixins("thirst.MixinPacketMovement")),
+
+    CP_THIRST(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.THIRST)
+        .setApplyIf(() -> ConfigASM.thirstChanges)
+        .addClientMixins("thirst.MixinClientProxy")),
+
+    THIRST_DRINK_INTERNAL(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.THIRST)
+        .setApplyIf(() -> ConfigASM.thirstChanges)
+        .addCommonMixins("thirst.MixinItemInternalDrink")),
+
+
+    THIRST_GUI(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.THIRST)
+        .setApplyIf(() -> ConfigASM.thirstChanges)
+        .addClientMixins("thirst.MixinGuiRenderBar")),
 
     THIRST_LOADER(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.THIRST)
@@ -339,7 +386,7 @@ public enum Mixins implements IMixins {
     WITHER_APPLE(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.HARDCORE_WITHER)
         .setApplyIf(() -> ConfigASM.hardcoreApple)
-        .addCommonMixins("MixinWitherApple")),
+        .addCommonMixins("adInfernos.MixinWitherApple")),
 
     MUSIC_FIXES(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.HEE)
@@ -354,22 +401,27 @@ public enum Mixins implements IMixins {
     INFERNAL_MOBS(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.INFERNAL_MOBS)
         .setApplyIf(() -> ConfigASM.IFFixes)
-        .addClientMixins("MixinInfernalMobsClient")),
+        .addClientMixins("infernalMob.MixinInfernalMobsClient")),
+
+    INFERNAL_MOBS_GRACE(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.INFERNAL_MOBS)
+        .setApplyIf(() -> ConfigASM.grace > -1)
+        .addClientMixins("infernalMob.MixinEntityEventHandler")),
 
     IF_CLIENT(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.INFERNAL_MOBS)
         .setApplyIf(() -> ConfigASM.IFFixes)
-        .addClientMixins("MixinRendererBossGlow")),
+        .addClientMixins("infernalMob.MixinRendererBossGlow")),
 
     MM_M(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.INFERNAL_MOBS)
         .setApplyIf(() -> ConfigASM.IFFixes)
-        .addCommonMixins("MixinMobModifier")),
+        .addCommonMixins("infernalMob.MixinMobModifier")),
 
     IF_CORE(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.INFERNAL_MOBS)
         .setApplyIf(() -> ConfigASM.IFFixes)
-        .addCommonMixins("MixinInfernalMobsCore")),
+        .addCommonMixins("infernalMob.MixinInfernalMobsCore")),
 
     ONEUP(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.INFERNAL_MOBS)
@@ -419,7 +471,7 @@ public enum Mixins implements IMixins {
     HEROBRINE_FIX_CRASH(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.AD_INF)
         .setApplyIf(() -> ConfigASM.arrowFixes)
-        .addCommonMixins("MixinEntityNetherArrow")),
+        .addCommonMixins("adInfernos.MixinEntityNetherArrow")),
 
     HEROBRINE_FIX2(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.AD_INF)
@@ -436,6 +488,11 @@ public enum Mixins implements IMixins {
         .addRequiredMod(TargetMods.AD_INF)
         .setApplyIf(() -> ConfigASM.removeGlobalIDAdInfernos)
         .addCommonMixins("adInfernos.MixinGenNetherDungeon")),
+
+    AD_INF_GID_RESULT3(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.AD_INF)
+        .setApplyIf(() -> ConfigASM.removeGlobalIDAdInfernos)
+        .addCommonMixins("adInfernos.MixinEntityNetherSpider")),
 
     CHEST_LOOT_NERF_IF(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.AD_INF)
@@ -469,6 +526,43 @@ public enum Mixins implements IMixins {
         .addRequiredMod(TargetMods.TBC)
         .setApplyIf(() -> ConfigASM.removeGlobalIDAdInfernos)
         .addCommonMixins("adInfernos.MixinNetherEntitys")),
+
+
+    CQ_CASCADING_WG_FIX(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.CQ)
+        .setApplyIf(() -> ConfigASM.cascadingWorldGenFixCQ)
+        .addCommonMixins("CQ.MixinBuildHelper")),
+
+    CQ_LOG_SPAMM(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.CQ)
+        .setApplyIf(() -> ConfigASM.CQLogSpamFix)
+        .addCommonMixins("CQ.MixinMobZombiePig")),
+
+    CQ_LOG_SPAMM1(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.CQ)
+        .setApplyIf(() -> ConfigASM.CQLogSpamFix)
+        .addCommonMixins("CQ.MixinWorldGeneratorNew")),
+
+    CQ_CASCADING_WG_FIX1(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.CQ)
+        .setApplyIf(() -> ConfigASM.cascadingWorldGenFixCQ)
+        .addCommonMixins("CQ.MixinBuilderNether")),
+
+    CQ_CASCADING_WG_FIX2(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.CQ)
+        .setApplyIf(() -> ConfigASM.cascadingWorldGenFixCQ)
+        .addCommonMixins("CQ.MixinBuilderBlockData")),
+
+
+   // DUMMYCORE_VERSION_CHECKER_DISABLE1(new MixinBuilder().setPhase(Phase.LATE)
+    //    .addRequiredMod(TargetMods.DUMMYCORE)
+     //   .setApplyIf(() -> ConfigASM.disableDummyVersionChecker)
+     //   .addCommonMixins("dummyCore.MixinModVersionChecker")),
+
+    DUMMYCORE_VERSION_CHECKER_DISABLE2(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.DUMMYCORE)
+       .setApplyIf(() -> ConfigASM.disableDummyVersionChecker)
+        .addCommonMixins("dummyCore.MixinThreadURICheck")),
 
 
     ;

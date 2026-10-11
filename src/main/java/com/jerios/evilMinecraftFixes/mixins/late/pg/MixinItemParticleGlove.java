@@ -23,12 +23,16 @@ public class MixinItemParticleGlove extends Item {
 
     @Inject(method = "onLeftClickEntity",at= @At(value = "INVOKE", target = "Lnet/minecraft/util/FoodStats;addExhaustion(F)V"))
     private void evil$exhaustThirst(ItemStack stack, EntityPlayer player, Entity entity, CallbackInfoReturnable<Boolean> cir) {
-        PlayerContainer.getPlayer(player.getCommandSenderName()).addExhaustion(1.0f);
+        if (!player.worldObj.isRemote) {
+            PlayerContainer.getPlayer(player).addExhaustion(1.0f);
+        }
     }
 
     @Inject(method = "onItemUse",at= @At(value = "INVOKE", target = "Lnet/minecraft/util/FoodStats;addExhaustion(F)V"))
     private void evil$exhaustThirstUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10, CallbackInfoReturnable<Boolean> cir) {
-        PlayerContainer.getPlayer(par2EntityPlayer.getCommandSenderName()).addExhaustion(1.0f);
+        if (!par3World.isRemote) {
+            PlayerContainer.getPlayer(par2EntityPlayer).addExhaustion(1.0f);
+        }
     }
 
 }

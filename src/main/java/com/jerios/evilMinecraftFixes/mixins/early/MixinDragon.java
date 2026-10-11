@@ -9,6 +9,10 @@ import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
@@ -23,6 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 @Mixin(EntityDragon.class)
 public class MixinDragon extends EntityLiving {
@@ -59,6 +64,34 @@ public class MixinDragon extends EntityLiving {
             {
                 entity2.attackEntityFrom(DamageSource.magic, 1.0F);
             }
+
+
+            if (entity2 instanceof EntityPlayer) {
+                EntityPlayer player = (EntityPlayer) entity2;
+
+                ItemStack stack = player.inventory.getCurrentItem();
+
+                ItemStack[] playerArmor = player.inventory.armorInventory;
+
+                for (int i = 0; i < playerArmor.length; i++) {
+                    ItemStack pa = playerArmor[i];
+
+                    if (pa != null) {
+                        pa.damageItem(20, player);
+                    }
+                }
+
+                if (stack != null) {
+                    Item item = stack.getItem();
+
+                    if (item instanceof ItemTool) {
+                        stack.damageItem(20, player);
+                    }
+
+                }
+
+
+            }
         }
 
     }
@@ -74,6 +107,36 @@ public class MixinDragon extends EntityLiving {
             if (entity2 instanceof EntityLivingBase)
             {
                 entity2.attackEntityFrom(DamageSource.magic, 1.0F);
+            }
+
+            if (entity2 instanceof EntityPlayer) {
+                EntityPlayer player = (EntityPlayer) entity2;
+
+                ItemStack stack = player.inventory.getCurrentItem();
+
+                ItemStack[] playerArmor = player.inventory.armorInventory;
+
+
+                for (int i = 0; i < playerArmor.length; i++) {
+                    ItemStack pa = playerArmor[i];
+
+                    if (pa != null) {
+                        pa.damageItem(20, player);
+                    }
+
+
+                }
+
+                if (stack != null) {
+                    Item item = stack.getItem();
+
+                    if (item instanceof ItemTool) {
+                        stack.damageItem(20, player);
+                    }
+
+                }
+
+
             }
         }
 
@@ -139,6 +202,11 @@ public class MixinDragon extends EntityLiving {
                             JeanFireball entitydragonfireball = new JeanFireball(dragon.worldObj, dragon, d9, d10, d11);
                             entitydragonfireball.setLocationAndAngles(d6, d7, d8, 0.0F, 0.0F);
                             dragon.worldObj.spawnEntityInWorld(entitydragonfireball);
+
+                            EntityLargeFireball fireball = new EntityLargeFireball(dragon.worldObj, dragon, d9, d10, d11);
+                            fireball.setLocationAndAngles(d6, d7, d8, 0.0F, 0.0F);
+                            dragon.worldObj.spawnEntityInWorld(fireball);
+
                             this.evil$fireballCharge = 0;
                         }
 

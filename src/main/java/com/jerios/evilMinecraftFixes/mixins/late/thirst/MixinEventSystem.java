@@ -39,4 +39,17 @@ public class MixinEventSystem {
     @SubscribeEvent
     public void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
     }
+
+    /**
+     * @author Jerios
+     * @reason Replaced with IEEP
+     */
+    @Overwrite(remap = false)
+    @SubscribeEvent
+    public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+     //   if (!event.player.worldObj.isRemote) {
+      //      PlayerContainer.getPlayer(event.player).respawnPlayer();
+      //  }
+    }
+
 }

@@ -41,17 +41,6 @@ public class InfernalMobsMakeNeturalMobsAgressiveEvent {
             }
         }
 
-        if (event.entityLiving instanceof CreeperMinion) {
-            CreeperMinion minion = (CreeperMinion) event.entityLiving;
-
-            // prevent Bomby from having rare effects.
-            if (minion.getTamed()) {
-                if(InfernalMobsCore.getMobModifiers(event.entityLiving) != null) {
-                    InfernalMobsCore.removeEntFromElites(event.entityLiving);
-                }
-            }
-        }
-
         if (Config.endermenAgressiveIfModifier) {
             if (event.entityLiving instanceof EntityEnderman) {
                 EntityEnderman enderman = (EntityEnderman) event.entityLiving;

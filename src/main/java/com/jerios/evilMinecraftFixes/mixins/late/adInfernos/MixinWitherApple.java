@@ -1,4 +1,4 @@
-package com.jerios.evilMinecraftFixes.mixins.late;
+package com.jerios.evilMinecraftFixes.mixins.late.adInfernos;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;

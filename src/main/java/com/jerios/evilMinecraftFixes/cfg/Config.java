@@ -6,6 +6,7 @@ import net.minecraftforge.common.config.Configuration;
 
 public class Config {
 
+    public static boolean evilerMC;
     public static float hardness;
     public static float resistance;
     public static boolean spawnLadderZombie;
@@ -24,6 +25,9 @@ public class Config {
     public static int playerActivationDistance = 64;
     public static int minTimer = 200;
     public static int maxTimer = 800;
+
+
+    public static boolean content;
 
     public static float enderDragonNoKnockbackHp = 80;
 
@@ -91,6 +95,12 @@ public class Config {
         distanceToSpawn = configuration.getFloat("Max spawn distance for endermen relic structure", "HEE", 1300.0F, 0, Float.MAX_VALUE, "Distance to try and spawn ender deamon structure");
 
         chanceToSpawnIsland = configuration.getInt("Spawn Chance of Relic Island", "HEE", 16, 0, Integer.MAX_VALUE, "Spawn chance after required distance");
+
+        content = configuration.getBoolean("Enable Content", "Content", true, "Enable the Content");
+
+        evilerMC = configuration.getBoolean("EVILER MC RECIPIES", "Content", true, "ENABLE ONLY IF YOU ARE IN EVILER MC");
+
+
         if (configuration.hasChanged()) {
             configuration.save();
         }

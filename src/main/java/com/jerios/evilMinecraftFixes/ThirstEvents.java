@@ -28,15 +28,13 @@ public class ThirstEvents {
     @SubscribeEvent
     public void onClonePlayer(PlayerEvent.Clone e) {
 
-        int a =PlayerContainer.getPlayer(e.entityPlayer).getStats().thirstLevel;
-        int b =PlayerContainer.getPlayer(e.original).getStats().thirstLevel;
-
         if(!e.wasDeath) {
-
             NBTTagCompound compound = new NBTTagCompound();
             ((IThirst) PlayerContainer.getPlayer(e.original)).saveNBTData2(compound);
             ((IThirst)PlayerContainer.getPlayer(e.entityPlayer)).loadNBTData2(compound);
-
+        } else {
+            PlayerContainer.getPlayer(e.original).respawnPlayer();
+            PlayerContainer.getPlayer(e.entityPlayer).respawnPlayer();
         }
 
 

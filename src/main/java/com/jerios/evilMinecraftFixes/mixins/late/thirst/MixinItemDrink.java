@@ -26,4 +26,13 @@ public class MixinItemDrink {
         list.add("Heals " + (s2.endsWith(".0") ? s2.replace(".0", "") : s2) + " Saturation");
     }
 
+    /**
+     * @author
+     * @reason
+     */
+    @Overwrite(remap = false)
+    public boolean canDrink(EntityPlayer player) {
+            return PlayerContainer.getPlayer(player).getStats().thirstLevel < 20;
+    }
+
 }

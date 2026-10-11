@@ -1,4 +1,4 @@
-package com.jerios.evilMinecraftFixes.mixins.late;
+package com.jerios.evilMinecraftFixes.mixins.late.adInfernos;
 
 import com.superdextor.dextersnether.entity.projectile.EntityNetherArrow;
 import net.minecraft.entity.EntityLivingBase;

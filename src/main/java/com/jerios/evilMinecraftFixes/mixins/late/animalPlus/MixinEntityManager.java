@@ -20,8 +20,11 @@ import clickme.animals.entity.water.EntityShark;
 import clickme.animals.entity.water.EntityTropiFish;
 import clickme.animals.entity.water.EntityWhale;
 import com.jerios.evilMinecraftFixes.Evil;
+import com.jerios.evilMinecraftFixes.content.ItemSpawnEgg;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import fakeMod.AnimalPlusProxy;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemMonsterPlacer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Unique;
@@ -55,10 +58,11 @@ public class MixinEntityManager {
     }
 
     @Unique
-    private static int evil$modID = 2;
+    private static int evil$modID = 2100;
 
     private static void evil$registerMod(Class<? extends Entity> entityClass, String entityName, int i1, int i2) {
-        EntityRegistry.registerModEntity(entityClass, entityName,evil$modID++, Evil.INSTANCE, 128, 1, true);
+        EntityRegistry.registerModEntity(entityClass, entityName,evil$modID++, AnimalPlusProxy.INSTANCE, 128, 1, true);
+        ItemSpawnEgg.addSpawnEgg(evil$modID, entityClass, "AnimalPlusMod." + entityName, i1, i2);
     }
 
 }

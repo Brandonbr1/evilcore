@@ -5,13 +5,19 @@ import com.jerios.evilMinecraftFixes.athena.AthenaEvents;
 import com.jerios.evilMinecraftFixes.athena.EntityWitherDeathManager;
 import com.jerios.evilMinecraftFixes.athena.WitherProps;
 import com.jerios.evilMinecraftFixes.cfg.ConfigASM;
+import com.jerios.evilMinecraftFixes.client.EvilLockBrightness;
 import com.jerios.evilMinecraftFixes.content.ContentRegistry;
+import com.jerios.evilMinecraftFixes.content.EvilMobs;
+import com.jerios.evilMinecraftFixes.content.ItemSpawnEgg;
+import com.jerios.evilMinecraftFixes.dynamicDifficulty.DynamicDifficultyEvent;
 import com.jerios.evilMinecraftFixes.evilOres.OreBossTickEvent;
 import com.jerios.evilMinecraftFixes.evilOres.OresAttackEvent;
 import com.jerios.evilMinecraftFixes.evilOres.OresInteg;
 import com.jerios.evilMinecraftFixes.evilOres.world.EvilGenFakeOres;
+import com.jerios.evilMinecraftFixes.evilerRecipiesManager.EvilerRecipiesManager;
 import com.jerios.evilMinecraftFixes.hee.EntityCrystalBomb;
 import com.jerios.evilMinecraftFixes.hostileWorlds.HWSpawns;
+import com.jerios.evilMinecraftFixes.infernalMobs.CreeperMinionNiceUnableToBecomeRare;
 import com.jerios.evilMinecraftFixes.infernalMobs.InfernalMobsMakeNeturalMobsAgressiveEvent;
 import com.jerios.evilMinecraftFixes.infernalMobs.InfernalMobsSaveHandler;
 import com.jerios.evilMinecraftFixes.ironBackPacks.IronBackPacksLimitAmmountEvent;
@@ -30,6 +36,7 @@ import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -71,10 +78,16 @@ public class Evil {
     @Mod.Instance("evilMinecraftFixes")
     public static Evil INSTANCE;
 
+    public static Item monsterSpawnerEgg;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
        // ReplaceMobFilter.replaceMobFilterWithInstanceThatDoesNotAttackBomby();
 
+        monsterSpawnerEgg = new ItemSpawnEgg();
+        GameRegistry.registerItem(monsterSpawnerEgg, "Evil Spawn Egg");
+
+        EvilMobs.addMobs();
         Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
         proxy.preInit(event);
         ContentRegistry.register();
@@ -109,8 +122,16 @@ public class Evil {
             MinecraftForge.EVENT_BUS.register(new InfernalMobsSaveHandler());
             MinecraftForge.EVENT_BUS.register(new InfernalMobsMakeNeturalMobsAgressiveEvent());
 
+            if (Loader.isModLoaded("MutantCreatures")) {
+
+            MinecraftForge.EVENT_BUS.register(new CreeperMinionNiceUnableToBecomeRare());
+            }
+
         }
 
+
+        MinecraftForge.EVENT_BUS.register(new DynamicDifficultyEvent());
+        FMLCommonHandler.instance().bus().register(new DynamicDifficultyEvent());
 
 
         if (Loader.isModLoaded("thirstmod")) {
@@ -125,6 +146,9 @@ public class Evil {
         }
 
 
+        FMLCommonHandler.instance().bus().register(new HungerChangesEvent());
+        MinecraftForge.EVENT_BUS.register(new EvilLockBrightness());
+
         WitherProps.register();
 
         if (Loader.isModLoaded("HardcoreEnderExpansion")) {
@@ -132,7 +156,6 @@ public class Evil {
         }
 
         EntityRegistry.registerModEntity(EntityWitherDeathManager.class, "death", 54, INSTANCE, 256, 1, true);
-
         EntityRegistry.registerModEntity(EntityCrystalBomb.class, "bomb", 808, INSTANCE, 256, 1, true);
 
         if (Loader.isModLoaded("fakeores")) {
@@ -157,6 +180,11 @@ public class Evil {
 
         if (Loader.isModLoaded("chocolateQuest")) {
             CQInteg.register();
+        }
+
+        if (Config.evilerMC)
+        {
+            EvilerRecipiesManager.add();
         }
 
     //    if (Loader.isModLoaded("ParticleMan")) {

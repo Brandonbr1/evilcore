@@ -25,9 +25,9 @@ public class MixinPlayerContainer implements IExtendedEntityProperties, IThirst 
 
     @Override
     public void saveNBTData(NBTTagCompound compound) {
-       // stats.readData();
+        stats.writeData();
 
-        NBTTagCompound propertyData = new NBTTagCompound();
+      /**   NBTTagCompound propertyData = new NBTTagCompound();
         if (stats != null) {
             propertyData.setInteger("level", stats.thirstLevel);
             propertyData.setFloat("exhaustion", stats.thirstExhaustion);
@@ -39,14 +39,17 @@ public class MixinPlayerContainer implements IExtendedEntityProperties, IThirst 
         }
 
         compound.setTag(IThirst.PROP, propertyData);
+       **/
+
+
 
 
     }
 
     @Override
     public void loadNBTData(NBTTagCompound compound) {
-     //   stats.writeData();
-        if(compound.hasKey(IThirst.PROP, Constants.NBT.TAG_COMPOUND)) {
+        stats.readData();
+     /**   if(compound.hasKey(IThirst.PROP, Constants.NBT.TAG_COMPOUND)) {
             NBTTagCompound propertyData = compound.getCompoundTag(IThirst.PROP);
             if (stats != null) {
                 if (propertyData.hasKey("level")) {
@@ -58,6 +61,7 @@ public class MixinPlayerContainer implements IExtendedEntityProperties, IThirst 
                 }
             }
         }
+      **/
 
     }
 
@@ -89,11 +93,6 @@ public class MixinPlayerContainer implements IExtendedEntityProperties, IThirst 
      */
     @Overwrite(remap = false)
     public static void addPlayer(EntityPlayer player) {
-    }
-
-    @Shadow(remap = false)
-    public ThirstLogic getStats() {
-        return this.stats;
     }
 
     @Override

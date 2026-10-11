@@ -1,4 +1,4 @@
-package com.jerios.evilMinecraftFixes.content.entity;
+package com.jerios.evilMinecraftFixes.content.entity.boss;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;

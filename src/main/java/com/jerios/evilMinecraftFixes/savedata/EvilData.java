@@ -7,26 +7,42 @@ import net.minecraft.world.storage.MapStorage;
 
 public class EvilData extends WorldSavedData {
 
-   public int athenaDeath = 0;
+    private static String NAME = "evil_mc_world_data";
 
+   public int athenaDeath = 0;
+   public int worldTicks = 0;
+
+    // Required constructors
     public EvilData() {
-        super("evil_mc_world_data");
+        super(NAME);
+    }
+    public EvilData(String s) {
+        super(s);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
-        nbt.getInteger("AthenaDeathCount");
+        athenaDeath =   nbt.getInteger("AthenaDeathCount");
+        worldTicks=nbt.getInteger("WorldTimeTick");
 
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         nbt.setInteger("AthenaDeathCount", athenaDeath);
+        nbt.setInteger("WorldTimeTick", worldTicks);
     }
 
     public void increaseAthenaDeath() {
         athenaDeath++;
         markDirty();
+    }
+
+    public void increaseTicks() {
+        if (worldTicks <= 144000) {
+            worldTicks++;
+            markDirty();
+        }
     }
 
     public boolean isAgressiveStage1() {
@@ -45,13 +61,12 @@ public class EvilData extends WorldSavedData {
         if (world.isRemote) {
             throw new RuntimeException("DO NOT RUN ON CLIENT DUMBASS");
         }
-        // The IS_GLOBAL constant is there for clarity, and should be simplified into the right branch.
         MapStorage storage = world.mapStorage;
-        EvilData instance = (EvilData) storage.loadData(EvilData.class, "evil_mc_world_data");
+        EvilData instance = (EvilData) storage.loadData(EvilData.class, NAME);
 
         if (instance == null) {
             instance = new EvilData();
-            storage.setData("evil_mc_world_data", instance);
+            storage.setData(NAME, instance);
         }
         return instance;
     }

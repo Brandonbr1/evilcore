@@ -2,6 +2,7 @@ package com.jerios.evilMinecraftFixes;
 
 import com.thetorine.thirstmod.core.client.player.ClientStats;
 import com.thetorine.thirstmod.core.main.ThirstMod;
+import com.thetorine.thirstmod.core.player.PlayerContainer;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
@@ -30,7 +31,7 @@ public class ThirstSatuartionEvent {
         int top = height - GuiIngameForge.right_height;
         GuiIngameForge.right_height += 10;
 
-        float sat = ClientStats.getInstance().saturation;
+        float sat = PlayerContainer.getPlayer(Minecraft.getMinecraft().thePlayer).getStats().thirstSaturation; //ClientStats.getInstance().saturation;
 
         Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("" + sat, left, top, 0xFFFFFF);
 

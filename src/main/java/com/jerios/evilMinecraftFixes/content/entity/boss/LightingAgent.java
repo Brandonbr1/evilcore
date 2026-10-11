@@ -1,9 +1,7 @@
-package com.jerios.evilMinecraftFixes.content.entity;
+package com.jerios.evilMinecraftFixes.content.entity.boss;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 

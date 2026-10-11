@@ -1,4 +1,4 @@
-package com.jerios.evilMinecraftFixes.mixins.late;
+package com.jerios.evilMinecraftFixes.mixins.late.infernalMob;
 
 import atomicstryker.infernalmobs.client.RendererBossGlow;
 import net.minecraft.client.Minecraft;

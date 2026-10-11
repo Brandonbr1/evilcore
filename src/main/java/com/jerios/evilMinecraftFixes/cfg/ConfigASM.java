@@ -11,6 +11,10 @@ public class ConfigASM {
 
     }
 
+    @Config.Comment("Infernal Mobs grace Period(-1 to disable)")
+    @Config.DefaultInt(18000)
+    public static int grace;
+
     @Config.Comment("Use Faster Math?")
     @Config.DefaultBoolean(true)
     public static boolean math;
@@ -74,6 +78,18 @@ public class ConfigASM {
     @Config.Comment("Remove AD Infernos Global IDS for everything except Herobrine")
     @Config.DefaultBoolean(true)
     public static boolean removeGlobalIDAdInfernos ;
+
+    @Config.Comment("Fix CQ cascading WorldGen")
+    @Config.DefaultBoolean(true)
+    public static boolean cascadingWorldGenFixCQ ;
+
+    @Config.Comment("Disable CQ Log Spam")
+    @Config.DefaultBoolean(true)
+    public static boolean CQLogSpamFix ;
+
+    @Config.Comment("Disable Dummy Core Version Checker")
+    @Config.DefaultBoolean(true)
+    public static boolean disableDummyVersionChecker ;
 
     @Config.Comment("Disable Animal Plus Update checker")
     @Config.DefaultBoolean(true)

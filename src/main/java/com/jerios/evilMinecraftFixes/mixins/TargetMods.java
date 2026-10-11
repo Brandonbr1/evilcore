@@ -21,6 +21,7 @@ public enum TargetMods implements ITargetMod {
     THIRST("thirstmod"),
     PM("ParticleMan"),
     EXU("ExtraUtilities"),
+    DUMMYCORE("DummyCore.Utils.ModVersionChecker", true),
     APLUS("animalsPlus"),
     TBC("ThinkBigCore");
 
