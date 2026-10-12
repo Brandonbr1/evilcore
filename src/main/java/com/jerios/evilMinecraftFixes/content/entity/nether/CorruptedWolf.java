@@ -72,7 +72,8 @@ public class CorruptedWolf extends EntityMob {
             int y = MathHelper.floor_double(posY);
             int z = MathHelper.floor_double(posZ);
 
-            if (worldObj.getBlock(x, y, z) == Blocks.air) {
+            if (worldObj.getBlock(x, y, z) == Blocks.air)
+            {
                 worldObj.setBlock(x,y,z,Blocks.fire);
             }
         }
@@ -104,6 +105,8 @@ public class CorruptedWolf extends EntityMob {
                 EntityLivingBase living = (EntityLivingBase) p_70652_1_;
                 living.hurtTime-=20;
                 setOnFireFromLava(living);
+                living.addPotionEffect(new PotionEffect(Potion.hunger.id, 400, 1));
+                living.addPotionEffect(new PotionEffect(Potion.poison.id, 80, 1));
             }
         }
         return super.attackEntityAsMob(p_70652_1_);

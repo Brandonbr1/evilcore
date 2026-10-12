@@ -1,18 +1,13 @@
 package com.jerios.evilMinecraftFixes.evilerRecipiesManager;
 
-import chylex.hee.HardcoreEnderExpansion;
 import chylex.hee.init.BlockList;
-import com.jerios.evilMinecraftFixes.CQAdditions.CQInteg;
 import com.rwtema.extrautils.ExtraUtils;
-import com.superdextor.dextersnether.DextersNether;
 import com.superdextor.dextersnether.init.NetherItems;
 import cpw.mods.fml.common.registry.GameRegistry;
 import fr.elias.fakeores.common.FakeOres;
-import main.ironbackpacks.items.ItemRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import particleman.forge.ParticleMan;
 
 public class EvilerRecipiesManager {
 

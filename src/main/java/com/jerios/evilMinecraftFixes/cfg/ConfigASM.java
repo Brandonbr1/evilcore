@@ -170,6 +170,11 @@ public class ConfigASM {
     @Config.DefaultBoolean(true)
     public static boolean harderEndermen ;
 
+
+    @Config.Comment("Zombie agression for villagers is swapped for players.")
+    @Config.DefaultBoolean(true)
+    public static boolean agressiveZombies ;
+
     @Config.Comment("Rare Spawners")
     @Config.DefaultBoolean(true)
     public static boolean rareSpawners ;
@@ -177,6 +182,11 @@ public class ConfigASM {
     @Config.Comment("HEE Tweaks")
     @Config.DefaultBoolean(true)
     public static boolean HeeTweaks ;
+
+
+    @Config.Comment("Dynamic Difficulty System for Special AI")
+    @Config.DefaultBoolean(true)
+    public static boolean specialAIDDS ;
 
     @Config.Comment("Hard Dragon")
     @Config.DefaultBoolean(true)

@@ -14,11 +14,11 @@ public class EvilMobs {
 
     public static void addMobs() {
         registerMob(AcidicSlime.class, "AcidicSlime");
-     //   addSpawn(AcidicSlime.class, 60,1,4, EnumCreatureType.monster, BiomeGenBase.hell);
+        addSpawn(AcidicSlime.class, 50,1,4, EnumCreatureType.monster, BiomeGenBase.hell);
         registerMob(CorruptedWolf.class, "CorruptedWolf");
-      //  addSpawn(EntityHellHound.class, 55,2,4, EnumCreatureType.monster, BiomeGenBase.hell);
+         addSpawn(CorruptedWolf.class, 55,3,4, EnumCreatureType.monster, BiomeGenBase.hell);
         registerMob(EntityCryingSoul.class, "CryingSoul");
-        addSpawn(CorruptedWolf.class, 50,1,4, EnumCreatureType.monster, BiomeGenBase.hell);
+        addSpawn(CorruptedWolf.class, 60,1,4, EnumCreatureType.monster, BiomeGenBase.hell);
     }
 
    static int id = 1;

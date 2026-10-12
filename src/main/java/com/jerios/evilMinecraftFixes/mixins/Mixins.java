@@ -20,6 +20,10 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> ConfigASM.harderEndermen)
         .addCommonMixins("hard.MixinHarderEndermen")),
 
+    AGRESSIVE_PLAYER_ZOMBIES(new MixinBuilder().setPhase(Phase.EARLY)
+        .setApplyIf(() -> ConfigASM.agressiveZombies)
+        .addCommonMixins("hard.MixinEntityZombie")),
+
     /**  HARDER_SPAWNERS(new MixinBuilder().setPhase(Phase.EARLY)
         .setApplyIf(() -> ConfigASM.rareSpawners)
         .addCommonMixins("hard.MixinEvilMobSpawnerBaseLogic")),
@@ -131,7 +135,10 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> ConfigASM.PGGloveThirst)
         .addCommonMixins("pg.MixinItemParticleGlove")),
 
-
+    SPECIAL_AI_DDS(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.SPEC_AI)
+        .setApplyIf(() -> ConfigASM.specialAIDDS)
+        .addCommonMixins("specialAI.MixinAIHandler")),
 
     HEE_RENDER(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.HEE)

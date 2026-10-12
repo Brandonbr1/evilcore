@@ -74,10 +74,10 @@ dependencies {
 
    // api("com.falsepattern:falsepatternlib-mc1.7.10:1.12.2")
 
+    devOnlyNonPublishable(rfg.deobf("curse.maven:epic-siege-mod-229449:2288000"))
+    devOnlyNonPublishable(rfg.deobf("curse.maven:special-ai-224301:2281145"))
 
-
-
-
+//specail AI and ESM Activate in nether and end respectively
 
 
 

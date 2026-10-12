@@ -1,7 +1,10 @@
 package com.jerios.evilMinecraftFixes.content;
 
+import chylex.hee.init.ItemList;
 import com.jerios.evilMinecraftFixes.cfg.Config;
 import com.jerios.evilMinecraftFixes.content.tile.BlockUnlockerAnvil;
+import com.jerios.evilMinecraftFixes.hostileWorlds.dim.BiomeHostileWorlds;
+import com.rwtema.extrautils.ExtraUtils;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -9,10 +12,15 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeManager;
 
 public class ContentRegistry {
 
     public static Item starFragment;
+
+    public static BiomeGenBase HW = new BiomeHostileWorlds(98);
 
     public static Item sharpness6;
     public static Item sharpness7;
@@ -50,7 +58,7 @@ public class ContentRegistry {
 
 
     public static void register() {
-        if (Config.content) {
+     //   if (Config.content) {
             starFragment = new ItemNetherStarFragment().setCreativeTab(CreativeTabs.tabRedstone);
             registerItm(starFragment, "Stat Fragment");
 
@@ -168,7 +176,14 @@ public class ContentRegistry {
             GameRegistry.registerBlock(unlocker, "Unlocker Anvil");
 
             GameRegistry.addShapelessRecipe(new ItemStack(Items.nether_star), starFragment, starFragment, starFragment, starFragment);
-        }
+
+            GameRegistry.addShapedRecipe(new ItemStack(ContentRegistry.unlocker, 1), "III","INI", "III", 'I', ExtraUtils.unstableIngot, 'N', Items.nether_star);
+
+        //  GameRegistry.addShapedRecipe(new ItemStack(ContentRegistry.unlocker, 1), "UUU", "UNU", "UUU", 'U', ItemList.essence, 'N', Items.nether_star);
+      //  }
+
+            BiomeDictionary.registerBiomeType(HW, BiomeDictionary.Type.SPOOKY);
+
     }
 
     public static void reci(Item prevI, Item currI) {
