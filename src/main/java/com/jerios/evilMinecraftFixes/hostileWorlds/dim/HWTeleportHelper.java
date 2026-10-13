@@ -44,7 +44,7 @@ public class HWTeleportHelper {
             ent.worldObj.removeEntity(ent);
             ent.isDead = false;
             ent.worldObj.theProfiler.startSection("reposition");
-            minecraftserver.getConfigurationManager().transferEntityToWorld(ent, originalDim, worldserver, worldserver1);
+            minecraftserver.getConfigurationManager().transferEntityToWorld(ent, originalDim, worldserver, worldserver1, new TeleporterHW(worldserver1.func_73046_m().worldServerForDimension(0)));
             ent.worldObj.theProfiler.endStartSection("reloading");
             Entity entity = EntityList.createEntityByName(EntityList.getEntityString(ent), worldserver1);
 

@@ -8,6 +8,7 @@ import net.minecraft.block.BlockPortal;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -226,30 +227,40 @@ public class BlockHWPortal extends BlockPortal {
     public void onEntityCollidedWithBlock(World worldIn, int x, int y, int z, Entity entityIn) {
         if (entityIn.ridingEntity == null && entityIn.riddenByEntity == null && !worldIn.isRemote) {
           //  MinecraftServer server = MinecraftServer.getServer();
-         //   if (entityIn.timeUntilPortal-- < 0)
-          //  {
 
                 if (entityIn instanceof EntityPlayerMP entityPlayerMP) {
-                    if (entityPlayerMP.dimension != ContentRegistry.HW_ID) {
-                        HWTeleportHelper.travelToDimension(entityPlayerMP, ContentRegistry.HW_ID);
-                    } else {
-                    //    HWTeleportHelper.travelToDimension(entityPlayerMP, 0);
+                    if (entityPlayerMP.timeUntilPortal-- <= 10) {
+                        if (entityPlayerMP.dimension != ContentRegistry.HW_ID) {
+                            entityIn.timeUntilPortal = 200;
+                            HWTeleportHelper.travelToDimension(entityPlayerMP, ContentRegistry.HW_ID);
+
+                        } else {
+                            entityIn.timeUntilPortal = 200;
+                            HWTeleportHelper.travelToDimension(entityPlayerMP, 0);
+
+                        }
                     }
                 }
 
-            /** if ((entityIn instanceof Entity))
-                {
-                    if (entityIn.dimension != ContentRegistry.HW_ID) {
-                        HWTeleportHelper.travelToDimension(entityIn, ContentRegistry.HW_ID);
-                    } else {
-                        HWTeleportHelper.travelToDimension(entityIn, 0);
-                    }
+                // Teleport only entities, not player
+             if (!(entityIn instanceof EntityPlayer) && entityIn instanceof Entity) {
+                 if (entityIn.timeUntilPortal-- <= 10) {
+                     if (entityIn.dimension != ContentRegistry.HW_ID) {
+                         entityIn.timeUntilPortal = 200;
+                         HWTeleportHelper.travelToDimension(entityIn, ContentRegistry.HW_ID);
 
-                }
-                **/
+                     } else {
+                            entityIn.timeUntilPortal = 200;
+                           HWTeleportHelper.travelToDimension(entityIn, 0);
+
+                     }
+
+                 }
+             }
 
 
-          //  }
+
+
 
 
         }
@@ -425,7 +436,7 @@ public class BlockHWPortal extends BlockPortal {
 
         protected boolean func_150857_a(Block p_150857_1_)
         {
-            return p_150857_1_.getMaterial() == Material.air || p_150857_1_ == Blocks.fire || p_150857_1_ == Blocks.portal || p_150857_1_ == ContentRegistry.hwPortal;
+            return p_150857_1_.getMaterial() == Material.air || p_150857_1_ == Blocks.fire || p_150857_1_ == ContentRegistry.hwPortal;
         }
 
         public boolean func_150860_b()
