@@ -1,5 +1,6 @@
 package com.jerios.evilMinecraftFixes.mixins.late.specialMobs;
 
+import com.jerios.evilMinecraftFixes.ducks.IGetCreeperProps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -20,7 +21,7 @@ import toast.specialMobs.entity.creeper.EntityEnderCreeper;
 import toast.specialMobs.entity.creeper.Entity_SpecialCreeper;
 
 @Mixin(Entity_SpecialCreeper.class)
-public class MixinEntity_SpecialCreeper extends EntityCreeper {
+public class MixinEntity_SpecialCreeper extends EntityCreeper implements IGetCreeperProps {
 
 
     @Shadow(remap = false)
@@ -35,6 +36,9 @@ public class MixinEntity_SpecialCreeper extends EntityCreeper {
     private boolean isRareCreeper;
     @Unique
     private boolean hasAlreadyActivatedLowHP;
+
+    @Unique
+    private boolean creeperAlreadyExplode;
 
     public MixinEntity_SpecialCreeper(World p_i1733_1_) {
         super(p_i1733_1_);
@@ -86,8 +90,19 @@ public class MixinEntity_SpecialCreeper extends EntityCreeper {
     private Explosion evil$redirectCharged(World instance, Entity p_72876_1_, double p_72876_2_, double p_72876_4_, double p_72876_6_, float p_72876_8_, boolean p_72876_9_) {
         boolean flag = this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
 
-        timeSinceIgnited = -20;
+     /**   if (creeperAlreadyExplode) {
+            if (this.timeSinceIgnited < this.fuseTime) {
+
+                this.setCreeperState(-1);
+            }
+        }
+**/
+        if (this.timeSinceIgnited >= this.fuseTime) {
+            this.setCreeperState(-1);
+            timeSinceIgnited = 0;
+        }
         return this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ,(float)this.explosionRadius * 2, flag, flag);
+
     }
 
 
@@ -95,13 +110,18 @@ public class MixinEntity_SpecialCreeper extends EntityCreeper {
     private void evil$injectRead(NBTTagCompound tag, CallbackInfo callbackInfo) {
         tag.setBoolean("rareCreeperEvil", isRareCreeper);
         tag.setBoolean("rareAlreadyLowHp", hasAlreadyActivatedLowHP);
-
+        tag.setBoolean("creeperAlreadyExplode", creeperAlreadyExplode);
     }
 
     @Inject(method = "writeEntityToNBT", at = @At("TAIL"))
     private void evil$injectWrite(NBTTagCompound tag, CallbackInfo callbackInfo) {
         tag.getBoolean("rareCreeperEvil");
         tag.getBoolean("rareAlreadyLowHp");
+        tag.getBoolean("creeperAlreadyExplode");
     }
 
+    @Override
+    public boolean getHasCreeperExploded() {
+        return creeperAlreadyExplode;
+    }
 }

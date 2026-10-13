@@ -1,6 +1,7 @@
 package com.jerios.evilMinecraftFixes.evilerRecipiesManager;
 
 import chylex.hee.init.BlockList;
+import com.jerios.evilMinecraftFixes.content.ContentRegistry;
 import com.rwtema.extrautils.ExtraUtils;
 import com.superdextor.dextersnether.init.NetherItems;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -18,6 +19,9 @@ public class EvilerRecipiesManager {
         GameRegistry.addShapelessRecipe(new ItemStack(FakeOres.fd_rainbow_block), NetherItems.darkcore,NetherItems.darkcore,NetherItems.darkcore,NetherItems.darkcore,NetherItems.darkcore,NetherItems.darkcore,NetherItems.darkcore,NetherItems.darkcore,NetherItems.darkcore);
         GameRegistry.addShapelessRecipe(new ItemStack(ExtraUtils.unstableIngot, 1), new ItemStack(ExtraUtils.decorative1, 1,5));
         GameRegistry.addShapedRecipe(new ItemStack(ExtraUtils.decorative1, 1, 8), "GEG", "EBE", "GEG", 'G', Blocks.gold_block, 'E', Items.enchanted_book, 'B', Blocks.bookshelf);
+        GameRegistry.addShapedRecipe(new ItemStack(ContentRegistry.unlocker, 1), "III","INI", "III", 'I', ExtraUtils.unstableIngot, 'N', Items.nether_star);
+
+        //  GameRegistry.addShapedRecipe(new ItemStack(ContentRegistry.unlocker, 1), "UUU", "UNU", "UUU", 'U', ItemList.essence, 'N', Items.nether_star);
     }
 
 

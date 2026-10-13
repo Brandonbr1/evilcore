@@ -15,7 +15,6 @@ public class Vortex {
 
     public static void ensureBlockExists(WorldServer world, int x, int y, int z) {
         if (world != null && !world.blockExists(x, y, z)) {
-            System.out.println("It did not exist");
             world.getChunkProvider()
                 .loadChunk(x >> 4, z >> 4);
         }

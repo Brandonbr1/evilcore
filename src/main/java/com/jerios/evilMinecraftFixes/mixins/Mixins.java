@@ -241,6 +241,27 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> ConfigASM.hardCreeper)
         .addCommonMixins("specialMobs.MixinEntity_SpecialCreeper")),
 
+    SPM_CREEPER1(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.SPM)
+        .setApplyIf(() -> ConfigASM.hardCreeper)
+        .addCommonMixins("specialMobs.MixinEntityDirtCreeper")),
+
+    SPM_CREEPER2(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.SPM)
+        .setApplyIf(() -> ConfigASM.hardCreeper)
+        .addCommonMixins("specialMobs.MixinEntityDrowningCreeper")),
+
+    SPM_CREEPER3(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.SPM)
+        .setApplyIf(() -> ConfigASM.hardCreeper)
+        .addCommonMixins("specialMobs.MixinEntityGravelCreeper")),
+
+
+    SPM_CREEPER4(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.SPM)
+        .setApplyIf(() -> ConfigASM.hardCreeper)
+        .addCommonMixins("specialMobs.MixinEntityLightningCreeper")),
+
     CLOUD_BOOTS(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.CQ)
         .setApplyIf(() -> ConfigASM.buffClouldBoots)
