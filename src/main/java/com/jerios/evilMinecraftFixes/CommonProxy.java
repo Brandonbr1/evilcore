@@ -2,6 +2,7 @@ package com.jerios.evilMinecraftFixes;
 
 import com.jerios.evilMinecraftFixes.content.ContentRegistry;
 import com.jerios.evilMinecraftFixes.content.tile.GuiRepairUnlocker;
+import com.jerios.evilMinecraftFixes.hostileWorlds.dim.TeleporterHW;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -10,8 +11,10 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 
 public class CommonProxy {
 
@@ -28,6 +31,14 @@ public class CommonProxy {
     public void postInit(FMLPostInitializationEvent event) {}
 
     // register server commands in this event handler (Remove if not needed)
-    public void serverStarting(FMLServerStartingEvent event) {}
+    public void serverStarting(FMLServerStartingEvent event) {
+        MinecraftServer server = event.getServer();
+        WorldServer worldServer = server.worldServerForDimension(ContentRegistry.HW_ID);
+        worldServer.customTeleporters.add(new TeleporterHW(worldServer));
+
+      //  MinecraftServer minecraftserver = MinecraftServer.getServer();
+
+    }
+
 
 }

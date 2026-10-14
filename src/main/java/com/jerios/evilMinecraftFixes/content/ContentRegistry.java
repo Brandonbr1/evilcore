@@ -1,15 +1,14 @@
 package com.jerios.evilMinecraftFixes.content;
 
-import chylex.hee.init.ItemList;
-import com.jerios.evilMinecraftFixes.cfg.Config;
+import com.jerios.evilMinecraftFixes.content.evilMinecraftMod.BlockMud;
+import com.jerios.evilMinecraftFixes.content.evilMinecraftMod.BlockQuicksand;
+import com.jerios.evilMinecraftFixes.content.evilMinecraftMod.spawnerNests.BlockSpiderNest;
 import com.jerios.evilMinecraftFixes.content.tile.BlockUnlockerAnvil;
 import com.jerios.evilMinecraftFixes.hostileWorlds.dim.BiomeHostileWorlds;
 import com.jerios.evilMinecraftFixes.hostileWorlds.dim.BlockHWPortal;
 import com.jerios.evilMinecraftFixes.hostileWorlds.dim.WorldProviderHW;
-import com.rwtema.extrautils.ExtraUtils;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Items;
@@ -17,7 +16,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.DimensionManager;
 
 public class ContentRegistry {
@@ -60,6 +58,11 @@ public class ContentRegistry {
     public static Block unlocker;
 
     public static Item baseBook;
+
+    public static Block blockQuicksand;
+    public static Block blockMud;
+
+    public static Block spiderNest;
 
 
 
@@ -179,13 +182,23 @@ public class ContentRegistry {
             reci(u9, u10);
 
             unlocker = new BlockUnlockerAnvil();
-            GameRegistry.registerBlock(unlocker, "Unlocker Anvil");
+            registerBlock(unlocker, "Unlocker Anvil");
 
             GameRegistry.addShapelessRecipe(new ItemStack(Items.nether_star), starFragment, starFragment, starFragment, starFragment);
 
       //  }
 
         hw();
+
+        blockQuicksand = new BlockQuicksand();
+        registerBlock(blockQuicksand, "Quicksand");
+
+        blockMud = new BlockMud();
+        registerBlock(blockMud, "Mud");
+
+        spiderNest = new BlockSpiderNest();
+        registerBlock(spiderNest, "Spider Nest");
+
 
     }
 
@@ -200,7 +213,11 @@ public class ContentRegistry {
 
 
         hwPortal= new BlockHWPortal().setCreativeTab(CreativeTabs.tabMaterials).setBlockName("hostileworldsPortalBlock");
-        GameRegistry.registerBlock(hwPortal, "HW PORTAL BLOCK");
+        registerBlock(hwPortal, "HW PORTAL BLOCK");
+    }
+
+    private static void registerBlock(Block block, String name) {
+        GameRegistry.registerBlock(block, name);
     }
 
     public static void reci(Item prevI, Item currI) {

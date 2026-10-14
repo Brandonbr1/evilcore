@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Random;
 
 public class TeleporterHW extends Teleporter {
+
     private final WorldServer worldServerInstance;
     /** A private Random() function in Teleporter */
     private final Random random;
@@ -36,6 +37,11 @@ public class TeleporterHW extends Teleporter {
         this.worldServerInstance = worldIn;
         this.random = new Random(worldIn.getSeed());
     }
+
+
+
+
+
 
     /**
      * Place an entity in a nearby portal, creating one if necessary.
@@ -118,12 +124,13 @@ public class TeleporterHW extends Teleporter {
 
                     for (int i2 = this.worldServerInstance.getActualHeight() - 1; i2 >= 0; --i2)
                     {
-                        Utils.ensureBlockExists(worldServerInstance,l3, i2, l1);
+                        Utils.ensureBlockExists(worldServerInstance, l3, i2, l1);
                         if (this.worldServerInstance.getBlock(l3, i2, l1) == ContentRegistry.hwPortal)
                         {
-                            Utils.ensureBlockExists(worldServerInstance,l3, i2 - 1, l1);
+                            Utils.ensureBlockExists(worldServerInstance, l3, i2 - 1, l1);
                             while (this.worldServerInstance.getBlock(l3, i2 - 1, l1) == ContentRegistry.hwPortal)
                             {
+                                Utils.ensureBlockExists(worldServerInstance, l3, i2 - 1, l1);
                                 --i2;
                             }
 
@@ -147,7 +154,7 @@ public class TeleporterHW extends Teleporter {
         {
             if (flag)
             {
-                this.destinationCoordinateCache.add(j1, new Teleporter.PortalPosition(i, j, k, this.worldServerInstance.getTotalWorldTime()));
+                this.destinationCoordinateCache.add(j1, new TeleporterHW.PortalPosition(i, j, k, this.worldServerInstance.getTotalWorldTime()));
                 this.destinationCoordinateKeys.add(Long.valueOf(j1));
             }
 
@@ -162,7 +169,7 @@ public class TeleporterHW extends Teleporter {
                 i4 = 2;
             }
 
-            Utils.ensureBlockExists(worldServerInstance, i +1, j, k);
+            Utils.ensureBlockExists(worldServerInstance, i + 1, j, k);
             if (this.worldServerInstance.getBlock(i + 1, j, k) == ContentRegistry.hwPortal)
             {
                 i4 = 0;
@@ -174,7 +181,7 @@ public class TeleporterHW extends Teleporter {
                 i4 = 3;
             }
 
-            Utils.ensureBlockExists(worldServerInstance, i, j, k + 1);
+            Utils.ensureBlockExists(worldServerInstance,i, j, k + 1);
             if (this.worldServerInstance.getBlock(i, j, k + 1) == ContentRegistry.hwPortal)
             {
                 i4 = 1;
@@ -189,13 +196,9 @@ public class TeleporterHW extends Teleporter {
                 int i3 = Direction.offsetZ[i4];
                 int j3 = Direction.offsetX[k2];
                 int k3 = Direction.offsetZ[k2];
-
-
-                Utils.ensureBlockExists(worldServerInstance, i + l2 + j3, j, k + i3 + k3);  Utils.ensureBlockExists(worldServerInstance, i + l2 + j3, j + 1, k + i3 + k3);
-
-                Utils.ensureBlockExists(worldServerInstance, i + l2, j, k + i3);  Utils.ensureBlockExists(worldServerInstance, i + l2, j + 1, k + i3);
-
+                Utils.ensureBlockExists(worldServerInstance,i + l2 + j3, j, k + i3 + k3);   Utils.ensureBlockExists(worldServerInstance,i + l2 + j3, j + 1, k + i3 + k3);
                 boolean flag1 = !this.worldServerInstance.isAirBlock(i + l2 + j3, j, k + i3 + k3) || !this.worldServerInstance.isAirBlock(i + l2 + j3, j + 1, k + i3 + k3);
+                Utils.ensureBlockExists(worldServerInstance,i + l2, j, k + i3);           Utils.ensureBlockExists(worldServerInstance,i + l2, j + 1, k + i3);
                 boolean flag2 = !this.worldServerInstance.isAirBlock(i + l2, j, k + i3) || !this.worldServerInstance.isAirBlock(i + l2, j + 1, k + i3);
 
                 if (flag1 && flag2)
@@ -210,11 +213,9 @@ public class TeleporterHW extends Teleporter {
                     d11 -= (double)j3;
                     int k1 = k - k3;
                     d7 -= (double)k3;
-                    Utils.ensureBlockExists(worldServerInstance, l3 + l2 + j3, j, k1 + i3 + k3);  Utils.ensureBlockExists(worldServerInstance, l3 + l2 + j3, j + 1, k1 + i3 + k3);
-
-                    Utils.ensureBlockExists(worldServerInstance, l3 + l2, j, k1 + i3);  Utils.ensureBlockExists(worldServerInstance, l3 + l2, j + 1, k1 + i3);
-
+                    Utils.ensureBlockExists(worldServerInstance,l3 + l2 + j3, j, k1 + i3 + k3);                        Utils.ensureBlockExists(worldServerInstance,l3 + l2 + j3, j + 1, k1 + i3 + k3);
                     flag1 = !this.worldServerInstance.isAirBlock(l3 + l2 + j3, j, k1 + i3 + k3) || !this.worldServerInstance.isAirBlock(l3 + l2 + j3, j + 1, k1 + i3 + k3);
+                    Utils.ensureBlockExists(worldServerInstance,l3 + l2, j, k1 + i3);                               Utils.ensureBlockExists(worldServerInstance,l3 + l2, j + 1, k1 + i3);
                     flag2 = !this.worldServerInstance.isAirBlock(l3 + l2, j, k1 + i3) || !this.worldServerInstance.isAirBlock(l3 + l2, j + 1, k1 + i3);
                 }
 
@@ -327,6 +328,7 @@ public class TeleporterHW extends Teleporter {
                         Utils.ensureBlockExists(worldServerInstance, i2, i3 - 1, k2);
                         while (i3 > 0 && this.worldServerInstance.isAirBlock(i2, i3 - 1, k2))
                         {
+                            Utils.ensureBlockExists(worldServerInstance, i2, i3 - 1, k2);
                             --i3;
                         }
 
@@ -352,7 +354,7 @@ public class TeleporterHW extends Teleporter {
                                         int j5 = k2 + (j4 - 1) * l3 - i4 * k3;
 
                                         Utils.ensureBlockExists(worldServerInstance, l4, i5, j5);
-                                         if (k4 < 0 && !this.worldServerInstance.getBlock(l4, i5, j5).getMaterial().isSolid() || k4 >= 0 && !this.worldServerInstance.isAirBlock(l4, i5, j5))
+                                        if (k4 < 0 && !this.worldServerInstance.getBlock(l4, i5, j5).getMaterial().isSolid() || k4 >= 0 && !this.worldServerInstance.isAirBlock(l4, i5, j5))
                                         {
                                             continue label274;
                                         }
@@ -391,11 +393,12 @@ public class TeleporterHW extends Teleporter {
                     for (i3 = this.worldServerInstance.getActualHeight() - 1; i3 >= 0; --i3)
                     {
                         Utils.ensureBlockExists(worldServerInstance, i2, i3, k2);
-                       if (this.worldServerInstance.isAirBlock(i2, i3, k2))
+                        if (this.worldServerInstance.isAirBlock(i2, i3, k2))
                         {
                             Utils.ensureBlockExists(worldServerInstance, i2, i3 - 1, k2);
-                          while (i3 > 0 && this.worldServerInstance.isAirBlock(i2, i3 - 1, k2))
+                            while (i3 > 0 && this.worldServerInstance.isAirBlock(i2, i3 - 1, k2))
                             {
+                                Utils.ensureBlockExists(worldServerInstance, i2, i3 - 1, k2);
                                 --i3;
                             }
 
@@ -412,8 +415,8 @@ public class TeleporterHW extends Teleporter {
                                         l4 = i3 + j4;
                                         i5 = k2 + (i4 - 1) * l3;
 
-                                        Utils.ensureBlockExists(worldServerInstance,k4, l4, i5);
-                                     if (j4 < 0 && !this.worldServerInstance.getBlock(k4, l4, i5).getMaterial().isSolid() || j4 >= 0 && !this.worldServerInstance.isAirBlock(k4, l4, i5))
+                                        Utils.ensureBlockExists(worldServerInstance, k4, l4, i5);
+                                        if (j4 < 0 && !this.worldServerInstance.getBlock(k4, l4, i5).getMaterial().isSolid() || j4 >= 0 && !this.worldServerInstance.isAirBlock(k4, l4, i5))
                                         {
                                             continue label222;
                                         }
@@ -476,7 +479,7 @@ public class TeleporterHW extends Teleporter {
                         i4 = j2 + k3;
                         j4 = k2 + (j3 - 1) * l2 - i3 * l5;
                         flag = k3 < 0;
-                        Utils.ensureBlockExists(worldServerInstance,l3, i4, j4);
+                        Utils.ensureBlockExists(worldServerInstance, l3, i4, j4);
                         this.worldServerInstance.setBlock(l3, i4, j4, flag ? Blocks.mossy_cobblestone : Blocks.air);
                     }
                 }
@@ -493,7 +496,7 @@ public class TeleporterHW extends Teleporter {
                     i4 = j2 + k3;
                     j4 = k2 + (j3 - 1) * l2;
                     flag = j3 == 0 || j3 == 3 || k3 == -1 || k3 == 3;
-                    Utils.ensureBlockExists(worldServerInstance,l3, i4, j4);
+                    Utils.ensureBlockExists(worldServerInstance, l3, i4, j4);
                     this.worldServerInstance.setBlock(l3, i4, j4, (Block)(flag ? Blocks.mossy_cobblestone : ContentRegistry.hwPortal), 0, 2);
                 }
             }
@@ -505,7 +508,7 @@ public class TeleporterHW extends Teleporter {
                     l3 = k5 + (j3 - 1) * l5;
                     i4 = j2 + k3;
                     j4 = k2 + (j3 - 1) * l2;
-                    Utils.ensureBlockExists(worldServerInstance,l3, i4, j4);
+                    Utils.ensureBlockExists(worldServerInstance, l3, i4, j4);
                     this.worldServerInstance.notifyBlocksOfNeighborChange(l3, i4, j4, this.worldServerInstance.getBlock(l3, i4, j4));
                 }
             }
@@ -528,7 +531,7 @@ public class TeleporterHW extends Teleporter {
             while (iterator.hasNext())
             {
                 Long olong = (Long)iterator.next();
-                Teleporter.PortalPosition portalposition = (Teleporter.PortalPosition)this.destinationCoordinateCache.getValueByKey(olong.longValue());
+                TeleporterHW.PortalPosition portalposition = (TeleporterHW.PortalPosition)this.destinationCoordinateCache.getValueByKey(olong.longValue());
 
                 if (portalposition == null || portalposition.lastUpdateTime < j)
                 {
@@ -551,4 +554,14 @@ public class TeleporterHW extends Teleporter {
             this.lastUpdateTime = p_i1962_5_;
         }
     }
+
+
+
+
+
+
+
+
+
+
 }

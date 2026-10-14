@@ -22,16 +22,35 @@ public class ChunkProviderHW implements IChunkProvider {
     private Random random;
     private final Block[] cachedBlockIDs = new Block[256];
     private final byte[] cachedBlockMetadata = new byte[256];
+
+    private WorldGenLakes airWorldCorruption;
+
     public ChunkProviderHW(World p_i2004_1_, long p_i2004_2_)
     {
         this.worldObj = p_i2004_1_;
-        this.random = new Random(p_i2004_2_);
+        this.random = new Random(p_i2004_2_ >> System.currentTimeMillis());
 
-
+        airWorldCorruption = new WorldGenLakes(Blocks.air);
             for (int j = 0; j < 8; ++j)
             {
-                this.cachedBlockIDs[j] = HostileWorlds.blockBloodyCobblestone;
-                this.cachedBlockMetadata[j] = (byte)0;
+
+                if (j <= 3)  {
+                    this.cachedBlockIDs[j] = HostileWorlds.blockBloodyCobblestone;
+                    this.cachedBlockMetadata[j] = (byte) 0;
+                } else {
+                    this.cachedBlockIDs[j] = Blocks.mossy_cobblestone;
+                    this.cachedBlockMetadata[j] = (byte) 0;
+                }
+
+         /**       if (j < 6 && j > 3)
+                {
+                    if (random.nextInt(4) > 2)
+                    {
+                        this.cachedBlockIDs[j] = Blocks.air;
+                        this.cachedBlockMetadata[j] = (byte) 0;
+                    }
+                }
+                **/
             }
 
     }
@@ -72,8 +91,25 @@ public class ChunkProviderHW implements IChunkProvider {
                 {
                     for (int j1 = 0; j1 < 16; ++j1)
                     {
-                        extendedblockstorage.func_150818_a(i1, k & 15, j1, block);
-                        extendedblockstorage.setExtBlockMetadata(i1, k & 15, j1, this.cachedBlockMetadata[k]);
+
+                        if (random.nextInt(25) == 0)
+                        {
+                            int a = k & 15;
+                            if (a < 5 && a > 2)
+                            {
+                                block = Blocks.air;
+                            }
+
+                            if (random.nextInt(8) == 0)
+                            {
+                                block = Blocks.lava;
+                            }
+
+                        }
+
+                            extendedblockstorage.func_150818_a(i1, k & 15, j1, block);
+                            extendedblockstorage.setExtBlockMetadata(i1, k & 15, j1, this.cachedBlockMetadata[k]);
+
                     }
                 }
             }
@@ -114,6 +150,22 @@ public class ChunkProviderHW implements IChunkProvider {
         this.random.setSeed((long)p_73153_2_ * i1 + (long)p_73153_3_ * j1 ^ this.worldObj.getSeed());
 
         biomegenbase.decorate(this.worldObj, this.random, k, l);
+
+        int l1;
+        int i2;
+        int j2;
+
+        if (this.random.nextInt(8) == 0)
+        {
+            l1 = k + this.random.nextInt(16) + 8;
+            i2 = 4;
+            j2 = l + this.random.nextInt(16) + 8;
+
+          //  if (this.random.nextInt(4) == 0)
+          //  {
+                this.airWorldCorruption.generate(this.worldObj, this.random, l1, i2, j2);
+          //  }
+        }
 
     }
 

@@ -36,7 +36,7 @@ public class MixinThirstLogic {
 
     @Unique public PoisonLogic evil$lastpoisonLogic;
 
-
+    //TODO: THIS HAS NPE
    // improve network load by only sending a packet when one of the data on the server has changed.
     @WrapWithCondition(method = "onTick",at= @At(value = "INVOKE", target = "Lcpw/mods/fml/common/network/simpleimpl/SimpleNetworkWrapper;sendTo(Lcpw/mods/fml/common/network/simpleimpl/IMessage;Lnet/minecraft/entity/player/EntityPlayerMP;)V"), remap = false)
     private boolean evil$booleanCheck(SimpleNetworkWrapper instance, IMessage message, EntityPlayerMP player) {

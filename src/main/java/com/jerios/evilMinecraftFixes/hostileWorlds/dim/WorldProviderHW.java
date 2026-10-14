@@ -51,13 +51,18 @@ public class WorldProviderHW extends WorldProvider {
         return new ChunkProviderHW(this.worldObj, this.worldObj.getSeed());
     }
 
+    @SideOnly(Side.CLIENT)
+    public float getCloudHeight()
+    {
+        return 8.0F;
+    }
+
     @Override
     @SideOnly(Side.CLIENT)
     public boolean isSkyColored()
     {
-        return false;
+        return true;
     }
-
 
     /**
      * Gets the hard-coded portal location to use when entering this dimension.
@@ -83,6 +88,13 @@ public class WorldProviderHW extends WorldProvider {
         return this.worldObj.getTopBlock(p_76566_1_, p_76566_2_).getMaterial().blocksMovement();
     }
 
+    @SideOnly(Side.CLIENT)
+    public double getVoidFogYFactor()
+    {
+        return 1.5D;
+    }
+
+
     public float calculateCelestialAngle(long p_76563_1_, float p_76563_3_)
     {
         return 0.5F;
@@ -91,7 +103,13 @@ public class WorldProviderHW extends WorldProvider {
     @SideOnly(Side.CLIENT)
     public boolean doesXZShowFog(int p_76568_1_, int p_76568_2_)
     {
-        return false;
+        return true;
+    }
+
+    @Override
+    public double getMovementFactor()
+    {
+        return 1.0f;
     }
 
     public String getDimensionName()

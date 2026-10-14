@@ -15,6 +15,7 @@ import com.jerios.evilMinecraftFixes.evilOres.OresAttackEvent;
 import com.jerios.evilMinecraftFixes.evilOres.OresInteg;
 import com.jerios.evilMinecraftFixes.evilOres.world.EvilGenFakeOres;
 import com.jerios.evilMinecraftFixes.evilerRecipiesManager.EvilerRecipiesManager;
+import com.jerios.evilMinecraftFixes.extraUtilsEvents.ExtraUtilitiesPowerEvent;
 import com.jerios.evilMinecraftFixes.hee.EntityCrystalBomb;
 import com.jerios.evilMinecraftFixes.hostileWorlds.HWSpawns;
 import com.jerios.evilMinecraftFixes.infernalMobs.CreeperMinionNiceUnableToBecomeRare;
@@ -113,6 +114,8 @@ public class Evil {
             MinecraftForge.EVENT_BUS.register(new OresAttackEvent());
         }
 
+        MinecraftForge.EVENT_BUS.register(new ExtraUtilitiesPowerEvent());
+
         if (Config.athena) {
             MinecraftForge.EVENT_BUS.register(new AthenaEvents());
         }
@@ -186,6 +189,7 @@ public class Evil {
         {
             EvilerRecipiesManager.add();
         }
+
 
     //    if (Loader.isModLoaded("ParticleMan")) {
      //       PGI.re();

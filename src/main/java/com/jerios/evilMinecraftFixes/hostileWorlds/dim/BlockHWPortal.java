@@ -7,61 +7,21 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockPortal;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemMonsterPlacer;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Direction;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 public class BlockHWPortal extends BlockPortal {
 
-    public void updateTick(World worldIn, int x, int y, int z, Random random)
-    {
-        super.updateTick(worldIn, x, y, z, random);
-
-        if (worldIn.provider.isSurfaceWorld() && worldIn.getGameRules().getGameRuleBooleanValue("doMobSpawning") && random.nextInt(2000) < worldIn.difficultySetting.getDifficultyId())
-        {
-            int l;
-
-            for (l = y; !World.doesBlockHaveSolidTopSurface(worldIn, x, l, z) && l > 0; --l)
-            {
-                ;
-            }
-
-            if (l > 0 && !worldIn.getBlock(x, l + 1, z).isNormalCube())
-            {
-                Entity entity = ItemMonsterPlacer.spawnCreature(worldIn, 57, (double)x + 0.5D, (double)l + 1.1D, (double)z + 0.5D);
-
-                if (entity != null)
-                {
-                    entity.timeUntilPortal = entity.getPortalCooldown();
-                }
-            }
-        }
-    }
-
-
-    /**
-     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-     * cleared to be reused)
-     */
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World worldIn, int x, int y, int z)
-    {
-        return null;
-    }
 
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess worldIn, int x, int y, int z)
     {
         int l = func_149999_b(worldIn.getBlockMetadata(x, y, z));
@@ -99,31 +59,11 @@ public class BlockHWPortal extends BlockPortal {
         this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f1, 0.5F + f, 1.0F, 0.5F + f1);
     }
 
-
-    public void onNeighborBlockChange(World worldIn, int x, int y, int z, Block neighbor)
-    {
-        int l = func_149999_b(worldIn.getBlockMetadata(x, y, z));
-        BlockHWPortal.Size size = new BlockHWPortal.Size(worldIn, x, y, z, 1);
-        BlockHWPortal.Size size1 = new BlockHWPortal.Size(worldIn, x, y, z, 2);
-
-        if (l == 1 && (!size.func_150860_b() || size.field_150864_e < size.field_150868_h * size.field_150862_g))
-        {
-            worldIn.setBlock(x, y, z, Blocks.air);
-        }
-        else if (l == 2 && (!size1.func_150860_b() || size1.field_150864_e < size1.field_150868_h * size1.field_150862_g))
-        {
-            worldIn.setBlock(x, y, z, Blocks.air);
-        }
-        else if (l == 0 && !size.func_150860_b() && !size1.func_150860_b())
-        {
-            worldIn.setBlock(x, y, z, Blocks.air);
-        }
-    }
-
     /**
      * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
      * coordinates.  Args: blockAccess, x, y, z, side
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockAccess worldIn, int x, int y, int z, int side)
     {
@@ -158,67 +98,55 @@ public class BlockHWPortal extends BlockPortal {
         return flag4 && side == 4 ? true : (flag4 && side == 5 ? true : (flag5 && side == 2 ? true : flag5 && side == 3));
     }
 
-    /**
-     * Returns which pass should this block be rendered on. 0 for solids and 1 for alpha
-     */
-    @SideOnly(Side.CLIENT)
-    public int getRenderBlockPass()
-    {
-        return 1;
-    }
 
-    /**
-     * A randomly called display update to be able to add particles or other items for display
-     */
-    @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World worldIn, int x, int y, int z, Random random)
+    @Override
+    public boolean func_150000_e(World p_150000_1_, int p_150000_2_, int p_150000_3_, int p_150000_4_)
     {
-        if (random.nextInt(100) == 0)
+        BlockHWPortal.Size size = new BlockHWPortal.Size(p_150000_1_, p_150000_2_, p_150000_3_, p_150000_4_, 1);
+        BlockHWPortal.Size size1 = new BlockHWPortal.Size(p_150000_1_, p_150000_2_, p_150000_3_, p_150000_4_, 2);
+
+        if (size.func_150860_b() && size.field_150864_e == 0)
         {
-            worldIn.playSound((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, "portal.portal", 0.5F, random.nextFloat() * 0.4F + 0.8F, false);
+            size.func_150859_c();
+            return true;
         }
-
-        for (int l = 0; l < 4; ++l)
+        else if (size1.func_150860_b() && size1.field_150864_e == 0)
         {
-            double d0 = (double)((float)x + random.nextFloat());
-            double d1 = (double)((float)y + random.nextFloat());
-            double d2 = (double)((float)z + random.nextFloat());
-            double d3 = 0.0D;
-            double d4 = 0.0D;
-            double d5 = 0.0D;
-            int i1 = random.nextInt(2) * 2 - 1;
-            d3 = ((double)random.nextFloat() - 0.5D) * 0.5D;
-            d4 = ((double)random.nextFloat() - 0.5D) * 0.5D;
-            d5 = ((double)random.nextFloat() - 0.5D) * 0.5D;
-
-            if (worldIn.getBlock(x - 1, y, z) != this && worldIn.getBlock(x + 1, y, z) != this)
-            {
-                d0 = (double)x + 0.5D + 0.25D * (double)i1;
-                d3 = (double)(random.nextFloat() * 2.0F * (float)i1);
-            }
-            else
-            {
-                d2 = (double)z + 0.5D + 0.25D * (double)i1;
-                d5 = (double)(random.nextFloat() * 2.0F * (float)i1);
-            }
-
-            worldIn.spawnParticle("portal", d0, d1, d2, d3, d4, d5);
+            size1.func_150859_c();
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
-    public static int func_149999_b(int p_149999_0_)
+    /**
+     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
+     * their own) Args: x, y, z, neighbor Block
+     */
+    @Override
+    public void onNeighborBlockChange(World worldIn, int x, int y, int z, Block neighbor)
     {
-        return p_149999_0_ & 3;
+        int l = func_149999_b(worldIn.getBlockMetadata(x, y, z));
+        BlockHWPortal.Size size = new BlockHWPortal.Size(worldIn, x, y, z, 1);
+        BlockHWPortal.Size size1 = new BlockHWPortal.Size(worldIn, x, y, z, 2);
+
+        if (l == 1 && (!size.func_150860_b() || size.field_150864_e < size.field_150868_h * size.field_150862_g))
+        {
+            worldIn.setBlock(x, y, z, Blocks.air);
+        }
+        else if (l == 2 && (!size1.func_150860_b() || size1.field_150864_e < size1.field_150868_h * size1.field_150862_g))
+        {
+            worldIn.setBlock(x, y, z, Blocks.air);
+        }
+        else if (l == 0 && !size.func_150860_b() && !size1.func_150860_b())
+        {
+            worldIn.setBlock(x, y, z, Blocks.air);
+        }
     }
 
-    /**
-     * Gets an item for the block being called on. Args: world, x, y, z
-     */
-    @SideOnly(Side.CLIENT)
-    public Item getItem(World worldIn, int x, int y, int z)
-    {
-        return Item.getItemById(0);
-    }
+
 
     /**
      * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
@@ -266,26 +194,6 @@ public class BlockHWPortal extends BlockPortal {
         }
     }
 
-    public boolean func_150000_e(World p_150000_1_, int p_150000_2_, int p_150000_3_, int p_150000_4_) {
-        BlockHWPortal.Size size = new BlockHWPortal.Size(p_150000_1_, p_150000_2_, p_150000_3_, p_150000_4_, 1);
-        BlockHWPortal.Size size1 = new BlockHWPortal.Size(p_150000_1_, p_150000_2_, p_150000_3_, p_150000_4_, 2);
-
-        if (size.func_150860_b() && size.field_150864_e == 0) {
-            size.func_150859_c();
-            return true;
-        } else if (size1.func_150860_b() && size1.field_150864_e == 0) {
-            size1.func_150859_c();
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-
-
-
-
 
     public static class Size
     {
@@ -297,7 +205,6 @@ public class BlockHWPortal extends BlockPortal {
         private ChunkCoordinates field_150861_f;
         private int field_150862_g;
         private int field_150868_h;
-        private static final String __OBFID = "CL_00000285";
 
         public Size(World p_i45415_1_, int p_i45415_2_, int p_i45415_3_, int p_i45415_4_, int p_i45415_5_)
         {
@@ -382,7 +289,7 @@ public class BlockHWPortal extends BlockPortal {
                         break label56;
                     }
 
-                    if (block == Blocks.mossy_cobblestone)
+                    if (block == ContentRegistry.hwPortal)
                     {
                         ++this.field_150864_e;
                     }
@@ -459,6 +366,10 @@ public class BlockHWPortal extends BlockPortal {
             }
         }
     }
+
+
+
+
 
 
 
