@@ -1,12 +1,15 @@
 package com.jerios.evilMinecraftFixes.content;
 
-import com.jerios.evilMinecraftFixes.content.evilMinecraftMod.BlockMud;
+import com.jerios.evilMinecraftFixes.InfernosContent;
 import com.jerios.evilMinecraftFixes.content.evilMinecraftMod.BlockQuicksand;
 import com.jerios.evilMinecraftFixes.content.evilMinecraftMod.spawnerNests.BlockSpiderNest;
 import com.jerios.evilMinecraftFixes.content.tile.BlockUnlockerAnvil;
+import com.jerios.evilMinecraftFixes.content.tile.charger.BlockRingCharger;
+import com.jerios.evilMinecraftFixes.content.tile.charger.TileEntityCharger;
 import com.jerios.evilMinecraftFixes.hostileWorlds.dim.BiomeHostileWorlds;
 import com.jerios.evilMinecraftFixes.hostileWorlds.dim.BlockHWPortal;
 import com.jerios.evilMinecraftFixes.hostileWorlds.dim.WorldProviderHW;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -60,11 +63,12 @@ public class ContentRegistry {
     public static Item baseBook;
 
     public static Block blockQuicksand;
-    public static Block blockMud;
 
     public static Block spiderNest;
 
+    public static Block charger;
 
+    public static Item goldenMilk;
 
     public static void register() {
      //   if (Config.content) {
@@ -184,20 +188,27 @@ public class ContentRegistry {
             unlocker = new BlockUnlockerAnvil();
             registerBlock(unlocker, "Unlocker Anvil");
 
+        charger = new BlockRingCharger();
+        registerBlock(charger, "Ring charger");
+
             GameRegistry.addShapelessRecipe(new ItemStack(Items.nether_star), starFragment, starFragment, starFragment, starFragment);
 
       //  }
 
         hw();
 
+        if (Loader.isModLoaded("dextersnether")) {
+            InfernosContent.addContent();
+        }
+
         blockQuicksand = new BlockQuicksand();
         registerBlock(blockQuicksand, "Quicksand");
 
-        blockMud = new BlockMud();
-        registerBlock(blockMud, "Mud");
 
         spiderNest = new BlockSpiderNest();
         registerBlock(spiderNest, "Spider Nest");
+
+        GameRegistry.registerTileEntity(TileEntityCharger.class, "EvilCharger");
 
 
     }
@@ -216,7 +227,7 @@ public class ContentRegistry {
         registerBlock(hwPortal, "HW PORTAL BLOCK");
     }
 
-    private static void registerBlock(Block block, String name) {
+    public static void registerBlock(Block block, String name) {
         GameRegistry.registerBlock(block, name);
     }
 
@@ -224,7 +235,7 @@ public class ContentRegistry {
         GameRegistry.addShapedRecipe(new ItemStack(currI), new Object[]{"OOO", "OOO", "OOO", 'O', prevI});
     }
 
-    private static void registerItm(Item i , String s) {
+    public static void registerItm(Item i , String s) {
         GameRegistry.registerItem(i, s);
     }
 

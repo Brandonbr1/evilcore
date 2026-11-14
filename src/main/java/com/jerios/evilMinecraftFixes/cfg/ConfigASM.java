@@ -19,6 +19,10 @@ public class ConfigASM {
     @Config.DefaultBoolean(true)
     public static boolean math;
 
+    @Config.Comment("Faster Fire spreading?")
+    @Config.DefaultBoolean(true)
+    public static boolean betaFireSpread;
+
     @Config.Comment("Make Jean Harder?")
     @Config.DefaultBoolean(true)
     public static boolean jeanHarder;
@@ -31,6 +35,10 @@ public class ConfigASM {
     @Config.DefaultBoolean(true)
     public static boolean hardCreeper ;
 
+    @Config.Comment("Fix Better Jungle Bugs?")
+    @Config.DefaultBoolean(true)
+    public static boolean betterJungleBugFix ;
+
     @Config.Comment("Harder Ghasts?")
     @Config.DefaultBoolean(true)
     public static boolean hardGhast ;
@@ -38,6 +46,10 @@ public class ConfigASM {
     @Config.Comment("Harder Skeletons?")
     @Config.DefaultBoolean(true)
     public static boolean hardSkele ;
+
+    @Config.Comment("Add Player Races?")
+    @Config.DefaultBoolean(true)
+    public static boolean playerRaces ;
 
     @Config.Comment("Fix Broken Ore Gen")
     @Config.DefaultBoolean(true)
@@ -116,6 +128,10 @@ public class ConfigASM {
     @Config.Comment("Add New Ore Boss phase")
     @Config.DefaultBoolean(true)
     public static boolean newOreBossPhase ;
+
+    @Config.Comment("Make dangerous plant killable")
+    @Config.DefaultBoolean(true)
+    public static boolean dangerousPlantFix ;
 
     @Config.Comment("Remove Global Entities from Fake Ores")
     @Config.DefaultBoolean(true)

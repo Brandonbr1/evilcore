@@ -22,10 +22,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 // replaced attan2 math with FastTringo
 @Mixin(EntityWither.class)
 public class MixinBedrockWither extends EntityMob {
-    World world;
     public MixinBedrockWither(World p_i1738_1_) {
         super(p_i1738_1_);
-        this.world = p_i1738_1_;
         // func_82212_n() // whatever number it needs to be
     }
 
@@ -36,8 +34,8 @@ public class MixinBedrockWither extends EntityMob {
     @Overwrite
     public int getTotalArmorValue()
     {
-        if (world != null) {
-            return EvilData.get(world).isAgressiveStage3() ? 20 : 4 + EvilData.get(world).athenaDeath;
+        if (worldObj != null) {
+            return EvilData.get(worldObj).isAgressiveStage3() ? 14 : 4 + EvilData.get(worldObj).athenaDeath;
         }
         return 4;
 
@@ -204,6 +202,18 @@ public class MixinBedrockWither extends EntityMob {
     @Shadow
     public boolean isArmored()
     {
+        if (worldObj != null) {
+            if (EvilData.get(worldObj).isAgressiveStage1()) {
+                return this.getHealth() <= this.getMaxHealth() / 1.8F;
+            }
+            else if (EvilData.get(worldObj).isAgressiveStage2()) {
+                return this.getHealth() <= this.getMaxHealth() / 1.5F;
+            }
+            else if (EvilData.get(worldObj).isAgressiveStage3()) {
+                return this.getHealth() <= this.getMaxHealth() / 1.3F;
+            }
+        }
+
         return this.getHealth() <= this.getMaxHealth() / 2.0F;
     }
 
@@ -274,14 +284,14 @@ public class MixinBedrockWither extends EntityMob {
             if (entity != null)
             {
                 // rise up, hardly in player hit range if in desperate mode
-                if ( /**this.getHealth() <= 35 && this.posY < entity.posY + 2D || **/this.posY < entity.posY + 1.0D || !this.isArmored() && this.posY < entity.posY + 14.0D)
+                if (this.getHealth() <= 35 && this.posY < entity.posY + 2D || this.posY < entity.posY + 1.0D || !this.isArmored() && this.posY < entity.posY + 14.0D)
                 {
                     if (this.motionY < 0.0D)
                     {
                         this.motionY = 0.0D;
                     }
 
-                    this.motionY += (0.6D - this.motionY) * 0.6000000238418579D;
+                    this.motionY += (0.5D - this.motionY) * 0.6000000238418579D;
                 }
 
                 double d0 = entity.posX - this.posX;

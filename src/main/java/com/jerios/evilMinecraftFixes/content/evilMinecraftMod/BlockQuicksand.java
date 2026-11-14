@@ -19,19 +19,13 @@ public class BlockQuicksand extends BlockBase {
 
 
     public BlockQuicksand() {
-        super(Material.sand, "quickSand", "evilmc:quicksand", 1, CreativeTabs.tabDecorations);
+        super(Material.sand, "quickSand", "betterjungles:quicksand", 1, CreativeTabs.tabDecorations);
     }
 
     @Override
     public void onEntityCollidedWithBlock(World worldIn, int x, int y, int z, Entity entityIn) {
         super.onEntityCollidedWithBlock(worldIn, x, y, z, entityIn);
-        if (entityIn instanceof EntityLivingBase) {
-            EntityLivingBase elb = (EntityLivingBase) entityIn;
-            elb.motionY -= 0.7;
-            if (!worldIn.isRemote) {
-                elb.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 120, 1));
-            }
-        }
+        entityIn.setInWeb();
     }
 
 
@@ -47,27 +41,4 @@ public class BlockQuicksand extends BlockBase {
         return null;
     }
 
-    @Override
-    public int getRenderType()
-    {
-        return 1;
-    }
-
-    @Override
-    public boolean renderAsNormalBlock()
-    {
-        return false;
-    }
-
-    @Override
-    public Item getItemDropped(int meta, Random random, int fortune)
-    {
-        return Items.string;
-    }
-
-    @Override
-    protected boolean canSilkHarvest()
-    {
-        return true;
-    }
 }

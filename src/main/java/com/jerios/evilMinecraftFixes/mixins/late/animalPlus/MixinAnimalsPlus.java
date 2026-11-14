@@ -1,6 +1,7 @@
 package com.jerios.evilMinecraftFixes.mixins.late.animalPlus;
 
 import clickme.animals.AnimalsPlus;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.eventhandler.EventBus;
 import net.minecraft.entity.player.EntityPlayer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,4 +33,5 @@ public class MixinAnimalsPlus {
     @Overwrite
     private void checkForPromotions() {
     }
+
 }

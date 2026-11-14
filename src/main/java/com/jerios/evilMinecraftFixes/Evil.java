@@ -4,6 +4,7 @@ import com.jerios.evilMinecraftFixes.CQAdditions.CQInteg;
 import com.jerios.evilMinecraftFixes.athena.AthenaEvents;
 import com.jerios.evilMinecraftFixes.athena.EntityWitherDeathManager;
 import com.jerios.evilMinecraftFixes.athena.WitherProps;
+import com.jerios.evilMinecraftFixes.biomeReplace.JungleReplacer;
 import com.jerios.evilMinecraftFixes.cfg.ConfigASM;
 import com.jerios.evilMinecraftFixes.client.EvilLockBrightness;
 import com.jerios.evilMinecraftFixes.content.ContentRegistry;
@@ -25,17 +26,20 @@ import com.jerios.evilMinecraftFixes.ironBackPacks.IronBackPacksLimitAmmountEven
 import com.jerios.evilMinecraftFixes.jean.JeanHarder;
 import com.jerios.evilMinecraftFixes.mixins.early.IEntityPigmenAccessor;
 import com.jerios.evilMinecraftFixes.packet.NetworkHandler;
-import com.jerios.evilMinecraftFixes.pg.PGI;
+import com.jerios.evilMinecraftFixes.race.RaceProps;
 import com.jerios.evilMinecraftFixes.savedata.EvilData;
 import com.jerios.evilMinecraftFixes.zombieAwareness.WorldRefEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockFire;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -60,7 +64,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-import java.io.File;
+import java.util.Map;
 
 
 @Mod(modid = Evil.MODID, version = "1.0", name = "evilMinecraftFixes", acceptedMinecraftVersions = "[1.7.10]")
@@ -103,6 +107,8 @@ public class Evil {
             MinecraftForge.EVENT_BUS.register(new JeanHarder());
         }
 
+        new RaceProps();
+
         MinecraftForge.EVENT_BUS.register(this);
 
         if (Loader.isModLoaded("ZAMod")) {
@@ -136,6 +142,9 @@ public class Evil {
         MinecraftForge.EVENT_BUS.register(new DynamicDifficultyEvent());
         FMLCommonHandler.instance().bus().register(new DynamicDifficultyEvent());
 
+        if (Loader.isModLoaded("BetterJungles")) {
+            JungleReplacer.replaceBiome();
+        }
 
         if (Loader.isModLoaded("thirstmod")) {
             MinecraftForge.EVENT_BUS.register(new ThirstEvents());
@@ -164,6 +173,7 @@ public class Evil {
         if (Loader.isModLoaded("fakeores")) {
             GameRegistry.registerWorldGenerator(new EvilGenFakeOres(), 1);
         }
+
     }
 
 

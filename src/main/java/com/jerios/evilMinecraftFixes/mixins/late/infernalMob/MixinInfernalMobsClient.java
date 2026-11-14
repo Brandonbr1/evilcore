@@ -95,7 +95,9 @@ public class MixinInfernalMobsClient {
      */
     @Overwrite(remap = false)
     @SubscribeEvent
-    public void onTick(TickEvent.RenderTickEvent tick) {
+    public void onTick(TickEvent.RenderTickEvent tick)
+    {
+
     }
 
     @Shadow(remap = false)

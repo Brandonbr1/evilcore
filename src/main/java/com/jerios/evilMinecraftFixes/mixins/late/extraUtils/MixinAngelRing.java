@@ -20,15 +20,20 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.List;
 
 @Mixin(ItemAngelRing.class)
 public class MixinAngelRing extends Item implements IAngelRing {
 
-
+    int power = 0;
     int ringTimer = 0;
     boolean cachedHasKeyRingPower = false;
     boolean cachedHasTimerKey= false;
+    int damage = 0;
 
     /**
      * @author Jerios
@@ -39,19 +44,19 @@ public class MixinAngelRing extends Item implements IAngelRing {
         super.onUpdate(itemstack, world, entity, slot, par5);
         if (!world.isRemote) {
             if (entity instanceof EntityPlayerMP) {
-                ringTimer++;
+               // ringTimer++;
+
+                damage = itemstack.getItemDamage();
+                addRingTimer(itemstack, 1);
                 NBTTagCompound nbt = XUHelper.getPersistantNBT(entity);
                 if (getPower(itemstack) > 0) {
                     nbt.setByte("XU|Flying", (byte) 20);
                 } else {
                     nbt.setByte("XU|Flying", (byte) 1);
                 }
-                // SEEMS LIKE THIS SHOULD NOT BE HERE
-             //   addPlayer((EntityPlayerMP)entity, itemstack.getItemDamage(), par5);
 
+               addPlayer((EntityPlayerMP)entity, itemstack.getItemDamage(), par5);
 
-              //  System.out.println("RING TIMER  "+ringTimer);
-              //  System.out.println("POWER  "+getPower(itemstack));
 
                 if (ringTimer > 320)
                 {
@@ -61,7 +66,7 @@ public class MixinAngelRing extends Item implements IAngelRing {
                         subPower(itemstack, 25);
                      //   System.out.println("Power Subtracted 2");
                     }
-                    ringTimer = 0;
+                    setRingTimer(itemstack, 1);
                 }
 
 
@@ -75,6 +80,15 @@ public class MixinAngelRing extends Item implements IAngelRing {
             }
         }
     }
+
+    @Inject(method = "addInformation",at=@At("TAIL"))
+    private void evil$addPowerInfo(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4, CallbackInfo ci) {
+        if (par1ItemStack.getItemDamage() == damage) {
+            par3List.add("Ring Timer " + ringTimer);
+            par3List.add("Power " + power);
+        }
+    }
+
 
     @Shadow(remap = false)
     public static void addPlayer(EntityPlayer player, int i, boolean override) {
@@ -94,7 +108,7 @@ public class MixinAngelRing extends Item implements IAngelRing {
             cachedHasKeyRingPower = true;
         }
 
-        return nbt.getInteger("RingPower");
+        return power = nbt.getInteger("RingPower");
     }
 
     public int getRingTimer(ItemStack stack) {
@@ -114,6 +128,14 @@ public class MixinAngelRing extends Item implements IAngelRing {
         NBTTagCompound nbt = getNBTComp(stack);
 
         nbt.setInteger("RingTimer", getRingTimer(stack) + toAdd );
+        stack.setTagCompound(nbt);
+    }
+
+    public void setRingTimer(ItemStack stack, int ringTimer) {
+        NBTTagCompound nbt = getNBTComp(stack);
+
+        nbt.setInteger("RingTimer", ringTimer);
+        stack.setTagCompound(nbt);
     }
 
     public NBTTagCompound getNBTComp(ItemStack stack) {

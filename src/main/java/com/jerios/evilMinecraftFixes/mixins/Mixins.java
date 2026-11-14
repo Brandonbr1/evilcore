@@ -12,6 +12,10 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> ConfigASM.math)
         .addCommonMixins("math.MixinEntityLookHelper")),
 
+    BETA_FIRE(new MixinBuilder().setPhase(Phase.EARLY)
+        .setApplyIf(() -> ConfigASM.betaFireSpread)
+        .addCommonMixins("hard.MixinBlockFire")),
+
     DRAGON(new MixinBuilder().setPhase(Phase.EARLY)
         .setApplyIf(() -> ConfigASM.jeanHarder)
         .addCommonMixins("MixinDragon")),
@@ -117,6 +121,10 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> ConfigASM.hardSkele)
         .addClientMixins("hard.MixinHarderSkeletons")),
 
+    REACE(new MixinBuilder().setPhase(Phase.EARLY)
+        .setApplyIf(() -> ConfigASM.playerRaces)
+        .addClientMixins("race.MixinIronGolem")),
+
 
 
     SRCINVASION(new MixinBuilder().setPhase(Phase.LATE)
@@ -170,6 +178,11 @@ public enum Mixins implements IMixins {
         .addRequiredMod(TargetMods.ORE)
         .setApplyIf(() -> ConfigASM.newOreBossPhase)
         .addCommonMixins("fakeOres.MixinOreBoss")),
+
+    PLANT(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.ORE)
+        .setApplyIf(() -> ConfigASM.dangerousPlantFix)
+        .addCommonMixins("fakeOres.MixinDangerousPlant")),
 
     REMOVE_GLOBAL_REGISTRY_FAKE_ORES(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.ORE)
@@ -261,6 +274,16 @@ public enum Mixins implements IMixins {
         .addRequiredMod(TargetMods.SPM)
         .setApplyIf(() -> ConfigASM.hardCreeper)
         .addCommonMixins("specialMobs.MixinEntityLightningCreeper")),
+
+    BETTER_JUNGLES_BIOME(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.BETTERJUNGLES)
+        .setApplyIf(() -> ConfigASM.betterJungleBugFix)
+        .addCommonMixins("jungles.MixinBJBiome")),
+
+    BETTER_JUNGLES_CONFIG(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.BETTERJUNGLES)
+        .setApplyIf(() -> ConfigASM.betterJungleBugFix)
+        .addCommonMixins("jungles.MixinBetterJungles")),
 
     CLOUD_BOOTS(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.CQ)

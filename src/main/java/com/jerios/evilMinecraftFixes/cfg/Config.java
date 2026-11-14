@@ -57,7 +57,7 @@ public class Config {
         naturalRegeneration = configuration.getBoolean("Natural regeneration", "Player", true, "Should natural Regeneration be forcefully turned off?");
 
         healTimer = configuration
-            .getInt("Heal Timer", "Wither", 120, 0, 100000, "");
+            .getInt("Heal Timer", "Wither", 320, 0, 100000, "");
 
         spawnLadderZombie = configuration.getBoolean("Spawn Ladder Zombie", "HW", true, "Should the Ladder Zombie Spawn in?");
 

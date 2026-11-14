@@ -7,9 +7,12 @@ import com.jerios.evilMinecraftFixes.evilOres.block.EvilBlockFakeOres;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import fr.elias.fakeores.common.EntityDangerousPlant;
 import fr.elias.fakeores.common.FakeOres;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.world.biome.BiomeGenBase;
 
 public class OresInteg {
     public static Block fakeNetherrite;
@@ -28,6 +31,8 @@ public class OresInteg {
         EntityRegistry.registerModEntity(EntityNetheriteOre.class, "fakeNetherite", 548554, FakeOres.instance, 40, 1, true);
         EntityRegistry.registerModEntity(EntityGlowstone.class, "fakeGlowstone", 974, FakeOres.instance, 40, 1, true);
         EntityRegistry.registerModEntity(EntityGoldNugget.class, "fakeNetherGold", 674, FakeOres.instance, 40, 1, true);
+
+        EntityRegistry.addSpawn(EntityDangerousPlant.class, 15,1,3, EnumCreatureType.monster, BiomeGenBase.jungle, BiomeGenBase.jungleEdge, BiomeGenBase.jungleHills);
 
     }
 

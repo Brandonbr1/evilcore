@@ -9,6 +9,7 @@ public enum TargetMods implements ITargetMod {
 
     HWINVASION("HostileWorlds"),
     SPM("SpecialMobs"),
+    BETTERJUNGLES("BetterJungles"),
     AD_INF("dextersnether"),
     ORE("fakeores"),
     MP("moveplus"),

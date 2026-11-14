@@ -1,11 +1,13 @@
 package com.jerios.evilMinecraftFixes;
 
 import atomicstryker.infernalmobs.common.InfernalMobsCore;
+import com.jerios.evilMinecraftFixes.cfg.Config;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
@@ -14,6 +16,22 @@ public class BuffMobs {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onJoinNether(EntityJoinWorldEvent event) {
         if (!event.entity.worldObj.isRemote) {
+
+            if (event.entity instanceof EntityPlayer) {
+
+                EntityPlayer player = (EntityPlayer) event.entity;
+                if (player.worldObj.provider != null && player.worldObj.provider.dimensionId == -1) {
+
+                Config.oreAttack = true;
+
+
+                }
+            }
+
+
+
+
+
             if (event.entity instanceof EntityLiving) {
                 EntityLiving living = (EntityLiving) event.entity;
                 if (living instanceof IMob) {

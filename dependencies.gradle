@@ -44,6 +44,8 @@ dependencies {
     devOnlyNonPublishable(rfg.deobf("curse.maven:atomicstrykers-infernal-mobs-227875:2227584"))
     devOnlyNonPublishable(rfg.deobf(project.files("libs/particleman.jar")))
     devOnlyNonPublishable(rfg.deobf(project.files("libs/hostileworlds.jar")))
+
+   devOnlyNonPublishable(rfg.deobf(project.files("libs/betterjungles.jar")))
     devOnlyNonPublishable(rfg.deobf(project.files("libs/chocolateQuest-1.7.10-1.1d.jar")))
     devOnlyNonPublishable(project.files("libs/HardcoreEnderExpansion-1.12.25-GTNH-dev.jar"))
     //   devOnlyNonPublishable(rfg.deobf(project.files("libs/infernalMobs.jar")))
@@ -63,6 +65,7 @@ dependencies {
 
 
     devOnlyNonPublishable(rfg.deobf("curse.maven:extra-utilities-225561:2264383"))
+    devOnlyNonPublishable(rfg.deobf("curse.maven:gravestone-mod-62929:2445976"))
     //InfernalMobs-1.10.8-GTNH.jar
   //  devOnlyNonPublishable(rfg.deobf(project.files("libs/InfernalMobs-1.10.8-GTNH.jar")))
     devOnlyNonPublishable(project.files("libs/fakeores1.5.jar"));

@@ -73,7 +73,7 @@ public class AthenaEvents {
 
                         if ( EvilData.get(p.worldObj).isAgressiveStage2())
                         {
-                            p.attackEntityFrom(DamageSource.causeMobDamage(wither), 2);
+                            p.attackEntityFrom(DamageSource.causeMobDamage(wither), 1);
                         }
                     }
 
@@ -98,7 +98,6 @@ public class AthenaEvents {
 
         }
     }
-
 
     @SubscribeEvent
     public void mobTickEvent(LivingEvent.LivingUpdateEvent event) {
@@ -175,7 +174,7 @@ public class AthenaEvents {
                                             }
                                         }
 
-                                        if (timer2 <= 3) {
+                                        if (timer2 <= 1) {
                                             props.forcePinchMode = true;
                                         } else {
                                             props.forcePinchMode = false;
@@ -205,7 +204,7 @@ public class AthenaEvents {
 
 
 
-                            if (props.ticks % 160 == 0) {
+                            if (props.ticks % 160 == 0 || world.rand.nextInt(16) == 0) {
                                 for (int j = 0; j < 4; j++) {
                                     ItemStack[] g = player.inventory.armorInventory;
 
@@ -252,6 +251,20 @@ public class AthenaEvents {
         }
     }
 
+
+    @SubscribeEvent
+    public void onAthenaDeath(LivingDeathEvent deathEvent) {
+        if (deathEvent.entityLiving instanceof EntityWither) {
+            EntityWither wither = (EntityWither) deathEvent.entityLiving;
+
+            if (!wither.worldObj.isRemote) {
+                if (!EvilData.get(wither.worldObj).isAgressiveStage3()) {
+                    EvilData.get(wither.worldObj).increaseAthenaDeath();
+                }
+            }
+        }
+
+    }
 
 
 }
