@@ -87,6 +87,10 @@ public class ConfigASM {
     @Config.DefaultBoolean(true)
     public static boolean arrowFixes ;
 
+    @Config.Comment("Fix crash with killing yourself with instant damage with ad infernos")
+    @Config.DefaultBoolean(true)
+    public static boolean deathInfernosKillFix ;
+
     @Config.Comment("Remove AD Infernos Global IDS for everything except Herobrine")
     @Config.DefaultBoolean(true)
     public static boolean removeGlobalIDAdInfernos ;

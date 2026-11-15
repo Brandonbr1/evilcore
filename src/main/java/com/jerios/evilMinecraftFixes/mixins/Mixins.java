@@ -550,6 +550,13 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> ConfigASM.arrowFixes)
         .addCommonMixins("adInfernos.MixinNetherHooks")),
 
+
+    ADINFERNOS_CRASH_FIX(new MixinBuilder().setPhase(Phase.LATE)
+        .addRequiredMod(TargetMods.AD_INF)
+        .setApplyIf(() -> ConfigASM.deathInfernosKillFix)
+        .addCommonMixins("adInfernos.MixinNetherEvents")),
+
+
     SPM_SKELE(new MixinBuilder().setPhase(Phase.LATE)
         .addRequiredMod(TargetMods.SPM)
         .setApplyIf(() -> ConfigASM.hardSkele)
