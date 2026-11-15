@@ -20,7 +20,6 @@ import org.spongepowered.asm.mixin.Overwrite;
 public class MixinNetherEvents {
 
 
-
     /**
      * @author Jerios
      * @reason Fix broken achievement granting code
